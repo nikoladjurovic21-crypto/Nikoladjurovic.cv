@@ -43,6 +43,7 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 
 ## Files
 
+- [llms-full.txt](https://nikoladjurovic.cv/llms-full.txt): long-form version with the full CV, FAQ and work sample requirements.
 - [CV, Senior Business Analyst (PDF)](https://nikoladjurovic.cv/files/Nikola_Djurovic_Senior_BA_CV.pdf)
 - [Order Risk Hold System Design Document (PDF, 23 pages)](https://nikoladjurovic.cv/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf)
 

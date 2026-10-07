@@ -1,0 +1,174 @@
+# Nikola Djurovic, full profile
+
+> Long-form companion to https://nikoladjurovic.cv/llms.txt. Everything here is also published as HTML on the site. Last updated 2026-10-07.
+
+> Freelance Senior Business Analyst and Technical Product Owner based in Belgrade, Serbia (CET). Takes B2B contracts with clients worldwide, remote; full-time roles considered. Six years on SPQ+, SKF's global CPQ (configure, price, quote) platform used in 160+ countries, delivered through Soprex: 300+ specifications, launches held at 0 critical defects.
+
+Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovic · Website: https://nikoladjurovic.cv/
+
+## Key facts
+
+- Role: Senior Business Analyst / Product Owner at Soprex since 2022 (Business Analyst 2021 to 2022, Junior Business Analyst 2020 to 2021), working on SKF's SPQ+ platform.
+- Leads the BA team at Soprex and manages two development teams (around 15 people).
+- 300+ functional and non-functional specifications delivered (BRD, SRS, HLE).
+- Release planning across 5 cross-functional teams and 10+ workstreams; launches held at 0 critical defects.
+- Specified the 0 to 1 Approval Web Application, live in 160+ countries: multi-tier sign-off, SOX and ISO 9001 traceability, REST API contracts for SAP, Salesforce and Snowflake.
+- Specified and delivered the platform's first AI agent: a voice-command assistant on an LLM layer across OpenAI, Gemini and Grok, with provider switching and fallback.
+- Led AI adoption in the BA team: Claude Cowork ticket creation, MCP connections into Jira and ServiceNow, usage guidelines and training for about 50 users. Time per specification fell by about 32%.
+- 2026: rolled out Jira Cloud to 50+ users, 10,000+ tickets and hundreds of projects; wrote a Jira Forge app in Node.js with 95 unit tests.
+- Booking.dentist (2021 to 2023, via Soprex): sole BA and PO on a two-sided B2B/B2C medical-tourism marketplace live in 35+ countries. Shipped two products 0 to 1, wrote the business case, KPIs, MVP roadmap and pitch decks behind EUR 250,000 in seed funding raised through Katapult and RTC, cut 348 hours of non-MVP scope, built the sales function with the CEO (10-person team). Revenue grew 30%+ during his time.
+- Earlier: Sales Development Intern at Sales Clover (2020), Market Research Analyst at Cloudleaf, Inc. (2018).
+- Education: B.A. Ethnology and Anthropology, University of Belgrade, 2019. CBAP (IIBA) in progress.
+- Languages: English C2, Serbian native, Spanish A2.
+
+## Services
+
+- Requirements and specifications: workshops, gap analysis, BRD, SRS, HLE, user stories with acceptance criteria, requirements traceability (RTM).
+- Process design: AS-IS and TO-BE BPMN, business rules, use cases, UML.
+- Product ownership: backlog, MoSCoW / RICE / WSJF prioritisation, release planning, UAT.
+- Integration analysis: REST API contracts, payloads and data mapping between any systems (ERP, CRM, commerce, data platforms). Delivered for SAP, Salesforce, Snowflake and SAP CPI.
+- AI adoption and integration for businesses: finding where AI pays off, specifying LLM features and agents, connecting AI to business tools over MCP, and rolling it out across departments with usage guidelines and staff training. Evidence: the SPQ+ AI agent, OpenClaw integrated at Soprex with the technical team, and a BA-team rollout with about 50 users trained and about 32% less time per spec.
+- Product strategy and fundraising: Mom Test discovery, MVP scope, KPIs, roadmap, business case, investor pitch decks.
+
+## Engagement
+
+- Freelance B2B contract, invoiced monthly through his registered business in Serbia. No sponsorship or relocation needed.
+- Remote for clients worldwide, with hours shifted to overlap with the client's team, or on-site and hybrid in Belgrade. Can start within 2 weeks of signing.
+- Rates are quoted after an intro call.
+
+## Pages
+
+- [Home](https://nikoladjurovic.cv/): services, projects, recommendations, career, FAQ, contact.
+- [CV](https://nikoladjurovic.cv/cv/): the full CV as a web page, same content as the PDF.
+- [Sitemap](https://nikoladjurovic.cv/sitemap/): every page and file on the site.
+- [Order Risk Hold work sample](https://nikoladjurovic.cv/work/order-risk-hold/): case study of a System Design Document holding Shopify orders flagged as fraud risk in an ERP. Requirements, diagrams, wireframes, acceptance criteria.
+
+## Files
+
+- [CV, Senior Business Analyst (PDF)](https://nikoladjurovic.cv/files/Nikola_Djurovic_Senior_BA_CV.pdf)
+- [Order Risk Hold System Design Document (PDF, 23 pages)](https://nikoladjurovic.cv/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf)
+
+## Recommendations
+
+- Aleksandar Kontrin, Global Pricing Process Manager, SKF: "Nikola has demonstrated an exceptional ability to grasp complex business needs, translate them into clear, structured requirements and guide initiatives from early discovery all the way through delivery, deployment and rollout."
+- Simo Vuleta, Deputy Managing Director, Soprex: "He takes ownership of his responsibilities and can be relied upon to follow through on his commitments."
+
+## CV (same content as https://nikoladjurovic.cv/cv/)
+
+**Nikola Djurovic**, Senior Business Analyst · Requirements · AI-Assisted Analysis. Belgrade, Serbia (CET). nikoladjurovic21@gmail.com · linkedin.com/in/nikoladjurovic · nikoladjurovic.cv
+
+### Profile
+
+Senior Business Analyst, 6+ years on the global CPQ platform of a Fortune 500 manufacturer, used in 160+ countries. Runs requirements workshops, models processes in BPMN, and writes the specifications, user stories and acceptance criteria engineering builds from, through UAT. 300+ specifications, launches held at 0 critical defects. Leads the BA team and rolled out AI tooling that cut time per specification by about 32%.
+
+### Experience
+
+#### Soprex.com, Belgrade, Serbia
+
+**Senior Business Analyst / Product Owner** (2022 - Present)
+- Lead requirements workshops across 10+ workstreams and turn them into gap analyses, ToBe BPMN, use cases and 300+ specs for 5 delivery teams.
+- Write user stories with acceptance criteria, decomposed to roughly 2-hour tasks, and take each feature through UAT and release readiness with QA. Launches held at 0 critical defects.
+- Specified the Approval Web Application, live in 160+ countries: multi-tier sign-off, SOX and ISO 9001 traceability, and REST API contracts for SAP, Salesforce and Snowflake.
+- Manage the BA team and 2 development teams (around 15 people). Raised BA standards with shared templates and one elicitation process across the BA and PM team.
+- Led AI adoption in the BA team: Claude Cowork ticket creation, MCP into Jira and ServiceNow, usage guidelines and training for about 50 users. Time per spec fell about 32%.
+- Use AI daily in my own analysis. Claude Code drafts and gap-checks SRS, HLE and BRD and generates test cases. I check every output before it goes out under my name.
+- Specified and delivered the platform's first AI agent: a voice-command assistant on an LLM layer across OpenAI, Gemini and Grok, with provider switching and fallback.
+
+**AI Initiative: Jira Rollout and Automation** (2026 - Present)
+- Rolled out Jira Cloud to 50+ users, 10,000+ tickets and hundreds of projects: one hierarchy, shared schemes and time tracking, projected to save about 350 hours a year.
+- Wrote a Forge app in Node.js (95 unit tests) that rolls estimates and logged hours up the hierarchy, plus dashboard gadgets that show each user their own hours.
+- Trained PMs, BAs and end users, backed by user guides with annotated screenshots.
+
+**Business Analyst** (2021 - 2022)
+- Documented pricing, discount and approval rules for 160+ countries as ToBe BPMN.
+
+**Junior Business Analyst** (2020 - 2021)
+- Ramped on a Fortune 500 CPQ domain: user stories, test cases, UAT and defect triage.
+
+#### Booking.dentist, medical-tourism marketplace (via Soprex)
+
+**Business Analyst / Product Owner** (2021 - 2023)
+- Sole BA on a two-sided B2B/B2C marketplace live in 35+ countries. Ran discovery with the Mom Test, then specified the booking, cancellation and multi-currency rules.
+- Specified both products on one shared data model and rules engine, a consumer booking app and an internal back-office, then owned UAT.
+- Wrote the business case, KPIs and MVP roadmap behind EUR 250,000 in seed funding, raised through Katapult and RTC, and cut 348 hours of non-MVP scope to hold the launch date.
+
+### Earlier career
+
+- Cloudleaf, Inc. (Gartner Cool Vendor), Market Research Analyst, remote, 2018
+- Sales Clover, Sales Development Intern, remote, 2020
+
+### Education
+
+- CBAP, in progress, International Institute of Business Analysis (IIBA)
+- B.A. Ethnology and Anthropology, University of Belgrade, 2019
+
+### Languages
+
+Serbian (native), English (C2, professional), Spanish (A2, elementary)
+
+### Core skills
+
+Business Analysis (BABOK), Requirements Workshops, User Stories & Acceptance Criteria, Process Design & BPMN, Use Cases & UML, Requirements Traceability (RTM), UAT & Release Readiness, Process Improvement, AI-Assisted Analysis, Stakeholder Management, Team Leadership, Agile / Scrum / SAFe
+
+### Domains
+
+CPQ, Pricing, Approvals, Enterprise Tools, SaaS, Two-sided Marketplaces, AI / ML, B2B, B2C, Manufacturing, Medical Tourism
+
+### Tools and technologies
+
+Jira, Confluence, ServiceNow, Claude Code, Claude Cowork, ChatGPT, Miro, Draw.io, Lucidchart, Figma, Power BI, Postman, BPMN, UML, SAP, Salesforce, Snowflake, REST API, JSON, SQL, Data Modeling, Jira Forge, LLM APIs, MCP, Agent Skills, SOX / ISO 9001
+
+## FAQ
+
+### How do you work with clients abroad?
+
+As an independent contractor. I invoice monthly through my registered business in Serbia, so we sign a B2B services contract. No employment, sponsorship or relocation is involved.
+
+### Which hours do you work?
+
+I am based in Belgrade (CET) and work with clients worldwide. I shift my hours so your team gets a daily overlap.
+
+### What will I have at the end of an engagement?
+
+Documents your engineers and testers can use without me in the room: SRS or HLE, BPMN diagrams, wireframes, user stories with acceptance criteria and a traceability matrix. The Order Risk Hold work sample shows the format.
+
+### Which tools do you use?
+
+Jira and Confluence for delivery, Draw.io, Lucidchart, Miro and Figma for diagrams and wireframes, Postman for APIs and Power BI for reporting. I use Claude Code and Claude Cowork every day, and I check every output before it goes out under my name.
+
+### Do you take full-time roles?
+
+Yes, for the right team: remote, or on-site and hybrid in Belgrade. Freelance B2B contracts are my default.
+
+### How much do you charge?
+
+It depends on scope and hours per week. I send a quote after the intro call.
+
+### When can you start?
+
+Within 2 weeks of signing, often sooner.
+
+## Work sample: Order Risk Hold System Design Document
+
+Source: https://nikoladjurovic.cv/work/order-risk-hold/ (PDF: https://nikoladjurovic.cv/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf)
+
+Problem: Shopify's fraud verdict never reaches the ERP, so orders flagged as high risk are shipped. The document specifies storing the risk data on the Sales Order, holding high and medium risk orders from delivery, and auditing every release.
+
+Requirements:
+
+- FR-01: The import stores the Shopify risk assessments, the risk facts and the Shopify recommendation on the imported Sales Order.
+- FR-02: The ERP derives a single Risk Level per order from the assessments, using the highest severity returned.
+- FR-03: An order with Risk Level High or Medium is set to status Risk Hold at import.
+- FR-04: A user cannot create a shipment for an order on hold at High risk.
+- FR-05: A user can create a shipment for an order on hold at Medium risk after confirming a warning and entering a reason.
+- FR-06: Releasing a High risk hold requires the new Risk Override right. The release records user, timestamp and reason.
+- FR-07: Risk fields, assessments and facts are visible on the Sales Order screen, read only.
+- FR-08: An order whose risk is pending, missing or not recognised is imported, marked for review and blocked from delivery until the risk resolves.
+- FR-09: The restriction is enforced in the order service, so the API and any background job are subject to it, not only the screen.
+- FR-10: Risk hold behaviour is driven by settings: which levels hold, whether unknown risk blocks, and which right releases a hold.
+- FR-11: A later risk update from Shopify re-evaluates an order that has not shipped yet.
+- FR-12: Orders imported before go-live are not held retroactively.
+- NFR-01: The risk evaluation adds no more than 10 percent to the import job's runtime at 1,000 orders per run, so the 10-minute schedule holds.
+- NFR-02: No exception in risk mapping or persistence stops the import run or blocks the import of the order itself.
+- NFR-03: Every hold release goes to the audit log with user, timestamp, previous and new status, and reason, retained for the chargeback dispute window.
+- NFR-04: Risk state is communicated by text and label, not by colour alone.

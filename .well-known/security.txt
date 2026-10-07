@@ -1,0 +1,4 @@
+Contact: mailto:nikoladjurovic21@gmail.com
+Expires: 2027-10-07T00:00:00.000Z
+Preferred-Languages: en, sr
+Canonical: https://nikoladjurovic.cv/.well-known/security.txt
