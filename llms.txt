@@ -24,7 +24,7 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 - Requirements and specifications: workshops, gap analysis, BRD, SRS, HLE, user stories with acceptance criteria, requirements traceability (RTM).
 - Process design: AS-IS and TO-BE BPMN, business rules, use cases, UML.
 - Product ownership: backlog, MoSCoW / RICE / WSJF prioritisation, release planning, UAT.
-- Integration analysis: REST API contracts and data models for SAP, Salesforce, Snowflake, SAP CPI.
+- Integration analysis: REST API contracts, payloads and data mapping between any systems (ERP, CRM, commerce, data platforms). Delivered for SAP, Salesforce, Snowflake and SAP CPI.
 - AI adoption for BA teams: Claude Code, Claude Cowork, MCP into Jira and ServiceNow, guidelines, training.
 - Product strategy and fundraising: Mom Test discovery, MVP scope, KPIs, roadmap, business case, investor pitch decks.
 
