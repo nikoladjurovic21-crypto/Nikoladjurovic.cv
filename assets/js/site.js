@@ -104,17 +104,6 @@
     });
   }
 
-  // Client marquee pause control (WCAG 2.2.2: moving content can be paused)
-  var mq = document.querySelector('.clients');
-  var mqBtn = document.querySelector('.marquee-toggle');
-  if (mq && mqBtn) {
-    mqBtn.addEventListener('click', function () {
-      var paused = mq.classList.toggle('is-paused');
-      mqBtn.setAttribute('aria-pressed', String(paused));
-      mqBtn.textContent = paused ? 'Play' : 'Pause';
-    });
-  }
-
   // Footer year
   var y = document.getElementById('year');
   if (y) y.textContent = String(new Date().getFullYear());
