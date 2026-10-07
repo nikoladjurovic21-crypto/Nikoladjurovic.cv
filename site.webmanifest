@@ -1,0 +1,12 @@
+{
+  "name": "Nikola Djurovic, Freelance Business Analyst",
+  "short_name": "N. Djurovic",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f6f4ec",
+  "theme_color": "#13442a",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

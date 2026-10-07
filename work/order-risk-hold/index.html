@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Order Risk Hold: System Design Document Sample | Nikola Djurovic</title>
+<meta name="description" content="Business analysis work sample: a 23-page System Design Document that holds Shopify orders flagged as fraud risk in the ERP. Requirements, BPMN-style flows, state diagram, wireframes, API and test plan.">
+<meta name="author" content="Nikola Djurovic">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://nikoladjurovic.cv/work/order-risk-hold/">
+<meta name="theme-color" content="#13442a">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Nikola Djurovic">
+<meta property="og:title" content="Order Risk Hold: System Design Document Sample">
+<meta property="og:description" content="A 23-page SDD by Nikola Djurovic: Shopify fraud risk data in the ERP, a delivery hold and an audited release path. Requirements, diagrams, wireframes and test plan.">
+<meta property="og:url" content="https://nikoladjurovic.cv/work/order-risk-hold/">
+<meta property="og:image" content="https://nikoladjurovic.cv/assets/img/og-order-risk-hold.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Order Risk Hold, System Design Document by Nikola Djurovic">
+<meta property="article:author" content="https://nikoladjurovic.cv/">
+<meta property="article:published_time" content="2026-09-12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nikoladjurovic.cv/assets/img/og-order-risk-hold.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/js/site.js" defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://nikoladjurovic.cv/work/order-risk-hold/#article",
+      "headline": "Order Risk Hold for imported Shopify orders: System Design Document sample",
+      "description": "A business analysis work sample. Shopify fraud risk data is stored on the ERP Sales Order, high and medium risk orders are held from delivery, and every release is audited.",
+      "url": "https://nikoladjurovic.cv/work/order-risk-hold/",
+      "datePublished": "2026-09-12",
+      "dateModified": "2026-10-07",
+      "inLanguage": "en",
+      "proficiencyLevel": "Expert",
+      "author": { "@type": "Person", "@id": "https://nikoladjurovic.cv/#person", "name": "Nikola Djurovic", "url": "https://nikoladjurovic.cv/" },
+      "image": [
+        "https://nikoladjurovic.cv/assets/img/fig1-order-import-flow-1600.webp",
+        "https://nikoladjurovic.cv/assets/img/fig2-order-status-flow-1600.webp",
+        "https://nikoladjurovic.cv/assets/img/fig4-sales-order-wireframe-1600.webp"
+      ],
+      "about": ["Requirements engineering", "System Design Document", "ERP integration", "Shopify order risk", "Fraud prevention workflow"],
+      "isPartOf": { "@id": "https://nikoladjurovic.cv/#website" },
+      "associatedMedia": {
+        "@type": "MediaObject",
+        "name": "Order Risk Hold, System Design Document (PDF)",
+        "contentUrl": "https://nikoladjurovic.cv/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf",
+        "encodingFormat": "application/pdf"
+      },
+      "copyrightHolder": { "@id": "https://nikoladjurovic.cv/#person" },
+      "copyrightYear": 2026
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nikoladjurovic.cv/" },
+        { "@type": "ListItem", "position": 2, "name": "Work sample", "item": "https://nikoladjurovic.cv/#work-sample" },
+        { "@type": "ListItem", "position": 3, "name": "Order Risk Hold", "item": "https://nikoladjurovic.cv/work/order-risk-hold/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to Content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Nikola Djurovic, home">Nikola <b>Djurovic</b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#work">Projects</a></li>
+        <li><a href="/#recommendations">Recommendations</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a class="btn btn-sm" href="mailto:nikoladjurovic21@gmail.com?subject=Intro%20call" data-book>Book a Call</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article>
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#work-sample">Work sample</a></li>
+            <li aria-current="page">Order Risk Hold</li>
+          </ol>
+        </nav>
+        <p class="eyebrow"><span>Work sample</span><span>System Design Document</span></p>
+        <h1>Order Risk Hold for Imported Shopify Orders</h1>
+        <p class="lede">Fraudulent orders reach the warehouse because the ERP never sees Shopify's risk verdict. This document specifies how the ERP stores that verdict, holds risky orders from delivery and records who released them and why.</p>
+        <dl class="doc-meta">
+          <div><dt>Author</dt><dd>Nikola Djurovic</dd></div>
+          <div><dt>Type</dt><dd>System Design Document</dd></div>
+          <div><dt>Length</dt><dd>23 pages, 5 figures</dd></div>
+          <div><dt>Date</dt><dd><time datetime="2026-09">September 2026</time></dd></div>
+        </dl>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            Download the Full PDF <span class="file-meta">960&nbsp;KB</span>
+          </a>
+          <a class="btn btn-ghost" href="#diagrams">Jump to the Diagrams</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="case-section" aria-labelledby="problem">
+      <div class="prose">
+        <h2 id="problem"><span class="sec">1.1</span>The Problem</h2>
+        <p>Shopify runs a fraud analysis on every order and returns a risk assessment with a recommendation: accept, investigate or cancel. That output stops at Shopify. The ERP imports the order every 10 minutes with no risk data attached, so the sales manager sees a normal Sales Order and can ship it.</p>
+        <p>This costs the business twice:</p>
+        <ol class="list">
+          <li>Goods leave the warehouse on orders that are later charged back. The company loses the stock, the shipping cost and the card amount.</li>
+          <li>Nobody can say who released a suspicious order and why, so chargeback disputes cannot be reconstructed.</li>
+        </ol>
+        <p>The risk information already exists at the moment of import. The ERP does not store it and does not act on it.</p>
+      </div>
+    </section>
+
+    <section class="case-section" aria-labelledby="scenarios">
+      <h2 id="scenarios"><span class="sec">1.2</span>Four Scenarios the Design Has to Handle</h2>
+      <ul class="grid-2">
+        <li class="card scenario reveal"><p class="label">SCENARIO 1</p><h3>High Risk Order Ships Today</h3><p>Three cameras, EUR&nbsp;2,480, a card issued in a different country from the shipping address. Shopify says cancel. The order imports as Open, ships the same afternoon, and the chargeback arrives four weeks later.</p></li>
+        <li class="card scenario reveal"><p class="label">SCENARIO 2</p><h3>Medium Risk, No Signal</h3><p>Shopify recommends investigating. In the ERP the order looks like every other order, so nobody calls the customer.</p></li>
+        <li class="card scenario reveal"><p class="label">SCENARIO 3</p><h3>Legitimate Customer Flagged</h3><p>A returning customer orders while travelling. The sales manager confirms by phone and needs to ship today. The control has to allow that and record who allowed it.</p></li>
+        <li class="card scenario reveal"><p class="label">SCENARIO 4</p><h3>Analysis Not Finished</h3><p>The import runs before Shopify completes its analysis and the risk comes back as pending. The order must still import, and it must not be treated as safe.</p></li>
+      </ul>
+    </section>
+
+    <section class="case-section" aria-labelledby="requirements">
+      <h2 id="requirements"><span class="sec">1.3</span>Requirements</h2>
+      <p class="intro" style="margin-bottom:22px">Scope prioritised with MoSCoW. Twelve functional and four non-functional requirements, each with an ID that the acceptance criteria and tests trace back to.</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Functional requirements</caption>
+          <thead><tr><th scope="col">ID</th><th scope="col">Requirement</th><th scope="col">Priority</th></tr></thead>
+          <tbody>
+            <tr><td class="id">FR-01</td><td>The import stores the Shopify risk assessments, the risk facts and the Shopify recommendation on the imported Sales Order.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-02</td><td>The ERP derives a single Risk Level per order from the assessments, using the highest severity returned.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-03</td><td>An order with Risk Level High or Medium is set to status Risk Hold at import.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-04</td><td>A user cannot create a shipment for an order on hold at High risk.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-05</td><td>A user can create a shipment for an order on hold at Medium risk after confirming a warning and entering a reason.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-06</td><td>Releasing a High risk hold requires the new Risk Override right. The release records user, timestamp and reason.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-07</td><td>Risk fields, assessments and facts are visible on the Sales Order screen, read only.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-08</td><td>An order whose risk is pending, missing or not recognised is imported, marked for review and blocked from delivery until the risk resolves.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-09</td><td>The restriction is enforced in the order service, so the API and any background job are subject to it, not only the screen.</td><td><span class="pill">Must</span></td></tr>
+            <tr><td class="id">FR-10</td><td>Risk hold behaviour is driven by settings: which levels hold, whether unknown risk blocks, and which right releases a hold.</td><td><span class="pill should">Should</span></td></tr>
+            <tr><td class="id">FR-11</td><td>A later risk update from Shopify re-evaluates an order that has not shipped yet.</td><td><span class="pill should">Should</span></td></tr>
+            <tr><td class="id">FR-12</td><td>Orders imported before go-live are not held retroactively.</td><td><span class="pill">Must</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Non-functional requirements</caption>
+          <thead><tr><th scope="col">ID</th><th scope="col">Requirement</th></tr></thead>
+          <tbody>
+            <tr><td class="id">NFR-01</td><td>The risk evaluation adds no more than 10 percent to the import job's runtime at 1,000 orders per run, so the 10-minute schedule holds.</td></tr>
+            <tr><td class="id">NFR-02</td><td>No exception in risk mapping or persistence stops the import run or blocks the import of the order itself.</td></tr>
+            <tr><td class="id">NFR-03</td><td>Every hold release goes to the audit log with user, timestamp, previous and new status, and reason, retained for the chargeback dispute window.</td></tr>
+            <tr><td class="id">NFR-04</td><td>Risk state is communicated by text and label, not by colour alone.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="case-section" aria-labelledby="solution">
+      <div class="prose">
+        <h2 id="solution"><span class="sec">1.4</span>The Solution in Brief</h2>
+        <p>The import writes Shopify's risk data onto the Sales Order and checks it against the hold settings before the sales manager sees the order.</p>
+        <ul class="list">
+          <li><strong>High or Medium</strong> risk imports with status Risk Hold. <strong>Pending or unreadable</strong> risk imports with status Risk Review. Both block delivery. Everything else imports as Open and behaves as it does today.</li>
+          <li>At <strong>Medium</strong> risk, any user with delivery rights can confirm a warning and record a reason. That matches Shopify's advice to investigate.</li>
+          <li>At <strong>High</strong> risk, only a user with the Risk Override right can release the hold. That matches Shopify's advice to cancel.</li>
+          <li>The check sits in the order service, so the screen, the API and background jobs all get the same refusal.</li>
+        </ul>
+        <p>Thresholds change with fraud patterns and the season, so hold levels live in settings. A go-live date setting keeps the open order book from freezing on release day.</p>
+      </div>
+    </section>
+
+    <section class="case-section" id="diagrams" aria-labelledby="diagrams-title">
+      <h2 id="diagrams-title"><span class="sec">2.1</span>Diagrams</h2>
+      <p class="intro" style="margin-bottom:26px">Each figure opens at full size. Colours follow one legend across the document, and every state is also labelled in text.</p>
+
+      <figure class="figure reveal" id="fig-1">
+        <a href="/assets/img/fig1-order-import-flow-1600.webp" target="_blank" rel="noopener">
+          <img src="/assets/img/fig1-order-import-flow-1600.webp" srcset="/assets/img/fig1-order-import-flow-800.webp 800w, /assets/img/fig1-order-import-flow-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1369" loading="lazy" decoding="async" alt="Flowchart: Shopify fraud analysis, 10-minute import job, fetch order and risk, create Sales Order, then decisions on whether a risk block was returned, whether values are recognised, whether assessments exist and whether the write succeeded, ending in Risk Hold, Risk Review or Open status in the sales manager's work list.">
+        </a>
+        <figcaption><b>Figure 1. Order import with risk checks.</b> The first import of an order, including the three exception paths that must never stop the import run (NFR-02).</figcaption>
+      </figure>
+
+      <figure class="figure reveal" id="fig-2">
+        <a href="/assets/img/fig2-order-status-flow-1600.webp" target="_blank" rel="noopener">
+          <img src="/assets/img/fig2-order-status-flow-1600.webp" srcset="/assets/img/fig2-order-status-flow-800.webp 800w, /assets/img/fig2-order-status-flow-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1066" loading="lazy" decoding="async" alt="State diagram: from Risk Level to Risk Review, Risk Hold or Open; Risk Review resolves to Open or Risk Hold; Risk Hold is released to Open with a reason; Open can be upgraded to Risk Hold; Risk Review and Risk Hold can be cancelled; Open ends when delivered and invoiced.">
+        </a>
+        <figcaption><b>Figure 2. Sales Order status flow.</b> Four statuses and the events that move an order between them. A lower risk level never releases a hold on its own.</figcaption>
+      </figure>
+
+      <figure class="figure reveal" id="fig-3">
+        <a href="/assets/img/fig3-risk-refresh-flow-1600.webp" target="_blank" rel="noopener">
+          <img src="/assets/img/fig3-risk-refresh-flow-1600.webp" srcset="/assets/img/fig3-risk-refresh-flow-800.webp 800w, /assets/img/fig3-risk-refresh-flow-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1120" loading="lazy" decoding="async" alt="Flowchart of a later import run for an order the ERP already holds: if a shipment exists, log and notify only; if cancelled or closed, update risk fields only; otherwise reinsert assessments, recalculate the risk level, and hold the order again if the level increased.">
+        </a>
+        <figcaption><b>Figure 3. Risk refresh on a later import run.</b> What happens when Shopify updates its verdict after the first import (FR-11).</figcaption>
+      </figure>
+
+      <figure class="figure reveal" id="fig-4">
+        <a href="/assets/img/fig4-sales-order-wireframe-1600.webp" target="_blank" rel="noopener">
+          <img src="/assets/img/fig4-sales-order-wireframe-1600.webp" srcset="/assets/img/fig4-sales-order-wireframe-800.webp 800w, /assets/img/fig4-sales-order-wireframe-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="893" loading="lazy" decoding="async" alt="Annotated wireframe of the Sales Order screen with seven numbered new controls: risk banner, Create Shipment button state, status values, Order Risk group, Risk details button, Release Risk Hold button and a new Order Risk tab.">
+        </a>
+        <figcaption><b>Figure 4. Sales Order screen with the new risk controls.</b> New controls are outlined and numbered, with the behaviour of each one beside the screen. Italic text is UI copy for technical writer review.</figcaption>
+      </figure>
+
+      <figure class="figure reveal" id="fig-5">
+        <a href="/assets/img/fig5-dialog-and-tab-1282.webp" target="_blank" rel="noopener">
+          <img src="/assets/img/fig5-dialog-and-tab-1282.webp" srcset="/assets/img/fig5-dialog-and-tab-800.webp 800w, /assets/img/fig5-dialog-and-tab-1282.webp 1282w" sizes="(max-width: 1180px) 92vw, 1080px" width="1282" height="479" loading="lazy" decoding="async" alt="Wireframes of the medium risk confirmation dialog with a mandatory reason field, and the read-only Order Risk tab listing provider, risk level, sentiment and fact description.">
+        </a>
+        <figcaption><b>Figure 5. Medium risk confirmation dialog and the Order Risk tab.</b> Confirm stays disabled until the reason has at least 10 characters.</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section" aria-labelledby="testing">
+      <div class="prose">
+        <h2 id="testing"><span class="sec">3</span>Testing Strategy</h2>
+        <p>The feature blocks money moving in one direction and lets a user override the block in the other. Testing weight goes on the rule engine, the permission check and the audit trail. The document defines 9 acceptance criteria, an automated test plan across unit, integration, API contract, performance and regression layers, and a manual plan that ends in UAT sign-off by the sales manager. Two of the acceptance criteria:</p>
+      </div>
+      <p class="ac"><b>AC-02, positive.</b> Medium risk order is delivered with a recorded reason
+<b>Given</b> an order has Risk Level = Medium and Status = Risk Hold, and the user has delivery rights
+<b>When</b> the user presses Create Shipment, enters “Customer confirmed by phone” and presses Confirm
+<b>Then</b> Status becomes Open, the acceptance fields and the reason are stored and shown, the shipment is created, and the audit log holds one entry with the previous status, the new status, the user and the reason</p>
+      <p class="ac"><b>AC-06, negative.</b> Release refused without the right
+<b>Given</b> an order has Risk Level = High and Status = Risk Hold, and the user does not hold the Risk Override right
+<b>Then</b> Release Risk Hold is disabled with an explanatory tooltip, a direct call to POST /salesorders/{id}/risk-acceptance returns 403 and writes a security log entry, and a direct call to POST /salesorders/{id}/shipments returns 409 ORDER_RISK_BLOCKED</p>
+    </section>
+
+    <section class="case-section" aria-labelledby="contents">
+      <div class="prose">
+        <h2 id="contents">What Else Is in the Full Document</h2>
+        <ul class="list">
+          <li>Field mapping from the Shopify Admin GraphQL risk objects to the ERP</li>
+          <li>The rule that derives one Risk Level from several assessments</li>
+          <li>Settings, exception handling and status effects per risk level</li>
+          <li>UI copy for every banner, dialog, tooltip and empty state</li>
+          <li>API endpoints with response codes, and the database changes</li>
+          <li>Simplifications, limitations, bottlenecks and open questions</li>
+          <li>Data examples in an appendix</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section" style="padding-bottom:0">
+      <div class="cta-strip">
+        <p>Need a specification like this for your team? I take freelance B2B contracts with EU and UK teams.</p>
+        <div class="btn-row">
+          <a class="btn btn-dark" href="mailto:nikoladjurovic21@gmail.com?subject=Intro%20call" data-book>Book a Call</a>
+          <a class="btn btn-line" href="/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="site-footer" style="margin-top:56px">
+  <p>© <span id="year">2026</span> Nikola Djurovic · All rights reserved. This document may not be used for product development without written permission.</p>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="mailto:nikoladjurovic21@gmail.com">nikoladjurovic21@gmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/nikoladjurovic" rel="me noopener" target="_blank">LinkedIn</a></li>
+  </ul>
+</footer>
+</body>
+</html>
