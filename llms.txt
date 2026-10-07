@@ -25,7 +25,7 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 - Process design: AS-IS and TO-BE BPMN, business rules, use cases, UML.
 - Product ownership: backlog, MoSCoW / RICE / WSJF prioritisation, release planning, UAT.
 - Integration analysis: REST API contracts, payloads and data mapping between any systems (ERP, CRM, commerce, data platforms). Delivered for SAP, Salesforce, Snowflake and SAP CPI.
-- AI adoption for BA teams: Claude Code, Claude Cowork, MCP into Jira and ServiceNow, guidelines, training.
+- AI adoption and integration for businesses: finding where AI pays off, specifying LLM features and agents, connecting AI to business tools over MCP, usage guidelines and staff training. Evidence: the SPQ+ AI agent, OpenClaw integrated at Soprex with the technical team, and a BA-team rollout with about 50 users trained and about 32% less time per spec.
 - Product strategy and fundraising: Mom Test discovery, MVP scope, KPIs, roadmap, business case, investor pitch decks.
 
 ## Engagement
