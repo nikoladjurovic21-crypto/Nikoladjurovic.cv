@@ -34,13 +34,16 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 
 - Freelance B2B contract, invoiced monthly through his registered business in Serbia. No sponsorship or relocation needed.
 - Remote for clients worldwide, with hours shifted to overlap with the client's team, or on-site and hybrid in Belgrade. Can start within 2 weeks of signing.
-- Rates are quoted after an intro call.
+- Embedded engagements start at EUR 4,500 a month, full-time. Part-time, fixed-scope and discovery work are quoted after an intro call.
 
 ## Pages
 
 - [Home](https://nikoladjurovic.cv/): services, projects, recommendations, career, FAQ, contact.
 - [CV](https://nikoladjurovic.cv/cv/): the full CV as a web page, same content as the PDF.
 - [Sitemap](https://nikoladjurovic.cv/sitemap/): every page and file on the site.
+- [Approval Web Application case study](https://nikoladjurovic.cv/work/approval-workflow/)
+- [Booking.dentist case study](https://nikoladjurovic.cv/work/booking-dentist-marketplace/)
+- [Free SRS template](https://nikoladjurovic.cv/resources/srs-template/)
 - [Order Risk Hold work sample](https://nikoladjurovic.cv/work/order-risk-hold/): case study of a System Design Document holding Shopify orders flagged as fraud risk in an ERP. Requirements, diagrams, wireframes, acceptance criteria.
 
 ## Files
@@ -142,7 +145,7 @@ Yes, for the right team: remote, or on-site and hybrid in Belgrade. Freelance B2
 
 ### How much do you charge?
 
-It depends on scope and hours per week. I send a quote after the intro call.
+Embedded engagements start at €4,500 a month, full-time. Part-time, fixed-scope and discovery work are quoted after the intro call.
 
 ### When can you start?
 

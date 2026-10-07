@@ -36,9 +36,9 @@
 
 <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=20261007d">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261007g">
 <script>document.documentElement.classList.add('js')</script>
-<script src="/assets/js/site.js?v=20261007d" defer></script>
+<script src="/assets/js/site.js?v=20261007g" defer></script>
 
 <script type="application/ld+json">
 {
@@ -106,6 +106,7 @@
         "@type": "OfferCatalog",
         "name": "Services",
         "itemListElement": [
+          { "@type": "Offer", "name": "Embedded Business Analyst or Product Owner, full-time", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": 4500, "priceCurrency": "EUR", "unitText": "month" }, "itemOffered": { "@type": "Service", "name": "Embedded Business Analyst or Product Owner", "description": "Monthly B2B contract inside the client team." } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Requirements and specifications", "description": "Requirements workshops, gap analysis, BRD, SRS and HLE, user stories with acceptance criteria, and a requirements traceability matrix." } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Process design", "description": "AS-IS and TO-BE process models in BPMN, business rules and use cases." } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Product ownership", "description": "Backlog ownership, prioritisation, release planning across teams, UAT and release readiness." } },
@@ -124,7 +125,7 @@
         { "@type": "Question", "name": "What will I have at the end of an engagement?", "acceptedAnswer": { "@type": "Answer", "text": "Documents your engineers and testers can use without me in the room: SRS or HLE, BPMN diagrams, wireframes, user stories with acceptance criteria and a traceability matrix. The Order Risk Hold work sample shows the format." } },
         { "@type": "Question", "name": "Which tools do you use?", "acceptedAnswer": { "@type": "Answer", "text": "Jira and Confluence for delivery, Draw.io, Lucidchart, Miro and Figma for diagrams and wireframes, Postman for APIs and Power BI for reporting. I use Claude Code and Claude Cowork every day, and I check every output before it goes out under my name." } },
         { "@type": "Question", "name": "Do you take full-time roles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, for the right team: remote, or on-site and hybrid in Belgrade. Freelance B2B contracts are my default." } },
-        { "@type": "Question", "name": "How much do you charge?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on scope and hours per week. I send a quote after the intro call." } },
+        { "@type": "Question", "name": "How much do you charge?", "acceptedAnswer": { "@type": "Answer", "text": "Embedded engagements start at €4,500 a month, full-time. Part-time, fixed-scope and discovery work are quoted after the intro call." } },
         { "@type": "Question", "name": "When can you start?", "acceptedAnswer": { "@type": "Answer", "text": "Within 2 weeks of signing, often sooner." } }
       ]
     }
@@ -272,18 +273,21 @@
       <li class="card reveal">
         <span class="ico" aria-hidden="true"><svg><use href="#i-users"/></svg></span>
         <h3>Embedded BA or PO</h3>
-        <p>Monthly B2B contract, full-time or part-time, inside your team.</p>
+        <p class="price">From €4,500 / month</p>
+        <p>Monthly B2B contract inside your team. Full-time price; part-time is quoted on the call.</p>
         <p class="fit"><strong>Fits</strong> teams that need senior capacity for months.</p>
       </li>
       <li class="card reveal">
         <span class="ico" aria-hidden="true"><svg><use href="#i-box"/></svg></span>
         <h3>One Feature, Fully Specified</h3>
+        <p class="price muted">Fixed price per scope</p>
         <p>Fixed scope and price. From first workshop to signed-off SRS.</p>
         <p class="fit"><strong>Fits</strong> teams with engineers ready and requirements that are not.</p>
       </li>
       <li class="card reveal">
         <span class="ico" aria-hidden="true"><svg><use href="#i-compass"/></svg></span>
         <h3>Discovery and MVP Plan</h3>
+        <p class="price muted">Quoted per scope</p>
         <p>Customer interviews, MVP scope, KPIs and a roadmap for investors or a delivery team.</p>
         <p class="fit"><strong>Fits</strong> founders before the first build.</p>
       </li>
@@ -404,6 +408,15 @@
           <img src="/assets/img/fig3-risk-refresh-flow-800.webp" width="800" height="560" loading="lazy" decoding="async" alt="Flowchart of the risk refresh on a later import run">
           <span><b>FIG 3</b>Risk refresh on a later import</span></a></li>
       </ul>
+      <div class="res-teaser reveal">
+        <img src="/assets/img/srs-template-cover-800.webp" width="800" height="1131" loading="lazy" alt="Cover page of the free SRS template">
+        <div>
+          <p class="kicker">Free download</p>
+          <h3>The SRS Template Behind This Document</h3>
+          <p>Five pages for Word with guidance: scenarios, MoSCoW requirements, business rules, UI, API, Given / When / Then acceptance criteria and a traceability matrix.</p>
+          <a class="btn btn-primary" href="/resources/srs-template/">Get the Free Template</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -416,9 +429,9 @@
     <ul class="grid-3">
       <li class="card reveal">
         <p class="metric"><b>160+</b>countries live</p>
-        <h3>Approval Web Application</h3>
+        <h3><a href="/work/approval-workflow/">Approval Web Application</a></h3>
         <p>Multi-tier sign-off with SOX and ISO 9001 traceability. API contracts for SAP, Salesforce and Snowflake.</p>
-        <p class="meta">SKF · SPQ+</p>
+        <p class="meta">SKF · SPQ+ · <a class="more" href="/work/approval-workflow/">Read the case study</a></p>
       </li>
       <li class="card reveal">
         <p class="metric"><b>3</b>LLM providers</p>
@@ -440,9 +453,9 @@
       </li>
       <li class="card reveal">
         <p class="metric"><b>€250K</b>seed raised</p>
-        <h3>Medical-Tourism Marketplace</h3>
+        <h3><a href="/work/booking-dentist-marketplace/">Medical-Tourism Marketplace</a></h3>
         <p>Sole BA and PO, 35+ countries, two products shipped 0 to 1. Funding through Katapult and RTC. 348 hours of non-MVP scope cut.</p>
-        <p class="meta">Booking.dentist · 2021 to 2023</p>
+        <p class="meta">2021 to 2023 · <a class="more" href="/work/booking-dentist-marketplace/">Read the case study</a></p>
       </li>
       <li class="card reveal">
         <p class="metric"><b>10</b>person sales team</p>
@@ -534,7 +547,7 @@
       <details><summary>What will I have at the end of an engagement?</summary><p>Documents your engineers and testers can use without me in the room: SRS or HLE, BPMN diagrams, wireframes, user stories with acceptance criteria and a traceability matrix. The <a href="/work/order-risk-hold/">Order Risk Hold work sample</a> shows the format.</p></details>
       <details><summary>Which tools do you use?</summary><p>Jira and Confluence for delivery, Draw.io, Lucidchart, Miro and Figma for diagrams and wireframes, Postman for APIs and Power BI for reporting. I use Claude Code and Claude Cowork every day, and I check every output before it goes out under my name.</p></details>
       <details><summary>Do you take full-time roles?</summary><p>Yes, for the right team: remote, or on-site and hybrid in Belgrade. Freelance B2B contracts are my default.</p></details>
-      <details><summary>How much do you charge?</summary><p>It depends on scope and hours per week. I send a quote after the intro call.</p></details>
+      <details><summary>How much do you charge?</summary><p>Embedded engagements start at €4,500 a month, full-time. Part-time, fixed-scope and discovery work are quoted after the intro call.</p></details>
       <details><summary>When can you start?</summary><p>Within 2 weeks of signing, often sooner.</p></details>
     </div>
   </section>
@@ -566,13 +579,16 @@
 </main>
 
 <footer class="site-footer">
-  <p>© <span id="year">2026</span> Nikola Djurovic · Freelance Business Analyst, Belgrade</p>
+  <div>
+    <p>© <span id="year">2026</span> Nikola Djurovic · Freelance Business Analyst, Belgrade</p>
+    <p class="biz">Nikola Đurović pr Poslovni konsalting BizDevProduct Beograd</p>
+  </div>
   <nav aria-label="Footer">
     <ul>
-      <li><a href="/work/order-risk-hold/">Work Sample</a></li>
       <li><a href="/cv/">CV</a></li>
-      <li><a href="/files/Nikola_Djurovic_Senior_BA_CV.pdf" download>CV (PDF)</a></li>
+      <li><a href="/resources/srs-template/">SRS Template</a></li>
       <li><a href="https://www.linkedin.com/in/nikoladjurovic" rel="me noopener" target="_blank">LinkedIn</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
       <li><a href="/sitemap/">Sitemap</a></li>
     </ul>
   </nav>

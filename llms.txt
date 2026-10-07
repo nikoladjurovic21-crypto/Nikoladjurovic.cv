@@ -32,13 +32,16 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 
 - Freelance B2B contract, invoiced monthly through his registered business in Serbia. No sponsorship or relocation needed.
 - Remote for clients worldwide, with hours shifted to overlap with the client's team, or on-site and hybrid in Belgrade. Can start within 2 weeks of signing.
-- Rates are quoted after an intro call.
+- Embedded engagements start at EUR 4,500 a month, full-time. Part-time, fixed-scope and discovery work are quoted after an intro call.
 
 ## Pages
 
 - [Home](https://nikoladjurovic.cv/): services, projects, recommendations, career, FAQ, contact.
 - [CV](https://nikoladjurovic.cv/cv/): the full CV as a web page, same content as the PDF.
 - [Sitemap](https://nikoladjurovic.cv/sitemap/): every page and file on the site.
+- [Approval Web Application case study](https://nikoladjurovic.cv/work/approval-workflow/): 0 to 1 multi-tier approval app on a Fortune 500 CPQ platform, 160+ countries.
+- [Booking.dentist case study](https://nikoladjurovic.cv/work/booking-dentist-marketplace/): two-sided medical-tourism marketplace, two products 0 to 1, EUR 250,000 seed.
+- [Free SRS template](https://nikoladjurovic.cv/resources/srs-template/): five-page Word template with guidance.
 - [Order Risk Hold work sample](https://nikoladjurovic.cv/work/order-risk-hold/): case study of a System Design Document holding Shopify orders flagged as fraud risk in an ERP. Requirements, diagrams, wireframes, acceptance criteria.
 
 ## Files
