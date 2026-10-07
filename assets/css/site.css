@@ -387,7 +387,8 @@ td.id{font-family:var(--mono);font-size:.82rem;color:var(--moss-ink);white-space
 @media (max-width:760px){.wf-grid{grid-template-columns:1fr}}
 .flow .note{margin-top:12px;font-size:.88rem}
 .price{display:inline-block;align-self:flex-start;font-weight:700;font-size:.95rem;color:var(--moss-ink);background:var(--tint);border-radius:999px;padding:5px 12px;margin:2px 0 12px}
-.price.muted{color:var(--ink-soft);background:var(--paper-2);font-weight:600}
+.price a{color:inherit;text-decoration:none}
+.price a:hover{text-decoration:underline;text-underline-offset:3px}
 .site-footer .biz{font-size:.8rem;margin-top:4px;opacity:.85}
 .prose .note{color:var(--ink-soft);font-size:.92rem}
 main#main + .site-footer{margin-top:48px}
