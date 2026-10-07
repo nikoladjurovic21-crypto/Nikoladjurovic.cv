@@ -37,6 +37,7 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 ## Pages
 
 - [Home](https://nikoladjurovic.cv/): services, projects, recommendations, career, FAQ, contact.
+- [CV](https://nikoladjurovic.cv/cv/): the full CV as a web page, same content as the PDF.
 - [Sitemap](https://nikoladjurovic.cv/sitemap/): every page and file on the site.
 - [Order Risk Hold work sample](https://nikoladjurovic.cv/work/order-risk-hold/): case study of a System Design Document holding Shopify orders flagged as fraud risk in an ERP. Requirements, diagrams, wireframes, acceptance criteria.
 
