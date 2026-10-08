@@ -130,23 +130,26 @@
   vids.forEach(function (v) { io.observe(v); });
 })();
 
-// Travelling diagrams: a token runs each route, leaves a trail and lights the steps it passes
+// Travelling diagrams: a token runs each route and lights the steps it passes
 (function () {
   'use strict';
   var hosts = document.querySelectorAll('[data-travel]');
-  if (!hosts.length || !window.SVGElement) return;
+  if (!hosts.length || !window.SVGElement || !('IntersectionObserver' in window)) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var NS = 'http://www.w3.org/2000/svg';
-  var CFG = {"fig1":{"w":1600,"h":1369,"r":11,"speed":0.42,"routes":[{"label":"High risk \u2192 Risk Hold","d":"M640 40 V1083 H173 V1205 H453 V1243 H640 V1320"},{"label":"Low or none \u2192 Open","d":"M640 40 V1083 H1060 V1205 H829 V1243 H640 V1320"},{"label":"No risk returned yet \u2192 Risk Review","d":"M640 40 V449 H1079 V484 H1253 V1243 H640 V1320"},{"label":"Unrecognised value \u2192 Risk Review","d":"M640 40 V586 H193 V628 H13 V1243 H640 V1320"}]},"fig2":{"w":1600,"h":1066,"r":11,"speed":0.42,"routes":[{"label":"High or Medium \u2192 Hold \u2192 released","d":"M618 126 V630 H1013 V439 H1077 V961 H618"},{"label":"Pending \u2192 Review \u2192 resolves Low","d":"M618 126 V238 H485 L322 400 V428 H1007 V439 H1077 V961 H618"},{"label":"Low or None \u2192 Open \u2192 delivered","d":"M618 126 V238 H752 L911 400 L1007 439 H1077 V961 H618"},{"label":"Pending \u2192 Review \u2192 cancelled","d":"M618 126 V238 H485 L322 400 L282 439 H213 V852 H282 V961 H618"}]},"fig3":{"w":1600,"h":1120,"r":11,"speed":0.42,"routes":[{"label":"Nothing changed \u2192 hold kept","d":"M625 100 V1034"},{"label":"Risk went up \u2192 back to Risk Hold","d":"M625 100 V676 H1045"},{"label":"Already shipped \u2192 warning only","d":"M625 100 V296 H1045"},{"label":"On Risk Review \u2192 re-evaluate","d":"M625 100 V820 H200"}]},"process":{"r":6,"speed":0.16,"routes":[{"d":"M10 161 H1154"}]},"approval":{"r":6,"speed":0.15,"routes":[{"d":"M20 90 H1060"}]}};
+  var CFG = {"fig1":{"w":1600,"h":1369,"r":11,"speed":0.5,"routes":[{"label":"High risk \u2192 Risk Hold","d":"M640 40 V1083 H173 V1205 H453 V1243 H640 V1320"},{"label":"Low or none \u2192 Open","d":"M640 40 V1083 H1060 V1205 H829 V1243 H640 V1320"},{"label":"No risk returned yet \u2192 Risk Review","d":"M640 40 V449 H1079 V484 H1253 V1243 H640 V1320"},{"label":"Unrecognised value \u2192 Risk Review","d":"M640 40 V586 H193 V628 H13 V1243 H640 V1320"}]},"fig2":{"w":1600,"h":1066,"r":11,"speed":0.5,"routes":[{"label":"High or Medium \u2192 Hold \u2192 released","d":"M618 126 V630 H1013 V439 H1077 V961 H618"},{"label":"Pending \u2192 Review \u2192 resolves Low","d":"M618 126 V238 H485 L322 400 V428 H1007 V439 H1077 V961 H618"},{"label":"Low or None \u2192 Open \u2192 delivered","d":"M618 126 V238 H752 L911 400 L1007 439 H1077 V961 H618"},{"label":"Pending \u2192 Review \u2192 cancelled","d":"M618 126 V238 H485 L322 400 L282 439 H213 V852 H282 V961 H618"}]},"fig3":{"w":1600,"h":1120,"r":11,"speed":0.5,"routes":[{"label":"Nothing changed \u2192 hold kept","d":"M625 100 V1034"},{"label":"Risk went up \u2192 back to Risk Hold","d":"M625 100 V676 H1045"},{"label":"Already shipped \u2192 warning only","d":"M625 100 V296 H1045"},{"label":"On Risk Review \u2192 re-evaluate","d":"M625 100 V820 H200"}]},"process":{"r":6,"speed":0.2,"routes":[{"d":"M10 161 H1154"}],"gapSpeed":0.045,"hide":true,"trail":false},"approval":{"r":6,"speed":0.18,"routes":[{"d":"M20 90 H1060"}],"gapSpeed":0.04,"hide":true,"trail":false}};
+  var groups = {};
   function el(n, a, p) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
 
   function setup(host) {
     var cfg = CFG[host.getAttribute('data-travel')];
     if (!cfg) return;
+    var gname = host.getAttribute('data-travel-group'), group = null, me = null;
+    if (gname) { group = groups[gname] = groups[gname] || { members: [], turn: 0 }; me = group.members.length; group.members.push(host); }
     var svg, chip = null, inline = host.tagName.toLowerCase() === 'svg';
     if (inline) { svg = host; }
     else {
-      svg = el('svg', { viewBox: '0 0 ' + cfg.w + ' ' + cfg.h, 'class': 'travel-ov', 'aria-hidden': 'true', focusable: 'false' }, host);
+      svg = el('svg', { viewBox: '0 0 ' + cfg.w + ' ' + cfg.h, 'class': 'travel-ov', 'aria-hidden': 'true', focusable: 'false', preserveAspectRatio: 'xMidYMid meet' }, host);
       chip = document.createElement('span'); chip.className = 'travel-chip'; chip.setAttribute('aria-hidden', 'true'); host.appendChild(chip);
     }
     var layer = el('g', { 'class': 'tv-layer' }, svg);
@@ -164,13 +167,17 @@
       el('circle', { r: r, 'class': 'core', 'stroke-width': r * 0.38 }, g);
       return g;
     }
+    function inNode(p) {
+      for (var j = 0; j < nodes.length; j++) { var b = nodes[j].b; if (p.x >= b.x && p.x <= b.x + b.width && p.y >= b.y && p.y <= b.y + b.height) return nodes[j]; }
+      return null;
+    }
     function startRoute() {
       st.i = (st.i + 1) % cfg.routes.length;
       var R = cfg.routes[st.i], k = scale();
       st.r = Math.max(cfg.r, 3.6 * k);
-      st.trail = el('path', { d: R.d, 'class': 'tv-trail', 'stroke-width': st.r * 0.6 }, layer);
-      st.len = st.trail.getTotalLength();
-      st.trail.style.strokeDasharray = st.len; st.trail.style.strokeDashoffset = st.len;
+      st.path = el('path', { d: R.d, 'class': 'tv-trail' + (cfg.trail === false ? ' none' : ''), 'stroke-width': st.r * 0.6 }, layer);
+      st.len = st.path.getTotalLength();
+      st.path.style.strokeDasharray = st.len; st.path.style.strokeDashoffset = st.len;
       st.tok = token(st.r);
       st.dist = 0; st.phase = 'move'; st.t = 0;
       nodes.forEach(function (n) { if (!n.b) { try { n.b = n.el.getBBox(); } catch (e) { n.b = { x: 0, y: 0, width: 0, height: 0 }; } } });
@@ -185,10 +192,11 @@
       var p = el('path', { d: d, fill: 'none', stroke: 'none' }, layer);
       st.emits.push({ p: p, len: p.getTotalLength(), dist: 0, tok: token(st.r * 0.6, 'small'), to: n.el.getAttribute('data-emit-to') });
     }
+    function clearNodes() { nodes.forEach(function (n) { n.on = false; n.el.classList.remove('is-active', 'is-done'); }); }
     function step(dt) {
       // side tokens (audit trail and the like)
       st.emits = st.emits.filter(function (e) {
-        e.dist += dt * cfg.speed * 1.4;
+        e.dist += dt * 0.18;
         if (e.dist >= e.len) {
           e.tok.remove(); e.p.remove();
           var t = e.to && svg.querySelector(e.to);
@@ -197,26 +205,34 @@
         }
         place(e.tok, e.p.getPointAtLength(e.dist)); return true;
       });
-      if (st.phase === 'idle') { startRoute(); return; }
+      if (st.phase === 'idle') {
+        if (group && group.turn !== me) return; // figures in a group take turns
+        st.t += dt; if (st.t < 350) return;
+        startRoute(); return;
+      }
       st.t += dt;
       if (st.phase === 'move') {
-        st.dist = Math.min(st.len, st.dist + dt * cfg.speed);
-        var p = st.trail.getPointAtLength(st.dist);
+        var here = inNode(st.tok._p || { x: -1e9, y: -1e9 });
+        var v = here || !cfg.gapSpeed ? cfg.speed : cfg.gapSpeed;
+        st.dist = Math.min(st.len, st.dist + dt * v);
+        var p = st.path.getPointAtLength(st.dist); st.tok._p = p;
         place(st.tok, p);
-        st.trail.style.strokeDashoffset = st.len - st.dist;
+        st.path.style.strokeDashoffset = st.len - st.dist;
+        var cur = inNode(p);
         nodes.forEach(function (n) {
-          var b = n.b, inside = p.x >= b.x && p.x <= b.x + b.width && p.y >= b.y && p.y <= b.y + b.height;
-          if (inside && !n.on) { n.on = true; n.el.classList.add('is-active'); emit(n); }
-          else if (!inside && n.on) { n.on = false; n.el.classList.remove('is-active'); }
+          if (n === cur && !n.on) { n.on = true; n.el.classList.remove('is-done'); n.el.classList.add('is-active'); emit(n); }
+          else if (n !== cur && n.on) { n.on = false; n.el.classList.remove('is-active'); n.el.classList.add('is-done'); }
         });
+        if (cfg.hide) st.tok.classList.toggle('hidden', !!cur);
         if (st.dist >= st.len) { st.phase = 'hold'; st.t = 0; }
-      } else if (st.phase === 'hold' && st.t > 900) {
+      } else if (st.phase === 'hold' && st.t > (group ? 500 : 1100)) {
         st.phase = 'fade'; st.t = 0;
-        st.trail.classList.add('out'); st.tok.classList.add('out');
+        st.path.classList.add('out'); st.tok.classList.add('out');
         nodes.forEach(function (n) { n.on = false; n.el.classList.remove('is-active'); });
         if (chip) chip.classList.remove('on');
       } else if (st.phase === 'fade' && st.t > 650) {
-        st.trail.remove(); st.tok.remove(); st.phase = 'idle';
+        st.path.remove(); st.tok.remove(); clearNodes(); st.phase = 'idle'; st.t = 0;
+        if (group) group.turn = (group.turn + 1) % group.members.length;
       }
     }
     function frame(now) {
@@ -230,6 +246,5 @@
     }, { threshold: 0.15 });
     io.observe(host);
   }
-  if (!('IntersectionObserver' in window)) return;
   hosts.forEach(setup);
 })();

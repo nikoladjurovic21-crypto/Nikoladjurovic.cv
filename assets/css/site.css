@@ -420,7 +420,8 @@ main#main + .site-footer{margin-top:48px}
 .travel-host{position:relative;display:block}
 .travel-ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .tv-trail{fill:none;stroke:#6d4aff;stroke-linecap:round;stroke-linejoin:round;opacity:.5;transition:opacity .6s ease}
-.tv-token{transition:opacity .6s ease}
+.tv-token{transition:opacity .2s ease}
+.tv-token.out{transition:opacity .6s ease}
 .tv-token .core{fill:#6d4aff;stroke:#fff}
 .tv-token .glow{fill:#6d4aff;opacity:.22;transform-box:fill-box;transform-origin:center;animation:tv-glow 1.1s ease-in-out infinite}
 .tv-token.small .core{fill:#a78bfa}
@@ -437,3 +438,8 @@ main#main + .site-footer{margin-top:48px}
   svg[data-travel] path[stroke-dasharray]{animation:tv-march 5s linear infinite}
 }
 @keyframes tv-march{to{stroke-dashoffset:-110}}
+.fig-link .travel-host{padding:0;font-size:inherit;color:inherit;border-radius:8px;overflow:hidden}
+.fig-link img{object-fit:contain;object-position:center}
+.tv-trail.none{stroke:none}
+.tv-token.hidden{opacity:0;transition:opacity .15s ease}
+[data-travel] [data-node].is-done .fl-card{stroke:#6d4aff;stroke-width:1.5;transition:stroke .3s ease}
