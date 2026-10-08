@@ -31,9 +31,9 @@
 
 <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=20261008a">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261008b">
 <script>document.documentElement.classList.add('js')</script>
-<script src="/assets/js/site.js?v=20261008a" defer></script>
+<script src="/assets/js/site.js?v=20261008b" defer></script>
 
 <script type="application/ld+json">
 {
@@ -210,21 +210,21 @@
       <p class="intro" style="margin-bottom:26px">Each figure opens at full size. Colours follow one legend across the document, and every state is also labelled in text.</p>
 
       <figure class="figure reveal" id="fig-1">
-        <a href="/assets/img/fig1-order-import-flow-1600.webp" target="_blank" rel="noopener">
+        <a class="travel-host" data-travel="fig1" href="/assets/img/fig1-order-import-flow-1600.webp" target="_blank" rel="noopener">
           <img src="/assets/img/fig1-order-import-flow-1600.webp" srcset="/assets/img/fig1-order-import-flow-800.webp 800w, /assets/img/fig1-order-import-flow-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1369" loading="lazy" decoding="async" alt="Flowchart: Shopify fraud analysis, 10-minute import job, fetch order and risk, create Sales Order, then decisions on whether a risk block was returned, whether values are recognised, whether assessments exist and whether the write succeeded, ending in Risk Hold, Risk Review or Open status in the sales manager's work list.">
         </a>
         <figcaption><b>Figure 1. Order import with risk checks.</b> The first import of an order, including the three exception paths that must never stop the import run (NFR-02).</figcaption>
       </figure>
 
       <figure class="figure reveal" id="fig-2">
-        <a href="/assets/img/fig2-order-status-flow-1600.webp" target="_blank" rel="noopener">
+        <a class="travel-host" data-travel="fig2" href="/assets/img/fig2-order-status-flow-1600.webp" target="_blank" rel="noopener">
           <img src="/assets/img/fig2-order-status-flow-1600.webp" srcset="/assets/img/fig2-order-status-flow-800.webp 800w, /assets/img/fig2-order-status-flow-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1066" loading="lazy" decoding="async" alt="State diagram: from Risk Level to Risk Review, Risk Hold or Open; Risk Review resolves to Open or Risk Hold; Risk Hold is released to Open with a reason; Open can be upgraded to Risk Hold; Risk Review and Risk Hold can be cancelled; Open ends when delivered and invoiced.">
         </a>
         <figcaption><b>Figure 2. Sales Order status flow.</b> Four statuses and the events that move an order between them. A lower risk level never releases a hold on its own.</figcaption>
       </figure>
 
       <figure class="figure reveal" id="fig-3">
-        <a href="/assets/img/fig3-risk-refresh-flow-1600.webp" target="_blank" rel="noopener">
+        <a class="travel-host" data-travel="fig3" href="/assets/img/fig3-risk-refresh-flow-1600.webp" target="_blank" rel="noopener">
           <img src="/assets/img/fig3-risk-refresh-flow-1600.webp" srcset="/assets/img/fig3-risk-refresh-flow-800.webp 800w, /assets/img/fig3-risk-refresh-flow-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1120" loading="lazy" decoding="async" alt="Flowchart of a later import run for an order the ERP already holds: if a shipment exists, log and notify only; if cancelled or closed, update risk fields only; otherwise reinsert assessments, recalculate the risk level, and hold the order again if the level increased.">
         </a>
         <figcaption><b>Figure 3. Risk refresh on a later import run.</b> What happens when Shopify updates its verdict after the first import (FR-11).</figcaption>
