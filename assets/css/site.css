@@ -496,3 +496,7 @@ main#main + .site-footer{margin-top:48px}
 .toolkit .chips li{cursor:default;transition:transform .2s cubic-bezier(.3,.7,.3,1),background-color .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease;-webkit-user-select:none;user-select:none}
 .toolkit .chips li:hover,.toolkit .chips li.is-hot{background:var(--moss);border-color:var(--moss);color:#fff;transform:translateY(-3px) scale(1.08);box-shadow:0 10px 20px -10px rgb(var(--moss-rgb) / .8);position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){.toolkit .card:hover,.toolkit .card.is-hot,.toolkit .chips li:hover,.toolkit .chips li.is-hot{transform:none}}
+.toolkit .tk-note{font-size:.88rem;color:var(--ink-soft);margin:-4px 0 14px;line-height:1.5}
+.toolkit .tk-ai{border-color:rgb(var(--moss-rgb) / .45);background:linear-gradient(180deg,var(--card),var(--tint))}
+.toolkit .tk-ai h3{color:var(--moss-ink)}
+@media (min-width:700px){.toolkit .tk-ai{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);column-gap:32px;align-items:start}.toolkit .tk-ai h3,.toolkit .tk-ai .tk-note{grid-column:1}.toolkit .tk-ai .chips{grid-column:2;grid-row:1/span 2}}
