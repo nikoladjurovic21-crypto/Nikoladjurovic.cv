@@ -9,6 +9,43 @@
   var CALENDLY_URL = '';
 
   var header = document.querySelector('.site-header');
+
+  // Breadcrumb bar under the header on every inner page, so Home is always one tap away
+  var pageCrumbs = document.querySelector('main .crumbs');
+  if (header && pageCrumbs) {
+    var bar = document.createElement('nav');
+    bar.className = 'crumb-bar';
+    bar.setAttribute('aria-label', 'Breadcrumb');
+    var ol = pageCrumbs.querySelector('ol').cloneNode(true);
+    var first = ol.querySelector('li a');
+    if (first) { first.classList.add('crumb-home'); first.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h13V9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Home'; }
+    bar.appendChild(ol);
+    header.appendChild(bar);
+    pageCrumbs.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.add('has-crumb-bar');
+  }
+
+  // Sticky call to action on phones
+  if (!document.querySelector('.m-cta')) {
+    var cta = document.createElement('div');
+    cta.className = 'm-cta';
+    cta.innerHTML = '<a class="btn btn-primary" href="mailto:nikoladjurovic21@gmail.com?subject=Intro%20call" data-book><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>Book a 30-Minute Call</a>' +
+      '<a class="m-cta-mail" href="mailto:nikoladjurovic21@gmail.com" aria-label="Email Nikola"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a>';
+    document.body.appendChild(cta);
+    var hideZones = [document.getElementById('contact'), document.querySelector('.site-footer')].filter(Boolean);
+    var inZone = {};
+    var updateCta = function () {
+      var blocked = Object.keys(inZone).some(function (k) { return inZone[k]; });
+      var open = header && header.classList.contains('is-open');
+      cta.classList.toggle('is-on', window.scrollY > 380 && !blocked && !open);
+    };
+    if ('IntersectionObserver' in window && hideZones.length) {
+      var zio = new IntersectionObserver(function (es) { es.forEach(function (e) { inZone[hideZones.indexOf(e.target)] = e.isIntersecting; }); updateCta(); });
+      hideZones.forEach(function (z) { zio.observe(z); });
+    }
+    window.addEventListener('scroll', updateCta, { passive: true });
+    updateCta();
+  }
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
 
@@ -36,6 +73,7 @@
       var open = toggle.getAttribute('aria-expanded') === 'true';
       if (open) { closeMenu(); return; }
       header.classList.add('is-open');
+      var c0 = document.querySelector('.m-cta'); if (c0) c0.classList.remove('is-on');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Close menu');
     });
@@ -247,4 +285,38 @@
     io.observe(host);
   }
   hosts.forEach(setup);
+})();
+
+// Mobile process list: the steps light up one after another along the line
+(function () {
+  'use strict';
+  var list = document.querySelector('.process');
+  if (!list || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var steps = [].slice.call(list.querySelectorAll('.step'));
+  if (!steps.length) return;
+  var fill = document.createElement('span'); fill.className = 'proc-fill'; fill.setAttribute('aria-hidden', 'true');
+  var dot = document.createElement('span'); dot.className = 'proc-dot'; dot.setAttribute('aria-hidden', 'true');
+  list.appendChild(fill); list.appendChild(dot);
+  var i = -1, timer = 0, visible = false;
+  function shown() { return list.getBoundingClientRect().height > 10; }
+  function centre(s) { var n = s.querySelector('.step-num'); return n.offsetTop + n.offsetHeight / 2 + (s.offsetTop); }
+  function reset() { steps.forEach(function (s) { s.classList.remove('is-active', 'is-done'); }); fill.style.height = '0px'; dot.style.transform = 'translateY(' + centre(steps[0]) + 'px)'; i = -1; }
+  function tick() {
+    timer = 0;
+    if (!visible || !shown()) { list.classList.remove('is-running'); return; }
+    list.classList.add('is-running');
+    if (i >= steps.length - 1) { reset(); timer = setTimeout(tick, 700); return; }
+    if (i >= 0) { steps[i].classList.remove('is-active'); steps[i].classList.add('is-done'); }
+    i++;
+    var y = centre(steps[i]), y0 = centre(steps[0]);
+    fill.style.top = y0 + 'px'; fill.style.height = (y - y0) + 'px';
+    dot.style.transform = 'translateY(' + y + 'px)';
+    steps[i].classList.add('is-active');
+    timer = setTimeout(tick, i === steps.length - 1 ? 2600 : 1500);
+  }
+  new IntersectionObserver(function (es) {
+    visible = es[0].isIntersecting;
+    if (visible && !timer) { if (i < 0) reset(); timer = setTimeout(tick, 400); }
+  }, { threshold: 0.2 }).observe(list);
 })();
