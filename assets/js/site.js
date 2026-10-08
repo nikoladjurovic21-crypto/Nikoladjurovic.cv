@@ -320,3 +320,20 @@
     if (visible && !timer) { if (i < 0) reset(); timer = setTimeout(tick, 400); }
   }, { threshold: 0.2 }).observe(list);
 })();
+
+// Toolkit: on touch screens a tap does what hover does on desktop
+(function () {
+  'use strict';
+  var kit = document.querySelector('.toolkit');
+  if (!kit) return;
+  function clear() { kit.querySelectorAll('.is-hot').forEach(function (n) { n.classList.remove('is-hot'); }); }
+  kit.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chips li'), card = e.target.closest('.card');
+    var wasHot = (chip || card) && (chip || card).classList.contains('is-hot');
+    clear();
+    if (wasHot) return;
+    if (card) card.classList.add('is-hot');
+    if (chip) chip.classList.add('is-hot');
+  });
+  document.addEventListener('click', function (e) { if (!kit.contains(e.target)) clear(); });
+})();

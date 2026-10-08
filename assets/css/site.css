@@ -487,3 +487,12 @@ main#main + .site-footer{margin-top:48px}
 /* scenario label: higher specificity than .fig-link span, solid colours so it reads on any diagram */
 .travel-host .travel-chip{display:inline-flex;align-items:center;position:absolute;right:10px;bottom:10px;padding:6px 12px;margin:0;font:700 .78rem/1.2 var(--sans);color:#fff;background:#5a38e6;border:1px solid #4527c9;border-radius:999px;box-shadow:0 8px 20px -8px rgb(45 25 140 / .6);letter-spacing:0;text-transform:none}
 .travel-host .travel-chip::before{background:#fff}
+
+/* ---------- v7: toolkit hover / tap ---------- */
+.toolkit .card{position:relative;transition:transform .28s cubic-bezier(.3,.7,.3,1),box-shadow .28s ease,border-color .28s ease,background-color .28s ease}
+.toolkit .card h3{transition:color .25s ease}
+.toolkit .card:hover,.toolkit .card.is-hot{transform:translateY(-6px) scale(1.015);border-color:var(--moss);background:linear-gradient(180deg,var(--card),var(--tint));box-shadow:0 26px 50px -26px rgb(var(--moss-rgb) / .6);z-index:2}
+.toolkit .card:hover h3,.toolkit .card.is-hot h3{color:var(--moss-ink)}
+.toolkit .chips li{cursor:default;transition:transform .2s cubic-bezier(.3,.7,.3,1),background-color .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease;-webkit-user-select:none;user-select:none}
+.toolkit .chips li:hover,.toolkit .chips li.is-hot{background:var(--moss);border-color:var(--moss);color:#fff;transform:translateY(-3px) scale(1.08);box-shadow:0 10px 20px -10px rgb(var(--moss-rgb) / .8);position:relative;z-index:1}
+@media (prefers-reduced-motion:reduce){.toolkit .card:hover,.toolkit .card.is-hot,.toolkit .chips li:hover,.toolkit .chips li.is-hot{transform:none}}
