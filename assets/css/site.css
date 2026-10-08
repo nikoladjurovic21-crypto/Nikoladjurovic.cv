@@ -457,8 +457,9 @@ main#main + .site-footer{margin-top:48px}
 .crumb-bar .crumb-home svg{width:15px;height:15px}
 .has-crumb-bar .site-header{background:rgb(var(--deep-rgb) / .94);box-shadow:0 1px 0 rgb(var(--accent-rgb) / .18)}
 .has-crumb-bar main .crumbs{display:none}
-.has-crumb-bar .page-hero{padding-top:156px}
-.has-crumb-bar .cv-wrap{padding-top:146px}
+@media screen{.has-crumb-bar .page-hero{padding-top:156px}
+.has-crumb-bar .cv-wrap{padding-top:146px}}
+@media print{.m-cta,.crumb-bar{display:none!important}}
 @media (max-width:620px){.crumb-bar li:not(:first-child):not(:last-child){display:none}}
 
 .m-cta{display:none}

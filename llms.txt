@@ -17,7 +17,7 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 - Booking.dentist (2021 to 2023, via Soprex): sole BA and PO on a two-sided B2B/B2C medical-tourism marketplace live in 35+ countries. Shipped two products 0 to 1, wrote the business case, KPIs, MVP roadmap and pitch decks behind EUR 250,000 in seed funding raised through Katapult, cut 348 hours of non-MVP scope, built the sales function with the CEO (10-person team). Revenue grew 30%+ during his time.
 - Works daily with stakeholders from sales reps to global process owners, with QA on test cases and UAT, and with DevOps on release planning and deployment, followed by post-release hypercare.
 - Independent work: founder of SynkBase, a Term Intelligence Platform in development that finds where term definitions drift across Jira and Confluence and calculates the rework cost. Also builds BA agent skills for Claude and a currency converter extension for Firefox.
-- Earlier: Sales Development Intern at Sales Clover (2020), Market Research Analyst at Cloudleaf, Inc. (2018).
+- Earlier: Sales Development Representative at Sales Clover (2020), Market Research Analyst at Cloudleaf, Inc. (2018).
 - Education: B.A. Ethnology and Anthropology, University of Belgrade, 2019. CBAP (IIBA) in progress.
 - Languages: Serbian native, English C2, Spanish A2.
 
