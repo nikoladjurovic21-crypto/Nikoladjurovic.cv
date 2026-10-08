@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order Risk Hold: Clickable Prototype | Nikola Djurovic</title>
+<meta name="description" content="Clickable prototype of the Sales Order screen from the Order Risk Hold work sample. Switch the Shopify risk level and try the hold, the confirmation dialog and the release.">
+<link rel="canonical" href="https://nikoladjurovic.cv/work/order-risk-hold/prototype/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Order Risk Hold: Clickable Prototype | Nikola Djurovic">
+<meta property="og:description" content="Switch the Shopify risk level and try the hold, the confirmation dialog and the release.">
+<meta property="og:url" content="https://nikoladjurovic.cv/work/order-risk-hold/prototype/">
+<meta property="og:image" content="https://nikoladjurovic.cv/assets/img/og-order-risk-hold.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--ink:#111;--ink-2:#4b5563;--line:#111;--soft:#d6d9e0;--blue:#2563eb;--blue-t:#eef3ff;--red:#fecaca;--red-b:#dc2626;--amber:#fde68a;--amber-b:#b45309;--grey:#e5e7eb;--grey-b:#6b7280;--paper:#f6f7f9;--accent:#6d4aff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.4}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:12px 20px;background:#0f0d1a;color:#fff}
+.topbar a{color:#cfc4ff;text-decoration:none;font-weight:600}
+.topbar a:hover{text-decoration:underline}
+.topbar .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#a99bff;font-weight:700}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 16px 40px}
+.sim{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;background:#fff;border:1px solid var(--soft);border-radius:12px;padding:12px 16px;margin-bottom:16px}
+.sim b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.seg{display:inline-flex;border:1px solid #c7cbd4;border-radius:999px;overflow:hidden}
+.seg button{padding:6px 14px;font-weight:600;font-size:13px;border-right:1px solid #c7cbd4}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.switch{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13px}
+.switch .track{width:38px;height:22px;border-radius:999px;background:#c7cbd4;position:relative;transition:background .2s}
+.switch .track::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+.switch[aria-checked="true"] .track{background:var(--accent)}
+.switch[aria-checked="true"] .track::after{transform:translateX(16px)}
+.sim .reset{margin-left:auto;font-size:13px;font-weight:600;color:var(--accent)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.scroller{overflow-x:auto;background:#fff;border:2px solid var(--line);border-radius:4px}
+.screen{min-width:900px;position:relative}
+.s-title{font-size:20px;font-weight:700;padding:14px 18px 6px}
+.toolbar{display:flex;align-items:center;gap:16px;padding:8px 18px 12px;border-bottom:2px solid var(--line)}
+.toolbar .tb{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px}
+.toolbar svg{width:22px;height:22px}
+.toolbar .ic{display:inline-flex;padding:2px;border-radius:4px}
+.toolbar .ic:hover{background:var(--grey)}
+.btn-wf{border:2px solid var(--line);padding:5px 22px;font-weight:700;font-size:15px;background:#fff;border-radius:2px}
+.btn-wf:hover:not(:disabled){background:var(--grey)}
+.new{outline:2px dashed var(--blue);outline-offset:3px;border-radius:3px}
+.btn-new{border:2px solid var(--blue);color:var(--blue);background:var(--blue-t);padding:5px 18px;font-weight:700;font-size:13px;border-radius:2px;transition:filter .15s}
+.btn-new:hover:not(:disabled){filter:brightness(.94)}
+.btn-new:disabled{color:#9aa3b2;border-color:#c6ccd8;background:#f1f3f7;pointer-events:none}
+.tipwrap{cursor:not-allowed}.tipwrap:has(button:enabled){cursor:auto}
+.tipwrap{position:relative;display:inline-flex}
+.tip{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);width:260px;background:#111;color:#fff;font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+.tipwrap:hover .tip,.tipwrap.show-tip .tip{opacity:1}
+.banner{margin:12px 18px 0;padding:10px 14px;border:2px solid var(--blue);font-style:italic;border-radius:4px;transition:background .25s}
+.banner b{font-weight:700}
+.banner[data-tone="high"]{background:var(--red)}
+.banner[data-tone="medium"]{background:var(--amber)}
+.banner[data-tone="pending"]{background:var(--grey)}
+.banner[data-tone="ok"]{background:#dcfce7}
+.form{display:grid;grid-template-columns:1.1fr 1.4fr 1fr;gap:10px 24px;padding:16px 18px 6px}
+.fr{display:flex;align-items:center;gap:10px;min-height:30px}
+.fr label{font-weight:600;white-space:nowrap;min-width:84px}
+.fr .in{flex:1;border:2px solid var(--line);border-radius:999px;height:28px;display:flex;align-items:center;padding:0 10px;gap:6px;font-size:13px;overflow:hidden;white-space:nowrap}
+.fr .in.sq{border-radius:2px}
+.fr .in svg{width:14px;height:14px;flex:none}
+.tot{display:flex;justify-content:space-between;font-weight:600}
+.tot span:last-child{font-weight:400;font-variant-numeric:tabular-nums}
+.status{border:2px solid var(--blue);color:var(--blue);background:var(--blue-t);padding:3px 16px;font-weight:700;font-size:13px;border-radius:2px;transition:all .25s}
+.status[data-s="Open"]{border-color:#15803d;color:#15803d;background:#ecfdf3}
+.status[data-s="Shipped"]{border-color:#111;color:#111;background:#f3f4f6}
+.risk{margin:10px 18px 0;padding:10px 14px;border:2px dashed var(--blue);border-radius:4px;background:#f8faff;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:18px;align-items:end}
+.risk h3{color:var(--blue);font-size:14px;margin-bottom:6px;grid-column:1/-1}
+.risk-grid{display:grid;grid-template-columns:auto auto auto auto;justify-content:start;white-space:nowrap;align-items:center;gap:6px 14px;font-size:13px}
+.risk-grid i{color:var(--ink-2)}
+.lvl{display:inline-block;padding:2px 14px;border-radius:999px;font-weight:700;font-style:normal;border:1.5px solid}
+.lvl[data-l="High"]{background:var(--red);border-color:var(--red-b)}
+.lvl[data-l="Medium"]{background:var(--amber);border-color:var(--amber-b)}
+.lvl[data-l="Low"]{background:#dcfce7;border-color:#15803d}
+.lvl[data-l="Pending"],.lvl[data-l="None"]{background:var(--grey);border-color:var(--grey-b)}
+.risk-actions{display:flex;gap:12px;justify-content:flex-end}
+.tabs{display:flex;gap:4px;padding:14px 18px 0;border-bottom:2px solid var(--line)}
+.tab{padding:6px 16px;font-weight:700;font-size:13px;border:2px solid var(--line);border-bottom:0;background:#e5e7eb;border-radius:4px 4px 0 0;margin-bottom:-2px}
+.tab.new-tab{border-color:var(--blue);color:var(--blue);background:#fff}
+.tab[aria-selected="true"]{background:#fff;position:relative;z-index:1;border-bottom:2px solid #fff}
+.tab.new-tab[aria-selected="true"]{border-bottom-color:#fff}
+.gridbar{display:flex;gap:16px;padding:6px 18px;border-bottom:2px solid var(--line)}
+.gridbar svg{width:18px;height:18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:700;padding:8px 10px;border-right:2px solid var(--line);border-bottom:2px solid var(--line);white-space:nowrap}
+th:last-child{border-right:0}
+td{padding:8px 10px;border-right:2px solid var(--line);border-bottom:1px solid #e5e7eb}
+td:last-child{border-right:0}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.panel{min-height:200px}
+.empty{padding:22px 18px;font-style:italic;color:var(--ink-2)}
+/* annotations */
+.badge{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;z-index:3;pointer-events:none;transition:opacity .2s}
+.no-notes .badge{opacity:0}
+.anchor{position:relative}
+/* side */
+.side{display:grid;gap:16px}
+.card{background:#fff;border:1px solid var(--soft);border-radius:12px;padding:14px 16px}
+.card h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+.log{list-style:none;display:grid;gap:8px;max-height:330px;overflow:auto;font-size:12.5px}
+.log li{border-left:3px solid var(--accent);padding:2px 0 2px 8px;animation:in .3s ease}
+.log li.err{border-color:var(--red-b)}
+.log li.ok{border-color:#15803d}
+.log code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;background:#f3f4f6;padding:1px 4px;border-radius:3px}
+.log time{display:block;color:var(--ink-2);font-size:11px}
+@keyframes in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.rules{list-style:none;display:grid;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.rules b{color:var(--ink)}
+/* dialog */
+.overlay{position:absolute;inset:0;background:rgb(17 17 17 / .35);display:flex;align-items:center;justify-content:center;z-index:10;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.open{opacity:1;pointer-events:auto}
+.dialog{width:470px;background:#fff;border:2px solid var(--line);border-radius:6px;overflow:hidden;transform:translateY(8px);transition:transform .2s;box-shadow:0 30px 60px -20px rgb(0 0 0 / .4)}
+.overlay.open .dialog{transform:none}
+.dialog h3{font-style:italic;background:#e2e8f0;padding:10px 16px;border-bottom:2px solid var(--line);font-size:15px}
+.dialog .body{padding:14px 16px 16px;font-style:italic;display:grid;gap:10px}
+.dialog label{font-size:13px}
+.dialog textarea{width:100%;min-height:68px;border:2px solid var(--blue);border-radius:4px;padding:8px 10px;font:inherit;font-style:normal;resize:vertical}
+.dialog .count{font-size:12px;color:var(--ink-2);font-style:normal;text-align:right;margin-top:-6px}
+.dialog .acts{display:flex;justify-content:flex-end;gap:12px;font-style:normal}
+.dialog .acts button{min-width:120px;padding:7px 14px;border:2px solid var(--line);border-radius:4px;font-weight:700}
+.dialog .acts .primary{background:#c7d2fe}
+.dialog .acts .primary:disabled{background:#eef0f6;color:#9aa3b2;border-color:#c6ccd8}
+.toast{position:absolute;left:50%;bottom:18px;transform:translate(-50%,20px);background:#111;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;font-size:13px;opacity:0;transition:all .25s;z-index:12;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.foot{margin-top:16px;font-size:13px;color:var(--ink-2)}
+.foot a{color:var(--accent);font-weight:600}
+@media (max-width:1000px){.stage{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/work/order-risk-hold/">← Order Risk Hold Case Study</a>
+  <span class="tag">Clickable Prototype</span>
+  <a href="/">Nikola Djurovic</a>
+</div>
+<div class="wrap">
+  <div class="sim" role="group" aria-label="Simulation controls">
+    <b>Shopify Risk</b>
+    <div class="seg" id="lvl-seg">
+      <button type="button" data-level="High" aria-pressed="true">High</button>
+      <button type="button" data-level="Medium" aria-pressed="false">Medium</button>
+      <button type="button" data-level="Pending" aria-pressed="false">Pending</button>
+      <button type="button" data-level="Low" aria-pressed="false">Low</button>
+    </div>
+    <button type="button" class="switch" id="sw-right" role="switch" aria-checked="false"><span class="track" aria-hidden="true"></span>Risk Override Right</button>
+    <button type="button" class="switch" id="sw-notes" role="switch" aria-checked="true"><span class="track" aria-hidden="true"></span>Show Annotations</button>
+    <button type="button" class="reset" id="reset">Reset Order</button>
+  </div>
+
+  <div class="stage">
+    <div class="scroller">
+      <div class="screen" id="screen">
+        <div class="s-title">Sales Order</div>
+        <div class="toolbar">
+          <span class="tb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 11H7.8l4.6-4.6L11 5l-7 7 7 7 1.4-1.4L7.8 13H20z"/></svg>SAVE &amp; CLOSE</span>
+          <span class="ic" title="Save"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7zm-5 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm3-10H5V5h10z"/></svg></span>
+          <span class="ic" title="Undo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>
+          <span class="ic" title="New"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></span>
+          <span class="ic" title="Delete"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 7h12l-1 14H7zM9 3h6l1 2h4v2H4V5h4z"/></svg></span>
+          <span class="tipwrap anchor" id="ship-wrap">
+            <button type="button" class="btn-new" id="btn-ship">Create Shipment</button>
+            <span class="tip" id="ship-tip" role="tooltip"></span>
+            <span class="badge" style="left:-12px;top:-14px">2</span>
+          </span>
+          <button type="button" class="btn-wf" id="btn-invoice">Create Invoice</button>
+        </div>
+
+        <div class="anchor">
+          <div class="banner" id="banner" data-tone="high" role="status"></div>
+          <span class="badge" style="left:6px;top:0">1</span>
+        </div>
+
+        <div class="form">
+          <div class="fr"><label>*Order:</label><span class="in sq">SO-2481</span></div>
+          <div class="fr"><label>Customer:</label><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="10" cy="10" r="6"/><path d="m20 20-5.5-5.5"/></svg>Rowan Hale</span></div>
+          <div class="tot"><span>Order Qty Total:</span><span>3.00</span></div>
+          <div class="fr anchor"><label>Status:</label><span class="status" id="status" data-s="Risk Hold">Risk Hold</span><span class="badge" style="left:62px;top:-8px">3</span></div>
+          <div class="fr"><label>Address:</label><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="10" cy="10" r="6"/><path d="m20 20-5.5-5.5"/></svg>21 Harbour St, Lisbon, PT</span></div>
+          <div class="tot"><span>Discount Total:</span><span>0.00</span></div>
+          <div class="fr"><label>Date:</label><span class="in sq">07/09/2026</span></div>
+          <div class="fr"><label>Currency:</label><span class="in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="10" cy="10" r="6"/><path d="m20 20-5.5-5.5"/></svg>EUR</span></div>
+          <div class="tot"><span>Tax Total:</span><span>465.00</span></div>
+          <div class="fr"><label>Shopify No.:</label><span class="in sq">#1048</span></div>
+          <div class="fr"><label>Description:</label><span class="in sq">Web order, imported by the 10:20 run</span></div>
+          <div class="tot"><span>Order Total:</span><span>2,480.00</span></div>
+        </div>
+
+        <div class="anchor">
+          <div class="risk">
+            <h3>Order Risk</h3>
+            <div class="risk-grid">
+              <i>Risk Level</i><span class="lvl" id="r-level" data-l="High">High</span>
+              <i>Risk Recommendation</i><span id="r-rec">Cancel</span>
+              <i>Risk Checked On</i><span id="r-checked">07/09/2026 10:24</span>
+              <i>Risk Accepted By</i><span id="r-by">(empty)</span>
+              <i>Risk Accepted On</i><span id="r-on">(empty)</span>
+            </div>
+            <div class="risk-actions">
+              <span class="anchor"><button type="button" class="btn-new" id="btn-details">Risk Details</button><span class="badge" style="left:-12px;top:-14px">5</span></span>
+              <span class="tipwrap anchor" id="rel-wrap"><button type="button" class="btn-new" id="btn-release">Release Risk Hold</button><span class="tip" id="rel-tip" role="tooltip">You need the Risk Override right to release this hold.</span><span class="badge" style="left:-12px;top:-14px">6</span></span>
+            </div>
+          </div>
+          <span class="badge" style="left:6px;top:-8px">4</span>
+        </div>
+
+        <div class="tabs anchor" role="tablist">
+          <button type="button" class="tab" role="tab" id="tab-details" aria-selected="true" aria-controls="p-details">DETAILS</button>
+          <button type="button" class="tab new-tab" role="tab" id="tab-risk" aria-selected="false" aria-controls="p-risk">ORDER RISK</button>
+          <span class="badge" style="left:110px;top:2px">7</span>
+        </div>
+        <div class="panel" id="p-details" role="tabpanel" aria-labelledby="tab-details">
+          <div class="gridbar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 11a8 8 0 1 1-2.3-5.7L20 8M20 3v5h-5"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 4v16M4 12h16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 6 12 12M18 6 6 18"/></svg></div>
+          <table>
+            <thead><tr><th>Product ID</th><th>Product Description</th><th>UOM</th><th class="num">Quantity</th><th class="num">Unit Price</th><th class="num">Amount</th><th>Warehouse</th><th>Bin Location</th></tr></thead>
+            <tbody>
+              <tr><td>CAM-X100</td><td>Mirrorless camera body</td><td>PCS</td><td class="num">2</td><td class="num">890.00</td><td class="num">1,780.00</td><td>WH-LIS</td><td>A-04-2</td></tr>
+              <tr><td>LNS-2470</td><td>24-70 mm zoom lens</td><td>PCS</td><td class="num">1</td><td class="num">700.00</td><td class="num">700.00</td><td>WH-LIS</td><td>A-06-1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel" id="p-risk" role="tabpanel" aria-labelledby="tab-risk" hidden>
+          <table>
+            <thead><tr><th>Provider</th><th>Risk Level</th><th>Sentiment</th><th>Fact Description</th></tr></thead>
+            <tbody id="facts"></tbody>
+          </table>
+          <p class="empty" id="facts-empty" hidden>Shopify has not returned a risk assessment for this order yet.</p>
+        </div>
+
+        <div class="overlay" id="dlg" aria-hidden="true">
+          <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+            <h3 id="dlg-title">Confirm delivery of a medium risk order</h3>
+            <div class="body">
+              <p id="dlg-text">Shopify assessed this order as Medium risk and recommends investigating it. Confirm only after you have checked the customer.</p>
+              <label for="reason">Reason (mandatory, 10 to 250 characters)</label>
+              <textarea id="reason" maxlength="250"></textarea>
+              <p class="count" id="count">0 / 250</p>
+              <div class="acts"><button type="button" id="dlg-cancel">Cancel</button><button type="button" class="primary" id="dlg-ok" disabled>Confirm</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="card">
+        <h2>What the System Does</h2>
+        <ol class="log" id="log" aria-live="polite"></ol>
+      </div>
+      <div class="card">
+        <h2>Rules in This Release</h2>
+        <ul class="rules">
+          <li><b>High:</b> Risk Hold. Shipment blocked. Only the Risk Override right releases it (FR-04, FR-06).</li>
+          <li><b>Medium:</b> Risk Hold. Shipment after a confirmation with a reason (FR-05).</li>
+          <li><b>Pending:</b> Risk Review. Blocked until the risk resolves (FR-08).</li>
+          <li><b>Low or none:</b> Open, as today.</li>
+          <li>Every release goes to the audit log (NFR-03).</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <p class="foot">Illustrative data. The full rules, API codes and acceptance criteria are in the <a href="/work/order-risk-hold/">System Design Document</a>.</p>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id)};
+  var USER='N. Djurovic';
+  var FACTS={
+    High:[['Shopify','High','Negative','Card issuer country differs from shipping'],['Shopify','High','Negative','Billing address does not match card address'],['Shopify','Low','Positive','Customer has 2 previous orders']],
+    Medium:[['Shopify','Medium','Negative','Order placed from a new device'],['Shopify','Low','Positive','Billing and shipping address match']],
+    Low:[['Shopify','Low','Positive','Customer has 6 previous orders'],['Shopify','Low','Positive','Billing and shipping address match']],
+    Pending:[]
+  };
+  var REC={High:'Cancel',Medium:'Investigate',Low:'Accept',Pending:'(pending)'};
+  var st;
+  function fresh(level){return {level:level,status:level==='Low'?'Open':(level==='Pending'?'Risk Review':'Risk Hold'),acceptedBy:null,acceptedOn:null,shipped:false};}
+  var right=false;
+  function now(){var d=new Date();var p=function(n){return String(n).padStart(2,'0')};return p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}
+  function clock(){var d=new Date();return d.toTimeString().slice(0,8);}
+  function log(html,cls){var li=document.createElement('li');if(cls)li.className=cls;li.innerHTML='<time>'+clock()+'</time>'+html;$('log').prepend(li);}
+  var toastT;
+  function toast(t){var el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show')},2600);}
+
+  function render(){
+    var l=st.level,b=$('banner');
+    // banner (1)
+    var tone=null,html='';
+    if(st.shipped){tone='ok';html='<b>Shipment SH-7731 created.</b> Delivery released'+(st.acceptedBy?' by '+st.acceptedBy+' on '+st.acceptedOn:'')+'.';}
+    else if(st.status==='Open'&&st.acceptedBy){tone='ok';html='<b>Risk accepted by '+st.acceptedBy+' on '+st.acceptedOn+'.</b> Delivery is allowed.';}
+    else if(l==='High'){tone='high';html='<b>This order was assessed as High risk in Shopify. Delivery is blocked.</b><br>Shopify recommendation: Cancel. Open Risk details to review the assessment.';}
+    else if(l==='Medium'){tone='medium';html='<b>This order was assessed as Medium risk in Shopify. Confirm before delivery.</b><br>Shopify recommendation: Investigate. Check the customer before you ship.';}
+    else if(l==='Pending'){tone='pending';html='<b>Shopify has not finished its risk analysis. Delivery is blocked.</b><br>The next import run refreshes the risk. Open Risk details to see what is known.';}
+    b.hidden=!tone; if(tone){b.dataset.tone=tone;b.innerHTML=html;}
+    // status (3)
+    var s=st.shipped?'Shipped':st.status; $('status').textContent=s; $('status').dataset.s=s;
+    // risk group (4)
+    $('r-level').textContent=l; $('r-level').dataset.l=l; $('r-rec').textContent=REC[l];
+    $('r-checked').textContent=l==='Pending'?'(pending)':'07/09/2026 10:24';
+    $('r-by').textContent=st.acceptedBy||'(empty)'; $('r-on').textContent=st.acceptedOn||'(empty)';
+    // create shipment (2)
+    var ship=$('btn-ship'),tip=$('ship-tip');
+    var blocked=!st.shipped&&(st.status==='Risk Review'||(st.status==='Risk Hold'&&l==='High'));
+    ship.disabled=blocked||st.shipped;
+    ship.setAttribute('aria-describedby','ship-tip');
+    tip.textContent=st.shipped?'This order has shipped.':(blocked?(l==='High'?'Delivery is blocked: High risk. A user with the Risk Override right must release the hold first.':'Delivery is blocked until Shopify finishes its risk analysis.'):(st.status==='Risk Hold'?'Medium risk: you will be asked to confirm and give a reason.':'Creates the shipment.'));
+    // release (6)
+    var onHold=!st.shipped&&(st.status==='Risk Hold'||st.status==='Risk Review');
+    $('rel-wrap').style.visibility=onHold?'visible':'hidden';
+    $('btn-release').disabled=!right;
+    // facts
+    var tb=$('facts');tb.innerHTML='';
+    FACTS[l].forEach(function(f){var tr=document.createElement('tr');f.forEach(function(c){var td=document.createElement('td');td.textContent=c;tr.appendChild(td)});tb.appendChild(tr)});
+    $('facts-empty').hidden=FACTS[l].length>0;
+    document.querySelectorAll('#lvl-seg button').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.level===l))});
+  }
+
+  function setTab(risk){
+    $('tab-details').setAttribute('aria-selected',String(!risk)); $('tab-risk').setAttribute('aria-selected',String(risk));
+    $('p-details').hidden=risk; $('p-risk').hidden=!risk;
+  }
+
+  function importOrder(level,quiet){
+    st=fresh(level); render(); setTab(false);
+    if(!quiet){
+      log('Import run: Shopify order #1048 assessed <b>'+level+'</b>.');
+      log('Sales Order SO-2481 imported with status <b>'+st.status+'</b>.');
+    }
+  }
+
+  // dialog (medium confirm and release)
+  var mode=null,lastFocus=null;
+  function openDlg(m){
+    mode=m; lastFocus=document.activeElement;
+    if(m==='confirm'){$('dlg-title').textContent='Confirm delivery of a medium risk order';$('dlg-text').textContent='Shopify assessed this order as Medium risk and recommends investigating it. Confirm only after you have checked the customer.';$('dlg-ok').textContent='Confirm';}
+    else{$('dlg-title').textContent='Release the risk hold on SO-2481';$('dlg-text').textContent=(st.level==='High'?'Shopify recommends cancelling this order. ':'Shopify has not finished its analysis. ')+'Releasing the hold lets anyone with delivery rights ship it. Your name and reason go to the audit log.';$('dlg-ok').textContent='Release Hold';}
+    $('reason').value='';upd();
+    $('dlg').classList.add('open');$('dlg').setAttribute('aria-hidden','false');
+    setTimeout(function(){$('reason').focus()},50);
+  }
+  function closeDlg(){ $('dlg').classList.remove('open');$('dlg').setAttribute('aria-hidden','true'); if(lastFocus)lastFocus.focus(); }
+  function upd(){var n=$('reason').value.trim().length;$('count').textContent=$('reason').value.length+' / 250';$('dlg-ok').disabled=n<10;}
+  $('reason').addEventListener('input',upd);
+  $('dlg-cancel').addEventListener('click',function(){log('Dialog cancelled. Nothing changed.');closeDlg();});
+  $('dlg').addEventListener('keydown',function(e){if(e.key==='Escape'){closeDlg();}});
+  $('dlg-ok').addEventListener('click',function(){
+    var reason=$('reason').value.trim(); var prev=st.status;
+    st.acceptedBy=USER; st.acceptedOn=now(); st.status='Open';
+    log('<code>POST /salesorders/SO-2481/risk-acceptance</code> → 200','ok');
+    log('Audit log: '+prev+' → Open by '+USER+'. Reason: “'+reason.replace(/</g,'&lt;')+'”');
+    closeDlg();
+    if(mode==='confirm'){ship();} else {render();toast('Hold released. The order is Open.');}
+  });
+
+  function ship(){
+    st.shipped=true; render();
+    log('<code>POST /salesorders/SO-2481/shipments</code> → 201. Shipment SH-7731 created.','ok');
+    toast('Shipment SH-7731 created.');
+  }
+  $('btn-ship').addEventListener('click',function(){
+    if(st.status==='Risk Hold'&&st.level==='Medium'){openDlg('confirm');return;}
+    ship();
+  });
+  // a disabled button gets no click: log the server refusal when someone tries
+  $('ship-wrap').addEventListener('click',function(){
+    if($('btn-ship').disabled&&!st.shipped){
+      log('<code>POST /salesorders/SO-2481/shipments</code> → 409 <b>ORDER_RISK_BLOCKED</b>','err');
+      $('ship-wrap').classList.add('show-tip');setTimeout(function(){$('ship-wrap').classList.remove('show-tip')},2200);
+    }
+  });
+  $('rel-wrap').addEventListener('click',function(){
+    if($('btn-release').disabled){
+      log('<code>POST /salesorders/SO-2481/risk-acceptance</code> → 403. Security log entry written.','err');
+      $('rel-wrap').classList.add('show-tip');setTimeout(function(){$('rel-wrap').classList.remove('show-tip')},2200);
+    }
+  });
+  $('btn-release').addEventListener('click',function(){openDlg('release');});
+  $('btn-details').addEventListener('click',function(){setTab(true);log('Risk Details opened the Order Risk tab.');});
+  $('tab-details').addEventListener('click',function(){setTab(false)});
+  $('tab-risk').addEventListener('click',function(){setTab(true)});
+  $('btn-invoice').addEventListener('click',function(){toast('Invoice draft created (unchanged behaviour).')});
+  document.querySelectorAll('#lvl-seg button').forEach(function(b){b.addEventListener('click',function(){importOrder(b.dataset.level)})});
+  $('sw-right').addEventListener('click',function(){right=!right;this.setAttribute('aria-checked',String(right));log('Signed-in user '+(right?'now holds':'no longer holds')+' the Risk Override right.');render();});
+  $('sw-notes').addEventListener('click',function(){var on=this.getAttribute('aria-checked')!=='true';this.setAttribute('aria-checked',String(on));$('screen').classList.toggle('no-notes',!on);});
+  $('reset').addEventListener('click',function(){$('log').innerHTML='';importOrder(st.level);});
+
+  var q=new URLSearchParams(location.search);
+  importOrder(['High','Medium','Pending','Low'].indexOf(q.get('level'))>-1?q.get('level'):'High');
+})();
+</script>
+</body>
+</html>

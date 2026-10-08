@@ -31,9 +31,9 @@
 
 <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=20261007i">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261008a">
 <script>document.documentElement.classList.add('js')</script>
-<script src="/assets/js/site.js?v=20261007i" defer></script>
+<script src="/assets/js/site.js?v=20261008a" defer></script>
 
 <script type="application/ld+json">
 {
@@ -46,7 +46,7 @@
       "description": "A business analysis work sample. Shopify fraud risk data is stored on the ERP Sales Order, high and medium risk orders are held from delivery, and every release is audited.",
       "url": "https://nikoladjurovic.cv/work/order-risk-hold/",
       "datePublished": "2026-09-12",
-      "dateModified": "2026-10-07",
+      "dateModified": "2026-10-08",
       "inLanguage": "en",
       "proficiencyLevel": "Expert",
       "author": { "@type": "Person", "@id": "https://nikoladjurovic.cv/#person", "name": "Nikola Djurovic", "url": "https://nikoladjurovic.cv/" },
@@ -70,7 +70,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nikoladjurovic.cv/" },
-        { "@type": "ListItem", "position": 2, "name": "Work sample", "item": "https://nikoladjurovic.cv/#work-sample" },
+        { "@type": "ListItem", "position": 2, "name": "Work Sample", "item": "https://nikoladjurovic.cv/#work-sample" },
         { "@type": "ListItem", "position": 3, "name": "Order Risk Hold", "item": "https://nikoladjurovic.cv/work/order-risk-hold/" }
       ]
     }
@@ -108,11 +108,11 @@
         <nav class="crumbs" aria-label="Breadcrumb">
           <ol>
             <li><a href="/">Home</a></li>
-            <li><a href="/#work-sample">Work sample</a></li>
+            <li><a href="/#work-sample">Work Sample</a></li>
             <li aria-current="page">Order Risk Hold</li>
           </ol>
         </nav>
-        <p class="eyebrow"><span>Work sample</span><span>System Design Document</span></p>
+        <p class="eyebrow"><span>Work Sample</span><span>System Design Document</span></p>
         <h1>Order Risk Hold for Imported Shopify Orders</h1>
         <p class="lede">Fraudulent orders reach the warehouse because the ERP never sees Shopify's risk verdict. This document specifies how the ERP stores that verdict, holds risky orders from delivery and records who released them and why.</p>
         <dl class="doc-meta">
@@ -230,6 +230,14 @@
         <figcaption><b>Figure 3. Risk refresh on a later import run.</b> What happens when Shopify updates its verdict after the first import (FR-11).</figcaption>
       </figure>
 
+      <figure class="proto reveal" id="prototype">
+        <a class="proto-media" href="/work/order-risk-hold/prototype/" aria-label="Open the clickable prototype">
+          <video data-autoplay muted loop playsinline preload="none" width="1280" height="816" poster="/assets/media/order-risk-hold-prototype-poster.webp" aria-label="Recording of the clickable Sales Order prototype: a high risk order is blocked, the hold is released with a reason, and a medium risk order ships after confirmation"><source src="/assets/media/order-risk-hold-prototype.mp4" type="video/mp4"><source src="/assets/media/order-risk-hold-prototype.webm" type="video/webm"></video>
+          <span class="live-badge">Clickable Prototype</span>
+        </a>
+        <figcaption><b>Figure 4, live.</b> The same screen built to be clicked: switch the Shopify risk level, try to ship, release the hold with and without the Risk Override right, and watch the API calls and audit entries the system writes.</figcaption>
+        <div class="btn-row"><a class="btn btn-dark" href="/work/order-risk-hold/prototype/">Open the Prototype</a><a class="btn btn-line" href="/assets/media/order-risk-hold-prototype.gif" download>Download GIF <span class="file-meta">2.7&nbsp;MB</span></a></div>
+      </figure>
       <figure class="figure reveal" id="fig-4">
         <a href="/assets/img/fig4-sales-order-wireframe-1600.webp" target="_blank" rel="noopener">
           <img src="/assets/img/fig4-sales-order-wireframe-1600.webp" srcset="/assets/img/fig4-sales-order-wireframe-800.webp 800w, /assets/img/fig4-sales-order-wireframe-1600.webp 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="893" loading="lazy" decoding="async" alt="Annotated wireframe of the Sales Order screen with seven numbered new controls: risk banner, Create Shipment button state, status values, Order Risk group, Risk details button, Release Risk Hold button and a new Order Risk tab.">
@@ -288,7 +296,7 @@
 
 <footer class="site-footer">
   <div>
-    <p>© <span id="year">2026</span> Nikola Djurovic · Freelance Business Analyst, Belgrade</p>
+    <p>© <span id="year">2026</span> Nikola Djurovic · Senior Business Analyst &amp; Product Owner · Belgrade</p>
     <p class="biz">Nikola Đurović pr Poslovni konsalting BizDevProduct Beograd</p>
   </div>
   <nav aria-label="Footer">

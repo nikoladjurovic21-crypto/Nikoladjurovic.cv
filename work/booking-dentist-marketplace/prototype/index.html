@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinic Page: Clickable Prototype | Nikola Djurovic</title>
+<meta name="description" content="Clickable prototype of the Booking.dentist clinic page wireframe: tab navigation, gallery, before-and-after slider, treatment search, currency switch and the inquiry form.">
+<link rel="canonical" href="https://nikoladjurovic.cv/work/booking-dentist-marketplace/prototype/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clinic Page: Clickable Prototype | Nikola Djurovic">
+<meta property="og:description" content="The Booking.dentist clinic page wireframe, made clickable: gallery, before-and-after slider, treatment search, currency switch and inquiry form.">
+<meta property="og:url" content="https://nikoladjurovic.cv/work/booking-dentist-marketplace/prototype/">
+<meta property="og:image" content="https://nikoladjurovic.cv/assets/img/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--ink:#111;--ink-2:#555;--line:#222;--soft:#d6d9e0;--paper:#f6f7f9;--hl:#dbeafe;--hl-b:#3b82f6;--cta:#60a5fa;--sel:#fde7c2;--sel-b:#d39a3a;--accent:#6d4aff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:12px 20px;background:#0f0d1a;color:#fff;font-family:"Segoe UI",Helvetica,Arial,sans-serif}
+.topbar a{color:#cfc4ff;text-decoration:none;font-weight:600}
+.topbar a:hover{text-decoration:underline}
+.topbar .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#a99bff;font-weight:700}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 16px 36px}
+.sim{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;background:#fff;border:1px solid var(--soft);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-family:"Segoe UI",Helvetica,Arial,sans-serif}
+.sim b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.seg{display:inline-flex;border:1px solid #c7cbd4;border-radius:999px;overflow:hidden}
+.seg button{padding:6px 14px;font-weight:600;font-size:13px;border-right:1px solid #c7cbd4}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.sim p{font-size:13px;color:var(--ink-2);margin-left:auto}
+.device{margin:0 auto;background:#fff;border:2px solid var(--line);border-radius:6px;overflow:hidden;transition:max-width .35s ease;max-width:1100px;position:relative}
+.device.mobile{max-width:400px;border-radius:26px;border-width:8px;border-color:#1f1f1f}
+.viewport{height:700px;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;position:relative}
+/* site header */
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 22px;border-bottom:1px solid #ccc;background:#fff}
+.logo{display:flex;align-items:center;gap:6px;font-weight:700;color:#1d4ed8;font-size:15px}
+.logo svg{width:22px;height:22px}
+.hdr-r{display:flex;align-items:center;gap:16px;font-size:13px}
+.hdr-r select{border:1px solid #bbb;border-radius:4px;padding:3px 6px;background:#fff}
+.signup{background:var(--cta);color:#fff;font-weight:700;padding:6px 14px;border-radius:4px;border:1px solid #2563eb}
+.tabs{position:sticky;top:0;z-index:4;display:flex;background:#fff;border-bottom:2px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:1 0 auto;text-align:center;padding:7px 10px;font-size:12px;color:var(--ink);text-decoration:none;border-right:1px solid var(--line);white-space:nowrap;transition:background .15s}
+.tabs a:last-child{border-right:0}
+.tabs a:hover{background:#f1f5f9}
+.tabs a.on{background:var(--hl);box-shadow:inset 0 -3px 0 var(--hl-b);font-weight:700}
+.page{padding:12px 22px 0}
+.crumbs{font-size:11px;color:var(--ink-2)}
+.crumbs a{color:inherit}
+.top{display:grid;grid-template-columns:200px minmax(0,1fr);gap:22px;margin-top:10px}
+.search{border:1.5px solid var(--line);padding:12px;display:grid;gap:8px;align-self:start;font-size:13px}
+.search input,.search select{border:1.5px solid var(--line);padding:4px 6px;width:100%;background:#fff}
+.search .go{background:#fde68a;border:1.5px solid #d4a017;border-radius:3px;padding:5px;font-weight:700}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
+.head h1{font-size:20px}
+.stars{color:#d97706;letter-spacing:2px}
+.small{font-size:12px;color:var(--ink-2)}
+.cta{background:var(--hl);border:1.5px solid var(--hl-b);border-radius:4px;padding:7px 12px;font-weight:700;white-space:nowrap;transition:filter .15s}
+.cta:hover{filter:brightness(.95)}
+.gallery{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;border:1.5px solid var(--line)}
+.ph{display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;color:#333;background:repeating-linear-gradient(135deg,#fafafa 0 8px,#eee 8px 9px);border:1px solid var(--line);min-height:56px;padding:6px;position:relative;transition:background .2s,outline-color .2s}
+.ph.dark{background:repeating-linear-gradient(135deg,#e7ecf3 0 8px,#d8dee8 8px 9px)}
+.gallery .main{min-height:186px;cursor:zoom-in;font-weight:700}
+.thumbs{display:grid;grid-template-columns:1fr 1fr}
+.thumbs button{min-height:62px;outline:3px solid transparent;outline-offset:-4px}
+.thumbs button[aria-current="true"]{outline-color:var(--hl-b)}
+.side2{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:16px;margin-top:16px}
+.amen-box{border:1.5px solid var(--line);padding:10px;font-size:12px;display:grid;gap:6px;align-self:start}
+.amen-box li{list-style:none;display:flex;gap:6px;align-items:center}
+.amen-box .ghost{border:1.5px solid var(--line);border-radius:4px;padding:4px;font-size:12px;margin-top:4px}
+h2{font-size:19px;margin:18px 0 6px}
+h3{font-size:15px;margin:12px 0 4px}
+p.t{font-size:13px;color:#222;max-width:70ch}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:8px}
+.cards .ph{min-height:96px;cursor:pointer;flex-direction:column;gap:4px}
+.cards .ph[aria-expanded="true"]{outline:3px solid var(--hl-b);outline-offset:-3px}
+.bio{margin-top:10px;border:1.5px dashed var(--hl-b);background:#f5f9ff;padding:10px 12px;font-size:13px;display:none}
+.bio.show{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.ba{position:relative;height:110px;border:1.5px solid var(--line);overflow:hidden;user-select:none}
+.ba .after,.ba .before{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.ba .after{background:repeating-linear-gradient(135deg,#fafafa 0 8px,#eee 8px 9px)}
+.ba .before{background:repeating-linear-gradient(45deg,#e6e9ef 0 6px,#cfd5df 6px 7px);clip-path:inset(0 50% 0 0)}
+.ba .knob{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#111;pointer-events:none}
+.ba .knob::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:13px}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize}
+.ba-cap{font-size:11px;color:var(--ink-2);margin-top:4px}
+.trt-search{display:flex;gap:10px;margin:8px 0}
+.trt-search input{flex:1;border:1.5px solid var(--line);border-radius:4px;padding:6px 10px}
+.trt-search button{border:1.5px solid var(--line);border-radius:4px;padding:6px 18px;background:#f3f4f6}
+.trt{list-style:none;display:grid;gap:6px}
+.trt li{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:6px;padding:6px 10px;animation:fade .2s}
+.trt .r{display:flex;align-items:center;gap:10px;font-size:13px}
+.trt .price{font-weight:700;font-variant-numeric:tabular-nums;min-width:80px;text-align:right}
+.trt .inq{border:1.5px solid var(--line);border-radius:3px;padding:2px 8px;font-size:12px;background:#fff}
+.trt .inq:hover{background:var(--hl)}
+.pager{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:8px;font-size:12px}
+.pager button{min-width:26px;padding:2px 6px;border:1px solid #aaa;border-radius:3px}
+.pager button[aria-current="true"]{background:#111;color:#fff;border-color:#111}
+.amen{display:grid;grid-template-columns:200px minmax(0,1fr);border:1.5px solid var(--line);min-height:150px}
+.amen ul{list-style:none;border-right:1.5px solid var(--line)}
+.amen li button{display:block;width:100%;text-align:left;padding:7px 10px;border-bottom:1px solid #ddd;font-size:13px}
+.amen li button[aria-selected="true"]{background:var(--hl);font-weight:700}
+.amen .info{padding:16px;font-size:13px;font-style:italic;display:flex;align-items:center}
+details{border-bottom:1px solid #ccc;padding:7px 0}
+summary{cursor:pointer;font-size:13px}
+details p{font-size:13px;color:#333;margin-top:6px}
+.rev{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;margin:10px 0}
+.avatar{width:58px;height:58px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px}
+.foot{margin-top:24px;border-top:2px solid var(--line);text-align:center;padding:16px;font-size:13px}
+/* modal */
+.overlay{position:absolute;inset:0;background:rgb(0 0 0 / .4);display:flex;align-items:center;justify-content:center;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;padding:14px}
+.overlay.open{opacity:1;pointer-events:auto}
+.modal{background:#fff;border:2px solid var(--line);border-radius:6px;width:100%;max-width:420px;padding:16px 18px;display:grid;gap:9px;transform:translateY(8px);transition:transform .2s}
+.overlay.open .modal{transform:none}
+.modal h3{margin:0;font-size:17px}
+.modal label{font-size:12px;font-weight:700;display:grid;gap:3px}
+.modal input,.modal select,.modal textarea{border:1.5px solid var(--line);border-radius:4px;padding:6px 8px;font-weight:400}
+.modal .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal .acts{display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
+.modal .acts button{border:1.5px solid var(--line);border-radius:4px;padding:6px 16px;font-weight:700}
+.modal .acts .send{background:var(--cta);color:#fff;border-color:#2563eb}
+.modal .err{color:#b91c1c;font-size:12px;min-height:1em}
+.modal .ok{text-align:center;padding:10px 0;display:grid;gap:8px;justify-items:center}
+.modal .ok .tick{width:46px;height:46px;border-radius:50%;background:#dcfce7;border:2px solid #15803d;display:flex;align-items:center;justify-content:center;font-size:22px;color:#15803d}
+.lightbox .modal{max-width:640px}
+.lightbox .ph{min-height:300px;font-size:15px;font-weight:700}
+.lb-nav{display:flex;justify-content:space-between;align-items:center}
+.lb-nav button{border:1.5px solid var(--line);border-radius:4px;padding:4px 12px;font-weight:700}
+.toast{position:absolute;left:50%;bottom:16px;transform:translate(-50%,16px);background:#111;color:#fff;padding:9px 14px;border-radius:8px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:30;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.note{margin-top:14px;font-size:13px;color:var(--ink-2);font-family:"Segoe UI",Helvetica,Arial,sans-serif}
+.note a{color:var(--accent);font-weight:600}
+/* mobile layout inside the device */
+.mobile .hdr-r .opt,.mobile .hdr-r select{display:none}
+.mobile .top,.mobile .side2,.mobile .amen{grid-template-columns:1fr}
+.mobile .search{order:2}
+.mobile .gallery{grid-template-columns:1fr}
+.mobile .cards{grid-template-columns:1fr 1fr}
+.mobile .amen ul{border-right:0;border-bottom:1.5px solid var(--line)}
+.mobile .head{flex-direction:column}
+.mobile .cta{width:100%}
+.mobile .page{padding:10px 14px 0}
+.mobile .hdr{padding:10px 14px}
+@media (max-width:760px){.top,.side2,.amen{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.hdr-r .opt{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/work/booking-dentist-marketplace/">← Booking.dentist Case Study</a>
+  <span class="tag">Clickable Prototype</span>
+  <a href="/">Nikola Djurovic</a>
+</div>
+<div class="wrap">
+  <div class="sim" role="group" aria-label="View controls">
+    <b>View</b>
+    <div class="seg" id="dev-seg"><button type="button" data-dev="desktop" aria-pressed="true">Desktop</button><button type="button" data-dev="mobile" aria-pressed="false">Mobile</button></div>
+    <p>Everything inside the frame is clickable. Wireframe content, illustrative prices.</p>
+  </div>
+
+  <div class="device" id="device">
+    <div class="viewport" id="vp">
+      <header class="hdr">
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 3c-2.5 0-4 2-4 4.5 0 3 1.5 4.5 2 7.5.4 2.6 1 6 2.5 6s1.6-4 2.5-6c.5-1 1.5-1 2 0 .9 2 1 6 2.5 6s2.1-3.4 2.5-6c.5-3 2-4.5 2-7.5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/></svg>Booking.dentist</span>
+        <div class="hdr-r">
+          <select aria-label="Language"><option>English</option><option>Deutsch</option><option>Srpski</option></select>
+          <select id="cur" aria-label="Currency"><option value="EUR">EUR €</option><option value="GBP">GBP £</option><option value="CHF">CHF</option></select>
+          <span class="opt">Login</span>
+          <button type="button" class="signup">Sign Up</button>
+        </div>
+      </header>
+      <nav class="tabs" id="tabs" aria-label="Clinic sections">
+        <a href="#s-desc">Clinic Description</a><a href="#s-doctors">Meet the Doctors</a><a href="#s-ba">Before and After</a><a href="#s-proc">Treatment Procedure</a><a href="#s-acc">Accommodation</a><a href="#s-trt">All Treatments</a><a href="#s-amen">Amenities</a><a href="#s-faq">FAQ</a><a href="#s-rev">Reviews</a>
+      </nav>
+      <div class="page">
+        <p class="crumbs"><a href="#">Home</a> › <a href="#">Turkey</a> › <a href="#">Istanbul</a> › Clinic</p>
+        <div class="top">
+          <form class="search" id="search" aria-label="Search clinics">
+            <label>Location<input id="q-loc" value="Istanbul"></label>
+            <label>Treatment<select id="q-trt"><option>Dental Implants</option><option>Veneers</option><option>All-on-4</option><option>Teeth Whitening</option></select></label>
+            <button class="go" type="submit">Search</button>
+          </form>
+          <div>
+            <div class="head">
+              <div><h1>Bosphorus Dental Clinic</h1><p><span class="stars" aria-label="Rated 4.8 of 5">★★★★★</span> <span class="small">4.8 · 312 reviews · Şişli, Istanbul</span></p></div>
+              <button type="button" class="cta" data-inquire>Make an Inquiry</button>
+            </div>
+            <div class="gallery">
+              <button type="button" class="ph dark main" id="g-main" aria-label="Open gallery">Reception</button>
+              <div class="thumbs" id="thumbs"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side2">
+          <section id="s-desc">
+            <h2>Clinic Description</h2>
+            <h3>Welcome to the Clinic</h3>
+            <p class="t">A 14-chair clinic with an in-house lab, so crowns and veneers are made on site within days.</p>
+            <h3>Special Amenities</h3>
+            <p class="t">Airport transfer, translator on every visit and a partner hotel a five-minute walk away.</p>
+            <h3>Languages</h3><p class="t">English, German, Turkish, Arabic</p>
+            <h3>Booking Information</h3><p class="t">Send an inquiry with your X-ray. The clinic replies with a treatment plan and a fixed price within 24 hours.</p>
+          </section>
+          <aside class="amen-box" aria-label="Featured amenities">
+            <ul>
+              <li>✈︎ Airport transfer</li><li>🗣 Translator</li><li>🏨 Partner hotel</li><li>🧪 In-house lab</li><li>📶 Free Wi-Fi</li>
+            </ul>
+            <button type="button" class="ghost" id="all-amen">Show All 12 Amenities</button>
+          </aside>
+        </div>
+
+        <section id="s-doctors">
+          <h2>Meet the Doctors</h2>
+          <div class="cards" id="docs"></div>
+          <div class="bio" id="bio" role="region" aria-live="polite"></div>
+        </section>
+
+        <section id="s-ba">
+          <h2>Before and After</h2>
+          <div class="cards" id="bas"></div>
+        </section>
+
+        <section id="s-proc">
+          <h2>Treatment Procedure</h2>
+          <p class="t">Day 1 consultation and 3D scan. Day 2 implant placement. A temporary bridge the same week, the final crowns on a second visit after three to four months.</p>
+        </section>
+
+        <section id="s-acc">
+          <h2>Accommodation</h2>
+          <div class="cards"><div class="ph">Hotel Room</div><div class="ph">Lobby</div><div class="ph">Breakfast</div><div class="ph">View</div></div>
+        </section>
+
+        <section id="s-trt">
+          <h2>All Treatments</h2>
+          <form class="trt-search" id="trt-form" role="search"><input id="trt-q" placeholder="Search treatments" aria-label="Search treatments"><button type="submit">Apply</button></form>
+          <ul class="trt" id="trt-list"></ul>
+          <p class="small" id="trt-count" style="text-align:center;margin-top:6px"></p>
+          <div class="pager" id="pager"></div>
+        </section>
+
+        <section id="s-amen">
+          <h2>All Available Amenities at Bosphorus Dental</h2>
+          <div class="amen"><ul role="tablist" id="amen-list"></ul><div class="info" id="amen-info" role="tabpanel"></div></div>
+        </section>
+
+        <section id="s-faq">
+          <h2>Frequently Asked Questions</h2>
+          <details><summary>How long do I need to stay?</summary><p>Five to seven days for implants, then a second short visit for the final crowns.</p></details>
+          <details><summary>Is the price fixed?</summary><p>Yes. The treatment plan you accept states the full price, including transfers.</p></details>
+          <details><summary>What if something goes wrong at home?</summary><p>Work is guaranteed for five years, and the clinic covers the follow-up visit.</p></details>
+        </section>
+
+        <section id="s-rev">
+          <h2>Reviews</h2>
+          <div id="revs"></div>
+          <div class="pager" id="rev-pager"></div>
+        </section>
+        <div class="foot">Footer</div>
+      </div>
+    </div>
+
+    <div class="overlay" id="inq" aria-hidden="true">
+      <form class="modal" id="inq-form" role="dialog" aria-modal="true" aria-labelledby="inq-t" novalidate>
+        <div id="inq-body">
+          <h3 id="inq-t">Send an Inquiry to Bosphorus Dental</h3>
+          <label>Treatment<select id="f-trt"></select></label>
+          <div class="row2"><label>Travel From<input type="date" id="f-from"></label><label>Travel To<input type="date" id="f-to"></label></div>
+          <label>Full Name<input id="f-name" autocomplete="name"></label>
+          <label>Email<input id="f-mail" type="email" autocomplete="email"></label>
+          <label>Message<textarea id="f-msg" rows="2" placeholder="Anything the clinic should know"></textarea></label>
+          <p class="err" id="f-err" role="alert"></p>
+          <div class="acts"><button type="button" id="f-cancel">Cancel</button><button type="submit" class="send">Send Inquiry</button></div>
+        </div>
+      </form>
+    </div>
+    <div class="overlay lightbox" id="lb" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-label="Clinic photos">
+        <div class="ph dark" id="lb-img"></div>
+        <div class="lb-nav"><button type="button" id="lb-prev">‹ Prev</button><span class="small" id="lb-n"></span><button type="button" id="lb-next">Next ›</button></div>
+        <div class="acts" style="display:flex;justify-content:flex-end"><button type="button" id="lb-close" style="border:1.5px solid #222;border-radius:4px;padding:5px 14px;font-weight:700">Close</button></div>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <p class="note">The original wireframe was drawn in Draw.io for the <a href="/work/booking-dentist-marketplace/">Booking.dentist case study</a>. This version is rebuilt to be clicked through.</p>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id)};
+  var vp=$('vp'),device=$('device');
+  var toastT;
+  function toast(t){var el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show')},2400);}
+
+  // device toggle
+  document.querySelectorAll('#dev-seg button').forEach(function(b){b.addEventListener('click',function(){
+    device.classList.toggle('mobile',b.dataset.dev==='mobile');
+    document.querySelectorAll('#dev-seg button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
+  })});
+
+  // tabs: scroll inside the frame + scrollspy
+  var tabs=[].slice.call(document.querySelectorAll('#tabs a'));
+  tabs.forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(a.getAttribute('href'));vp.scrollTo({top:t.offsetTop-44});})});
+  function spy(){var y=vp.scrollTop+60,cur=null;tabs.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s.offsetTop<=y)cur=a;});
+    tabs.forEach(function(a){a.classList.toggle('on',a===cur)});
+    if(cur){var tb=$('tabs');var l=cur.offsetLeft-tb.clientWidth/2+cur.clientWidth/2;tb.scrollTo({left:l,behavior:'smooth'})}}
+  vp.addEventListener('scroll',function(){window.requestAnimationFrame(spy)},{passive:true});
+
+  // gallery
+  var photos=['Reception','Treatment Room','3D Scanner','In-House Lab','Waiting Lounge','Consultation Room','Sterilisation'];
+  var cur=0;
+  function drawThumbs(){var t=$('thumbs');t.innerHTML='';photos.forEach(function(p,i){var b=document.createElement('button');b.type='button';b.className='ph';b.textContent=p;if(i===cur)b.setAttribute('aria-current','true');b.addEventListener('click',function(){cur=i;$('g-main').textContent=p;drawThumbs();});t.appendChild(b);});
+    t.lastChild.remove();}
+  drawThumbs();
+  function lb(i){cur=(i+photos.length)%photos.length;$('lb-img').textContent=photos[cur];$('lb-n').textContent=(cur+1)+' / '+photos.length;$('g-main').textContent=photos[cur];drawThumbs();}
+  $('g-main').addEventListener('click',function(){lb(cur);open('lb');});
+  $('lb-prev').addEventListener('click',function(){lb(cur-1)});
+  $('lb-next').addEventListener('click',function(){lb(cur+1)});
+  $('lb-close').addEventListener('click',function(){close('lb')});
+
+  // search
+  $('search').addEventListener('submit',function(e){e.preventDefault();toast('Searching '+$('q-trt').value+' clinics in '+($('q-loc').value||'all cities')+'…');});
+  $('all-amen').addEventListener('click',function(){vp.scrollTo({top:$('s-amen').offsetTop-44})});
+
+  // doctors
+  var docs=[['Dr. Elif Kaya','Implantology','18 years, 4,000+ implants. Leads the All-on-4 programme.'],['Dr. Can Demir','Prosthodontics','Crowns, bridges and veneers, trained in Berlin.'],['Dr. Selin Arslan','Orthodontics','Clear aligners and adult braces.'],['Dr. Mert Yildiz','Oral Surgery','Bone grafts and sinus lifts before implant work.']];
+  docs.forEach(function(d,i){var b=document.createElement('button');b.type='button';b.className='ph';b.setAttribute('aria-expanded','false');b.innerHTML='<b>'+d[0]+'</b><span>'+d[1]+'</span>';
+    b.addEventListener('click',function(){var open_=b.getAttribute('aria-expanded')==='true';document.querySelectorAll('#docs .ph').forEach(function(x){x.setAttribute('aria-expanded','false')});
+      if(open_){$('bio').classList.remove('show');return;}b.setAttribute('aria-expanded','true');$('bio').innerHTML='<b>'+d[0]+', '+d[1]+'.</b> '+d[2];$('bio').classList.add('show');});
+    $('docs').appendChild(b);});
+
+  // before/after sliders
+  ['Implants','Veneers','Whitening','All-on-4'].forEach(function(n,i){var w=document.createElement('div');w.innerHTML='<div class="ba"><div class="after">After</div><div class="before">Before</div><div class="knob"></div><input type="range" min="0" max="100" value="50" aria-label="Before and after, '+n+'"></div><p class="ba-cap">'+n+' · drag to reveal</p>';
+    var r=w.querySelector('input'),bf=w.querySelector('.before'),k=w.querySelector('.knob');
+    r.addEventListener('input',function(){bf.style.clipPath='inset(0 '+(100-r.value)+'% 0 0)';k.style.left=r.value+'%';});
+    $('bas').appendChild(w);});
+
+  // treatments
+  var RATE={EUR:[1,'€'],GBP:[0.86,'£'],CHF:[0.94,'CHF ']};
+  var TRT=[['Dental Implant (Straumann)',690],['Dental Implant (Osstem)',420],['All-on-4, one jaw',3900],['All-on-6, one jaw',4900],['Zirconia Crown',230],['E-max Veneer',260],['Porcelain Veneer',180],['Teeth Whitening (in-office)',190],['Root Canal Treatment',150],['Sinus Lift',450],['Bone Graft',300],['Tooth Extraction',60],['Composite Bonding',110],['Dental Cleaning',45],['Night Guard',120],['Clear Aligners, full',2200],['Inlay / Onlay',210],['Gum Contouring',160],['Full-Mouth X-ray (OPG)',25],['Temporary Crown',40],['Bridge, 3 units',650],['Implant Crown',290],['Hollywood Smile, 20 veneers',4800],['Wisdom Tooth Removal',140]];
+  var page=1,PER=8,filtered=TRT.slice();
+  function money(eur){var c=$('cur').value,r=RATE[c];return r[1]+Math.round(eur*r[0]).toLocaleString('en-GB');}
+  function drawTrt(){var ul=$('trt-list');ul.innerHTML='';var pages=Math.max(1,Math.ceil(filtered.length/PER));if(page>pages)page=pages;
+    filtered.slice((page-1)*PER,page*PER).forEach(function(t){var li=document.createElement('li');li.innerHTML='<span>'+t[0]+'</span><span class="r"><span class="price">from '+money(t[1])+'</span><button type="button" class="inq">Inquire</button></span>';
+      li.querySelector('.inq').addEventListener('click',function(){inquire(t[0])});ul.appendChild(li);});
+    if(!filtered.length){ul.innerHTML='<li><i>No treatment matches. Try another word.</i></li>';}
+    var a=filtered.length?(page-1)*PER+1:0,b=Math.min(page*PER,filtered.length);$('trt-count').textContent='Showing '+a+'–'+b+' of '+filtered.length;
+    var pg=$('pager');pg.innerHTML='';for(var i=1;i<=pages;i++){(function(i){var bt=document.createElement('button');bt.type='button';bt.textContent=i;if(i===page)bt.setAttribute('aria-current','true');bt.addEventListener('click',function(){page=i;drawTrt();});pg.appendChild(bt);})(i)}}
+  function applyQ(){var q=$('trt-q').value.trim().toLowerCase();filtered=TRT.filter(function(t){return t[0].toLowerCase().indexOf(q)>-1});page=1;drawTrt();}
+  $('trt-form').addEventListener('submit',function(e){e.preventDefault();applyQ();});
+  $('trt-q').addEventListener('input',applyQ);
+  $('cur').addEventListener('change',function(){drawTrt();toast('Prices shown in '+$('cur').value);});
+  drawTrt();
+  var sel=$('f-trt');TRT.forEach(function(t){var o=document.createElement('option');o.textContent=t[0];sel.appendChild(o)});
+
+  // amenities
+  var AM=[['Airport Transfer','Driver waits at arrivals with your name. Included in every treatment plan.'],['Translator','An interpreter joins every appointment, English, German or Arabic.'],['Partner Hotel','Four-star hotel five minutes away, at the clinic rate.'],['In-House Lab','Crowns and veneers made on site in 3 to 5 days.'],['Free Wi-Fi','Across the clinic and the partner hotel.'],['Aftercare Calls','Video check-ins at 1 week, 1 month and 3 months.']];
+  AM.forEach(function(a,i){var li=document.createElement('li');var b=document.createElement('button');b.type='button';b.role='tab';b.textContent=a[0];b.setAttribute('aria-selected',String(i===0));
+    b.addEventListener('click',function(){document.querySelectorAll('#amen-list button').forEach(function(x){x.setAttribute('aria-selected',String(x===b))});$('amen-info').textContent=a[1];});li.appendChild(b);$('amen-list').appendChild(li);});
+  $('amen-info').textContent=AM[0][1];
+
+  // reviews
+  var REV=[['Hannah, UK','Four implants and a hotel I could walk from. The price on the plan was the price I paid.'],['Markus, DE','Translator at every visit. Second trip for crowns was booked before I flew home.'],['Aisha, AE','Veneers done in five days. The lab is downstairs, which explains the speed.'],['Tom, IE','Clear plan, no surprises, and a follow-up call a week after I got back.']];
+  var rp=1;function drawRev(){var w=$('revs');w.innerHTML='';REV.slice((rp-1)*2,rp*2).forEach(function(r){var d=document.createElement('div');d.className='rev';d.innerHTML='<span class="avatar">Profile</span><div><b>'+r[0]+'</b> <span class="stars">★★★★★</span><p class="t">'+r[1]+'</p></div>';w.appendChild(d);});
+    var pg=$('rev-pager');pg.innerHTML='';[1,2].forEach(function(i){var b=document.createElement('button');b.type='button';b.textContent=i;if(i===rp)b.setAttribute('aria-current','true');b.addEventListener('click',function(){rp=i;drawRev();});pg.appendChild(b);});}
+  drawRev();
+
+  // modals
+  var last=null;
+  function open(id){last=document.activeElement;$(id).classList.add('open');$(id).setAttribute('aria-hidden','false');var f=$(id).querySelector('select,input,button');if(f)setTimeout(function(){f.focus()},60);}
+  function close(id){$(id).classList.remove('open');$(id).setAttribute('aria-hidden','true');if(last)last.focus();}
+  document.querySelectorAll('.overlay').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)close(o.id)});o.addEventListener('keydown',function(e){if(e.key==='Escape')close(o.id)})});
+  var bodyHTML=$('inq-body').innerHTML;
+  function inquire(trt){
+    if(!$('f-name')){$('inq-body').innerHTML=bodyHTML;wire();}
+    if(trt)$('f-trt').value=trt; $('f-err').textContent='';open('inq');
+  }
+  function wire(){
+    var s=$('f-trt');if(!s.options.length)TRT.forEach(function(t){var o=document.createElement('option');o.textContent=t[0];s.appendChild(o)});
+    $('f-cancel').addEventListener('click',function(){close('inq')});
+  }
+  wire();
+  document.querySelectorAll('[data-inquire]').forEach(function(b){b.addEventListener('click',function(){inquire($('q-trt').value==='Dental Implants'?'Dental Implant (Straumann)':null)})});
+  $('inq-form').addEventListener('submit',function(e){e.preventDefault();
+    var n=$('f-name').value.trim(),m=$('f-mail').value.trim();
+    if(!n||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){$('f-err').textContent=!n?'Please enter your name.':'Please enter a valid email address.';return;}
+    var t=$('f-trt').value;
+    $('inq-body').innerHTML='<div class="ok"><span class="tick">✓</span><h3>Inquiry Sent</h3><p class="t">Bosphorus Dental received your request for '+t.replace(/</g,'&lt;')+'. You get a treatment plan and a fixed price within 24 hours.</p><button type="button" class="cta" id="ok-close">Done</button></div>';
+    $('ok-close').addEventListener('click',function(){close('inq')});$('ok-close').focus();
+  });
+})();
+</script>
+</body>
+</html>

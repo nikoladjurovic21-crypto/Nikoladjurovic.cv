@@ -2,50 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://nikoladjurovic.cv/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <image:image><image:loc>https://nikoladjurovic.cv/assets/img/nikola-djurovic-420.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/cv/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/work/order-risk-hold/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <image:image><image:loc>https://nikoladjurovic.cv/assets/img/fig1-order-import-flow-1600.webp</image:loc></image:image>
     <image:image><image:loc>https://nikoladjurovic.cv/assets/img/fig2-order-status-flow-1600.webp</image:loc></image:image>
     <image:image><image:loc>https://nikoladjurovic.cv/assets/img/fig4-sales-order-wireframe-1600.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/sitemap/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/files/Nikola_Djurovic_Senior_BA_CV.pdf</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/files/Order_Risk_Hold_SDD_Nikola_Djurovic.pdf</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/resources/srs-template/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/work/approval-workflow/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/work/booking-dentist-marketplace/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/privacy/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://nikoladjurovic.cv/files/SRS_Template_Nikola_Djurovic.pdf</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://nikoladjurovic.cv/work/order-risk-hold/prototype/</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://nikoladjurovic.cv/work/booking-dentist-marketplace/prototype/</loc>
+    <lastmod>2026-10-08</lastmod>
   </url>
 </urlset>

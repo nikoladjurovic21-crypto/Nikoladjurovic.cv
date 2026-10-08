@@ -2,13 +2,13 @@
 
 > Long-form companion to https://nikoladjurovic.cv/llms.txt. Everything here is also published as HTML on the site. Last updated 2026-10-07.
 
-> Freelance Senior Business Analyst and Technical Product Owner based in Belgrade, Serbia (CET). Takes B2B contracts with clients worldwide, remote; full-time roles considered. Six years on SPQ+, SKF's global CPQ (configure, price, quote) platform used in 160+ countries, delivered through Soprex: 300+ specifications, launches held at 0 critical defects.
+> Senior Business Analyst & Product Owner based in Belgrade, Serbia (CET), working freelance. Takes B2B contracts with clients worldwide, remote; full-time roles considered. Six years on SPQ+, SKF's global CPQ (configure, price, quote) platform used in 160+ countries, delivered through Soprex: 300+ specifications, launches held at 0 critical defects.
 
 Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovic · Website: https://nikoladjurovic.cv/
 
 ## Key facts
 
-- Role: Senior Business Analyst / Product Owner at Soprex since 2022 (Business Analyst 2021 to 2022, Junior Business Analyst 2020 to 2021), working on SKF's SPQ+ platform.
+- Role: Senior Business Analyst & Product Owner at Soprex since 2022 (Mid-Level Business Analyst 2021 to 2022, Junior Business Analyst 2020 to 2021), working on SKF's SPQ+ platform.
 - Leads the BA team at Soprex and manages two development teams (around 15 people).
 - 300+ functional and non-functional specifications delivered (BRD, SRS, HLE).
 - Release planning across 5 cross-functional teams and 10+ workstreams; launches held at 0 critical defects.
@@ -19,7 +19,7 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 - Booking.dentist (2021 to 2023, via Soprex): sole BA and PO on a two-sided B2B/B2C medical-tourism marketplace live in 35+ countries. Shipped two products 0 to 1, wrote the business case, KPIs, MVP roadmap and pitch decks behind EUR 250,000 in seed funding raised through Katapult, cut 348 hours of non-MVP scope, built the sales function with the CEO (10-person team). Revenue grew 30%+ during his time.
 - Earlier: Sales Development Intern at Sales Clover (2020), Market Research Analyst at Cloudleaf, Inc. (2018).
 - Education: B.A. Ethnology and Anthropology, University of Belgrade, 2019. CBAP (IIBA) in progress.
-- Languages: English C2, Serbian native, Spanish A2.
+- Languages: Serbian native, English C2, Spanish A2.
 
 ## Services
 
@@ -58,23 +58,23 @@ Contact: nikoladjurovic21@gmail.com · https://www.linkedin.com/in/nikoladjurovi
 
 ## CV (same content as https://nikoladjurovic.cv/cv/)
 
-**Nikola Djurovic**, Senior Business Analyst · Requirements · AI-Assisted Analysis. Belgrade, Serbia (CET). nikoladjurovic21@gmail.com · linkedin.com/in/nikoladjurovic · nikoladjurovic.cv
+**Nikola Djurovic**, Senior Business Analyst & Product Owner. Belgrade, Serbia (CET). nikoladjurovic21@gmail.com · linkedin.com/in/nikoladjurovic · nikoladjurovic.cv
 
 ### Profile
 
-Senior Business Analyst, 6+ years on the global CPQ platform of a Fortune 500 manufacturer, used in 160+ countries. Runs requirements workshops, models processes in BPMN, and writes the specifications, user stories and acceptance criteria engineering builds from, through UAT. 300+ specifications, launches held at 0 critical defects. Leads the BA team and rolled out AI tooling that cut time per specification by about 32%.
+Senior Business Analyst & Product Owner, 6+ years on the global CPQ platform of a Fortune 500 manufacturer, used in 160+ countries. Runs stakeholder workshops, models processes in BPMN and writes the specs engineering builds from, then takes each feature through test cases, UAT, release with DevOps and hypercare. 300+ specifications, launches held at 0 critical defects, and AI tooling that cut time per spec by about 32%.
 
 ### Experience
 
 #### Soprex.com, Belgrade, Serbia
 
-**Senior Business Analyst / Product Owner** (2022 - Present)
+**Senior Business Analyst & Product Owner** (2022 - Present)
 - Lead requirements workshops across 10+ workstreams and turn them into gap analyses, ToBe BPMN, use cases and 300+ specs for 5 delivery teams.
-- Write user stories with acceptance criteria, decomposed to roughly 2-hour tasks, and take each feature through UAT and release readiness with QA. Launches held at 0 critical defects.
+- Write user stories with acceptance criteria, split into ~2-hour tasks, and test cases with QA. Plan releases with DevOps and run post-release hypercare. Launches held at 0 critical defects.
 - Specified the Approval Web Application, live in 160+ countries: multi-tier sign-off, SOX and ISO 9001 traceability, and REST API contracts for SAP, Salesforce and Snowflake.
-- Manage the BA team and 2 development teams (around 15 people). Raised BA standards with shared templates and one elicitation process across the BA and PM team.
+- Manage the BA team and 2 development teams (~15 people), with shared templates and one elicitation process.
 - Led AI adoption in the BA team: Claude Cowork ticket creation, MCP into Jira and ServiceNow, usage guidelines and training for about 50 users. Time per spec fell about 32%.
-- Use AI daily in my own analysis. Claude Code drafts and gap-checks SRS, HLE and BRD and generates test cases. I check every output before it goes out under my name.
+- Use Claude Code daily to draft and gap-check SRS, HLE and BRD. I review every output.
 - Specified and delivered the platform's first AI agent: a voice-command assistant on an LLM layer across OpenAI, Gemini and Grok, with provider switching and fallback.
 
 **AI Initiative: Jira Rollout and Automation** (2026 - Present)
@@ -82,7 +82,7 @@ Senior Business Analyst, 6+ years on the global CPQ platform of a Fortune 500 ma
 - Wrote a Forge app in Node.js (95 unit tests) that rolls estimates and logged hours up the hierarchy, plus dashboard gadgets that show each user their own hours.
 - Trained PMs, BAs and end users, backed by user guides with annotated screenshots.
 
-**Business Analyst** (2021 - 2022)
+**Mid-Level Business Analyst** (2021 - 2022)
 - Documented pricing, discount and approval rules for 160+ countries as ToBe BPMN.
 
 **Junior Business Analyst** (2020 - 2021)
@@ -90,10 +90,16 @@ Senior Business Analyst, 6+ years on the global CPQ platform of a Fortune 500 ma
 
 #### Booking.dentist, medical-tourism marketplace (via Soprex)
 
-**Business Analyst / Product Owner** (2021 - 2023)
+**Business Analyst & Product Owner** (2021 - 2023)
 - Sole BA on a two-sided B2B/B2C marketplace live in 35+ countries. Ran discovery with the Mom Test, then specified the booking, cancellation and multi-currency rules.
 - Specified both products on one shared data model and rules engine, a consumer booking app and an internal back-office, then owned UAT.
 - Wrote the business case, KPIs and MVP roadmap behind EUR 250,000 in seed funding, raised through Katapult, and cut 348 hours of non-MVP scope to hold the launch date.
+
+### Independent projects
+
+- SynkBase (founder, in development): Term Intelligence Platform that finds where term definitions drift across connected systems such as Jira and Confluence and calculates the rework cost. Manufacturing is the first vertical.
+- BA Agent Skills for Claude (side project): skills that turn a feature idea into a PRD draft and user stories with Gherkin acceptance criteria.
+- Currency Converter for Firefox (side project, SynkBase brand): browser extension that adds a Convert To button next to prices.
 
 ### Earlier career
 
@@ -111,7 +117,7 @@ Serbian (native), English (C2, professional), Spanish (A2, elementary)
 
 ### Core skills
 
-Business Analysis (BABOK), Requirements Workshops, User Stories & Acceptance Criteria, Process Design & BPMN, Use Cases & UML, Requirements Traceability (RTM), UAT & Release Readiness, Process Improvement, AI-Assisted Analysis, Stakeholder Management, Team Leadership, Agile / Scrum / SAFe
+Business Analysis (BABOK), Requirements Workshops, User Stories & Acceptance Criteria, Process Design & BPMN, Use Cases & UML, Requirements Traceability (RTM), Test Cases & UAT, Releases with DevOps, AI-Assisted Analysis, Stakeholder Management, Team Leadership, Agile / Scrum / SAFe
 
 ### Domains
 

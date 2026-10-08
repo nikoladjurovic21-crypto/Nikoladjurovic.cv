@@ -108,3 +108,24 @@
   var y = document.getElementById('year');
   if (y) y.textContent = String(new Date().getFullYear());
 })();
+
+// Prototype recordings: play only while on screen, never for reduced motion
+(function () {
+  'use strict';
+  var vids = document.querySelectorAll('video[data-autoplay]');
+  if (!vids.length) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // the poster stays as a still image that links to the prototype
+  if (!('IntersectionObserver' in window)) {
+    vids.forEach(function (v) { v.preload = 'auto'; var p = v.play(); if (p) p.catch(function () {}); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; var p = v.play(); if (p) p.catch(function () {}); }
+      else { v.pause(); }
+    });
+  }, { threshold: 0.25 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
