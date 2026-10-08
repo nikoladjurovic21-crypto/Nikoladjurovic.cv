@@ -117,11 +117,11 @@ Serbian (native), English (C2, professional), Spanish (A2, elementary)
 
 ### Core skills
 
-Business Analysis (BABOK), Requirements Workshops, User Stories & Acceptance Criteria, Process Design & BPMN, Use Cases & UML, Requirements Traceability (RTM), Test Cases & UAT, Releases with DevOps, AI-Assisted Analysis, Stakeholder Management, Team Leadership, Agile / Scrum / SAFe
+Business Analysis (BABOK), Requirements Workshops, User Stories & Acceptance Criteria, Process Design & BPMN, Use Cases & UML, Requirements Traceability (RTM), Test Cases & UAT, Releases with DevOps, AI Adoption & Integration, Stakeholder Management, Team Leadership, Agile / Scrum / SAFe
 
 ### Domains
 
-CPQ, Pricing, Approvals, Enterprise Tools, SaaS, Two-sided Marketplaces, AI / ML, B2B, B2C, Manufacturing, Medical Tourism
+CPQ, Quote-to-Cash, Pricing, Approvals, Payments, E-commerce, B2B SaaS, B2C, Marketplaces, AI / ML, Manufacturing, Medical Tourism
 
 ### Tools and technologies
 
