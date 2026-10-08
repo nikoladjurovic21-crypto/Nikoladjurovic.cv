@@ -6,7 +6,7 @@
   // Paste your Calendly scheduling link between the quotes, for example
   // 'https://calendly.com/your-name/30min'. While it is empty, every
   // "Book a Call" button opens an email draft instead.
-  var CALENDLY_URL = '';
+  var CALENDLY_URL = 'https://calendly.com/nikoladjurovic/30min';
 
   var header = document.querySelector('.site-header');
 
