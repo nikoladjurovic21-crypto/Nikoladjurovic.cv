@@ -126,7 +126,7 @@ CPQ, Quote-to-Cash, Pricing, Approvals, Payments, E-commerce, B2B SaaS, B2C, Mar
 
 ### Tools and technologies
 
-Jira, Confluence, ServiceNow, Claude Code, Claude Cowork, ChatGPT, Miro, Draw.io, Lucidchart, Figma, Power BI, Postman, BPMN, UML, SAP, Salesforce, Snowflake, REST API, JSON, SQL, Data Modeling, Jira Forge, LLM APIs, MCP, Agent Skills, SOX / ISO 9001
+Jira, Confluence, Notion, ServiceNow, Claude Code, Claude Cowork, Claude Design, ChatGPT, Figma, Miro, Lucidchart, Draw.io, Balsamiq, Stitch, Power BI, Postman, BPMN, UML, SAP, Salesforce, Snowflake, REST API, JSON, SQL, Data Modeling, Jira Forge, LLM APIs, MCP, Agent Skills, SOX / ISO 9001
 
 ## FAQ
 
@@ -144,7 +144,7 @@ Documents your engineers and testers can use without me in the room: SRS or HLE,
 
 ### Which tools do you use?
 
-Jira and Confluence for delivery, Draw.io, Lucidchart, Miro and Figma for diagrams and wireframes, Postman for APIs and Power BI for reporting. I use Claude Code and Claude Cowork every day, and I check every output before it goes out under my name.
+Jira, Confluence and Notion for delivery, Figma, Miro, Lucidchart, Draw.io and Balsamiq for diagrams and wireframes, Stitch and Claude Design for fast UI prototypes, Postman for APIs and Power BI for reporting. I use Claude Code and Claude Cowork every day, and I check every output before it goes out under my name.
 
 ### Do you take full-time roles?
 
