@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Synkbase.ai Currency: Firefox Add-on Case Study | Nikola Djurovic</title>
+<meta name="description" content="Case study: a Firefox add-on I took from idea to the Mozilla store in October 2026. Converts prices on any website, desktop and Android, with nothing about the user leaving the browser. 191 automated tests, data collection declared none.">
+<meta name="author" content="Nikola Djurovic">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://nikoladjurovic.cv/work/synkbase-currency/">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Nikola Djurovic">
+<meta property="og:title" content="Synkbase.ai Currency: Firefox Add-on Case Study | Nikola Djurovic">
+<meta property="og:description" content="Case study: a Firefox add-on I took from idea to the Mozilla store in October 2026. Converts prices on any website, desktop and Android, with nothing about the user leaving the browser. 191 automated tests, data collection declared none.">
+<meta property="og:url" content="https://nikoladjurovic.cv/work/synkbase-currency/">
+<meta property="og:image" content="https://nikoladjurovic.cv/assets/img/og-image.png">
+<meta property="og:image:alt" content="Nikola Djurovic, Senior Business Analyst & Product Owner">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261011a">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/js/site.js?v=20261011a" defer></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Synkbase.ai Currency: a Firefox add-on from spec to store",
+   "url": "https://nikoladjurovic.cv/work/synkbase-currency/",
+   "author": { "@id": "https://nikoladjurovic.cv/#person" },
+   "datePublished": "2026-10-11",
+   "dateModified": "2026-10-11",
+   "inLanguage": "en",
+   "about": ["Browser extension", "Product ownership", "Privacy by design", "AI-assisted development", "Requirements and testing"],
+   "image": ["https://nikoladjurovic.cv/assets/img/currency-desktop-1050.webp"],
+   "description": "Case study: a Firefox add-on I took from idea to the Mozilla store in October 2026. Converts prices on any website, desktop and Android, with nothing about the user leaving the browser. 191 automated tests, data collection declared none."
+  },
+  {
+   "@type": "SoftwareApplication",
+   "name": "Synkbase.ai - Private Currency Converter",
+   "applicationCategory": "BrowserApplication",
+   "operatingSystem": "Firefox 115+, Firefox for Android 120+",
+   "softwareVersion": "0.6.5",
+   "url": "https://addons.mozilla.org/en-US/firefox/addon/synkbase-ai-currency/",
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+   "author": { "@id": "https://nikoladjurovic.cv/#person" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nikoladjurovic.cv/" },
+    { "@type": "ListItem", "position": 2, "name": "Independent Work", "item": "https://nikoladjurovic.cv/#independent" },
+    { "@type": "ListItem", "position": 3, "name": "Synkbase.ai Currency", "item": "https://nikoladjurovic.cv/work/synkbase-currency/" }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Nikola Djurovic, home">Nikola <b>Djurovic</b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#work">Projects</a></li>
+        <li><a href="/work/order-risk-hold/">Work Sample</a></li>
+        <li><a href="/resources/srs-template/">SRS Template</a></li>
+        <li><a href="/cv/">CV</a></li>
+        <li><a class="btn btn-sm" href="mailto:nikoladjurovic21@gmail.com?subject=Intro%20call" data-book>Book a Call</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <article>
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/#independent">Independent Work</a></li><li aria-current="page">Synkbase.ai Currency</li></ol></nav>
+        <p class="eyebrow"><span>Case Study</span><span>Own Product · Live</span></p>
+        <h1 class="hero-with-icon"><img src="/assets/img/synkbase-currency-icon.svg" width="64" height="64" alt="">Synkbase.ai Currency: a Firefox Add-on, From Spec to Store</h1>
+        <p class="lede">My own product. It shows any price on any website in your own currencies: hover a price on a computer, tap it on a phone. I set the requirements, made every product call, tested every build and wrote the store listing. Claude Code wrote most of the code from my specs.</p>
+        <dl class="doc-meta">
+          <div><dt>Role</dt><dd>Product Owner and Builder</dd></div>
+          <div><dt>When</dt><dd>September to October 2026</dd></div>
+          <div><dt>Status</dt><dd>Live on Firefox Add-ons since 8 October 2026</dd></div>
+        </dl>
+        <div class="btn-row"><a class="btn btn-primary" href="https://addons.mozilla.org/en-US/firefox/addon/synkbase-ai-currency/" target="_blank" rel="noopener">Get It on Firefox Add-ons</a><a class="btn btn-ghost" href="#decisions">Jump to the Decisions</a></div>
+      </div>
+    </header>
+
+    <section class="case-section">
+      <ul class="kpis">
+        <li><b>191</b>automated tests, all passing</li>
+        <li><b>62</b>findings and decisions logged</li>
+        <li><b>None</b>user data collected, as declared to Mozilla</li>
+        <li><b>46 KB</b>package, desktop and Android</li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <figure class="proto reveal">
+        <div class="proto-media" style="aspect-ratio:1080/700">
+          <video data-autoplay muted loop playsinline preload="none" width="1080" height="700" poster="/assets/media/synkbase-currency-demo-poster.webp" aria-label="Recording: the extension finds a forint price, the Convert to button appears, euro is chosen and the converted amount is shown with its rate and source; then the same for a Serbian dinar price split across two elements" style="aspect-ratio:1080/700"><source src="/assets/media/synkbase-currency-demo.mp4" type="video/mp4"><source src="/assets/media/synkbase-currency-demo.webm" type="video/webm"></video>
+          <span class="live-badge">Real Extension Code</span>
+        </div>
+        <figcaption><b>Desktop.</b> The published 0.6.5 scripts running on a demo shop. Rest on a price, pick a currency, see the amount with its rate and source. The dinar price is split across two elements on the page and still reads as one. Shop and rates are illustrative.</figcaption>
+        <div class="btn-row"><a class="btn btn-line" href="/assets/media/synkbase-currency-demo.gif" download>Download GIF <span class="file-meta">577&nbsp;KB</span></a></div>
+      </figure>
+    </section>
+
+    <section class="case-section">
+      <div class="prose">
+        <h2>The Problem</h2>
+        <p>Shopping on a foreign site means doing currency maths in a second tab. I wanted the converted price where I am reading it, on any shop, without sending my browsing to anyone's server.</p>
+        <h2>The Requirements I Set</h2>
+        <ul class="list">
+          <li><strong>Any website,</strong> whatever it is built with: plain HTML, React, Vue or web components.</li>
+          <li><strong>Only real prices.</strong> A number needs a currency marker. "Qty 5" and kilometres stay alone.</li>
+          <li><strong>Nothing about the user leaves the browser.</strong> No accounts, no analytics, no ads.</li>
+          <li><strong>Desktop and phone,</strong> each with an interaction that suits it.</li>
+          <li><strong>Honest numbers:</strong> every result names its rate source and says the rates are daily, not live.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section" id="decisions">
+      <h2 class="case-h2">Six Decisions That Shaped It</h2>
+      <p class="intro" style="margin-bottom:22px">Each one came from a finding in the decision log I kept from the first build. The log has 62 entries.</p>
+      <div class="decisions">
+        <article class="card reveal"><p class="metric"><b>v0.3 → v0.4</b>replaced, not patched</p><h3>Float Above the Page, Never Edit It</h3><p>The first version wrote buttons into the page text. On React shops the framework re-rendered the text and prices appeared twice. Patching that was a losing game, so I had it rebuilt as one layer floating above the page. The page's own markup is never touched, so no framework can break it or be broken by it.</p></article>
+        <article class="card reveal"><p class="metric"><b>1000×</b>error caught before launch</p><h3>Wrong Numbers Are Worse Than No Numbers</h3><p>A Serbian shop showed "160.845 RSD" and the first parser read it as 160.845, not 160,845. New rule: a separator followed by exactly three digits is a thousands separator, whatever the character. Dot, comma and every kind of space are handled the same way.</p></article>
+        <article class="card reveal"><p class="metric"><b>0.2% → 0.08%</b>gap to Google</p><h3>Precision for Weak Currencies</h3><p>255,090 HUF came out a little off. Cause: sources round tiny per-unit rates, and 1 HUF = 0.00272 EUR hides 0.2%. Every pair is now computed from euro rates (1 EUR = 367.12 HUF), which keeps full precision. Result 694.84 EUR, and the rest of the gap is a different time and provider.</p></article>
+        <article class="card reveal"><p class="metric"><b>Identical</b>request for every user</p><h3>Privacy as the Product</h3><p>Prices are found on the device. The only network call fetches the day's euro rate table, the same for everyone, so not even the page's currency leaves the browser. Mozilla's data-collection declaration is "none". Selling data was considered and rejected: it would break the strongest promise on the listing.</p></article>
+        <article class="card reveal"><p class="metric"><b>No hover</b>on a phone</p><h3>A Different Interaction for Touch</h3><p>Phones cannot hover, and tapping a price would trigger the shop's own link. So the phone gets a slim tab on the screen edge that opens into Convert prices or Off. In convert mode prices are outlined and the extension takes the tap, so the page underneath never fires.</p></article>
+        <article class="card reveal"><p class="metric"><b>2 bugs</b>tests could not see</p><h3>Test in a Real Browser Too</h3><p>191 automated tests run on simulated pages. Rendering the real scripts in a real browser for the store screenshots caught two layout bugs they missed: the menu covering the price it converts, and a phone banner wrapping onto two lines. Both fixed before submission.</p></article>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-h2">On a Phone</h2>
+      <p class="intro" style="margin-bottom:22px">Firefox for Android, same code. The layout switches on its own when the device has no mouse.</p>
+      <div class="phone-row">
+        <figure class="figure reveal"><img src="/assets/img/currency-phone-tab-393.webp" width="393" height="800" loading="lazy" alt="Phone screen of a demo shop with a slim tab on the right edge opened into two buttons: Convert prices and Off"><figcaption><b>1.</b> The slim edge tab opens into Convert prices or Off.</figcaption></figure>
+        <figure class="figure reveal"><img src="/assets/img/currency-phone-tap-393.webp" width="393" height="800" loading="lazy" alt="Phone screen in tap-a-price mode: every price on screen is outlined and a banner says Tap a price to convert"><figcaption><b>2.</b> Prices on screen are outlined. Tap one.</figcaption></figure>
+        <figure class="figure reveal"><img src="/assets/img/currency-phone-result-393.webp" width="393" height="800" loading="lazy" alt="Bottom sheet converting 160,845 RSD: euro selected, result 1,373 EUR with the rate, date and source Frankfurter"><figcaption><b>3.</b> Pick a currency. Rate, date and source shown.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="prose">
+        <h2>How I Ran It</h2>
+        <ul class="list">
+          <li><strong>Spec first, then build.</strong> Every change started as a written requirement and ended as a numbered finding or decision.</li>
+          <li><strong>AI as the engineering team.</strong> Claude Code wrote most of the code from my specs. I reviewed each build in Firefox and sent back what I saw.</li>
+          <li><strong>Automated checks:</strong> 191 tests across price detection, the overlay, the phone flow, settings sync, rates and the off switch. Mozilla's own linter reports zero errors, warnings and notices.</li>
+          <li><strong>Store-ready:</strong> listing text, privacy policy, permission justifications and eight screenshots, written alongside the build.</li>
+        </ul>
+        <h2>What Comes Next</h2>
+        <p>Free first, to earn installs on desktop and Android. A paid tier with near-live rates and card fee estimates comes once there is an audience, and a shop widget fits under <a href="https://synkbase.ai/" target="_blank" rel="noopener">SynkBase</a> later.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="cta-strip">
+        <p>Need someone who can take a product from requirements to a live release, and use AI to get there faster? I take freelance B2B contracts worldwide.</p>
+        <div class="btn-row"><a class="btn btn-dark" href="mailto:nikoladjurovic21@gmail.com?subject=Intro%20call" data-book>Book a Call</a><a class="btn btn-line" href="https://addons.mozilla.org/en-US/firefox/addon/synkbase-ai-currency/" target="_blank" rel="noopener">See the Listing</a></div>
+      </div>
+    </section>
+  </article>
+</main>
+<footer class="site-footer">
+  <div>
+    <p>© <span id="year">2026</span> Nikola Djurovic · Senior Business Analyst &amp; Product Owner · Belgrade</p>
+    <p class="biz">Nikola Đurović pr Poslovni konsalting BizDevProduct Beograd</p>
+  </div>
+  <nav aria-label="Footer">
+    <ul>
+      <li><a href="/cv/">CV</a></li>
+      <li><a href="/resources/srs-template/">SRS Template</a></li>
+      <li><a href="https://www.linkedin.com/in/nikoladjurovic" rel="me noopener" target="_blank">LinkedIn</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/sitemap/">Sitemap</a></li>
+    </ul>
+  </nav>
+</footer>
+</body>
+</html>

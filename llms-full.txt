@@ -98,9 +98,9 @@ Senior Business Analyst & Product Owner, 6+ years on the global CPQ platform of 
 
 ### Independent projects
 
-- SynkBase (founder, in development): Term Intelligence Platform that finds where term definitions drift across connected systems such as Jira and Confluence and calculates the rework cost. Manufacturing is the first vertical.
+- SynkBase (founder, in development with design partners, https://synkbase.ai/): Change Intelligence Platform. Knows when a business definition changes, what it breaks and what it costs: keeps the approved version of each definition, detects drift across connected systems such as Jira and Confluence, and prices the rework from the team's own delivery data.
 - BA Agent Skills for Claude (side project): skills that turn a feature idea into a PRD draft and user stories with Gherkin acceptance criteria.
-- Currency Converter for Firefox (side project, SynkBase brand): browser extension that adds a Convert To button next to prices.
+- Synkbase.ai Currency (own product, live on Firefox Add-ons since 8 October 2026, https://addons.mozilla.org/en-US/firefox/addon/synkbase-ai-currency/): Firefox add-on for desktop and Android that converts prices on any website into the user's currencies. Prices are detected on the device and the only request is the day's euro rate table, identical for every user; data collection declared none. 191 automated tests, Mozilla linter clean, 62 logged findings and decisions. Product owner and builder; code written with Claude Code from his specs. Case study: https://nikoladjurovic.cv/work/synkbase-currency/
 
 ### Earlier career
 

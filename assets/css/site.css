@@ -509,3 +509,18 @@ main#main + .site-footer{margin-top:48px}
 .toolkit .chips li.tool.generic:hover svg,.toolkit .chips li.tool.generic.is-hot svg{fill:none}
 .tool-chips{gap:8px}
 .tool-chips li.tool{padding:6px 12px 6px 10px}
+
+/* ---------- v9: currency add-on case study ---------- */
+.hero-with-icon{display:flex;align-items:flex-start;gap:18px}
+.hero-with-icon img{width:56px;height:56px;border-radius:14px;flex:none;margin-top:6px;box-shadow:0 10px 24px -12px rgb(0 0 0 / .5)}
+@media (max-width:620px){.hero-with-icon{flex-direction:column;gap:12px}.hero-with-icon img{width:48px;height:48px}}
+.decisions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.decisions .card h3{font-family:var(--serif);font-size:1.18rem;font-weight:600;margin-bottom:8px}
+.decisions .card p:not(.metric){color:var(--ink-soft);font-size:.95rem}
+@media (max-width:760px){.decisions{grid-template-columns:1fr}}
+.phone-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.phone-row .figure{margin:0}
+.phone-row .figure img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+@media (max-width:760px){.phone-row{grid-template-columns:1fr;max-width:360px;margin:0 auto}}
+.prose ul.list li{margin-bottom:8px}
+.prose ul.list strong{color:var(--ink)}
