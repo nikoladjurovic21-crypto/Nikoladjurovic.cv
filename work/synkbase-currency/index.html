@@ -23,9 +23,9 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=20261011b">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261011c">
 <script>document.documentElement.classList.add('js')</script>
-<script src="/assets/js/site.js?v=20261011b" defer></script>
+<script src="/assets/js/site.js?v=20261011c" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -91,7 +91,7 @@
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/#independent">Independent Work</a></li><li aria-current="page">Synkbase.ai Currency</li></ol></nav>
         <p class="eyebrow"><span>Case Study</span><span>Own Product · Live</span></p>
         <h1 class="hero-with-icon"><a class="hero-icon-link" href="https://addons.mozilla.org/en-US/firefox/addon/synkbase-ai-currency/" target="_blank" rel="noopener" aria-label="Synkbase.ai Currency on Firefox Add-ons (opens in a new tab)"><svg class="cv-icon" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#0db07e"/><g class="cv-ring"><path d="M11.15 22.28A23 23 0 0 1 50.74 18.67" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M54.17 25.87L56.22 16.53L45.71 21.44Z" fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="M52.85 41.72A23 23 0 0 1 13.26 45.33" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M9.83 38.13L7.78 47.47L18.29 42.56Z" fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></g><text class="cv-sym" style="--i:0" x="32" y="42" text-anchor="middle" font-size="30">€</text><text class="cv-sym" style="--i:1" x="32" y="42" text-anchor="middle" font-size="30">$</text><text class="cv-sym" style="--i:2" x="32" y="42" text-anchor="middle" font-size="30">£</text><text class="cv-sym" style="--i:3" x="32" y="42" text-anchor="middle" font-size="30">¥</text><text class="cv-sym" style="--i:4" x="32" y="40" text-anchor="middle" font-size="24">din</text></svg></a>Synkbase.ai Currency: a Firefox Add-on, From Spec to Store</h1>
-        <p class="lede">My own product. It shows any price on any website in your own currencies: hover a price on a computer, tap it on a phone. I set the requirements, made every product call, tested every build and wrote the store listing. Claude Code wrote most of the code from my specs.</p>
+        <p class="lede">My own product. It shows any price on any website in your own currencies: hover a price on a computer, tap it on a phone. I own it end to end: requirements, product decisions, build, testing, release and the store listing.</p>
         <dl class="doc-meta">
           <div><dt>Role</dt><dd>Product Owner and Builder</dd></div>
           <div><dt>When</dt><dd>September to October 2026</dd></div>
@@ -136,6 +136,112 @@
       </div>
     </section>
 
+    <section class="case-section">
+      <div class="prose">
+        <h2>What It Does</h2>
+        <ul class="list">
+          <li><strong>47 currencies, yours first.</strong> The starting list is your own currency, worked out on the device from the time zone, then the eight most traded. No location lookup.</li>
+          <li><strong>Hover on a computer, tap on a phone.</strong> One package. The layout follows whether the device has a mouse.</li>
+          <li><strong>Shared symbols read in context.</strong> "$", "kr" and "¥" are resolved from the site's domain and language first, so a .ca shop means Canadian dollars, then from your setting.</li>
+          <li><strong>Off for one site or everywhere,</strong> from the toolbar button. Search engines, webmail, work tools and payment pages are excluded from the start.</li>
+          <li><strong>Settings follow you</strong> to your other devices through Firefox Sync, when you use it.</li>
+          <li><strong>Every result names its rate, date and source.</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-h2">Stack</h2>
+      <p class="intro" style="margin-bottom:22px">Plain JavaScript on the WebExtensions API. No framework, no build step, no minification.</p>
+      <dl class="stack-grid">
+        <div class="card reveal"><dt>Platform</dt><dd>Firefox WebExtension, Manifest V2. Firefox 115+ on desktop, 120+ on Android.</dd></div>
+        <div class="card reveal"><dt>Reading the page</dt><dd>TreeWalker over visible text, DOM Ranges as pointers to each price, MutationObserver for pages that change, CSS Custom Highlight API for the underline.</dd></div>
+        <div class="card reveal"><dt>Overlay</dt><dd>One custom element with a closed Shadow DOM and inline styles. Page CSS cannot reach it, and it never edits the page's markup.</dd></div>
+        <div class="card reveal"><dt>Background</dt><dd>Non-persistent event page. Fetches the euro rate table, caches it for an hour and works out every currency pair.</dd></div>
+        <div class="card reveal"><dt>Storage</dt><dd>storage.local for the rate table and a copy of settings, storage.sync for settings across devices.</dd></div>
+        <div class="card reveal"><dt>Rates</dt><dd>Frankfurter API (central-bank reference rates), with ExchangeRate-API's open endpoint for currencies Frankfurter does not publish.</dd></div>
+        <div class="card reveal"><dt>Testing</dt><dd>191 tests on Node with jsdom: detection, overlay, phone flow, settings sync, rates and the off switch.</dd></div>
+        <div class="card reveal"><dt>Release</dt><dd>web-ext lint (0 errors, warnings, notices) and web-ext build for the store package. 46 KB.</dd></div>
+      </dl>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-h2">How It Works</h2>
+      <p class="intro" style="margin-bottom:22px">Four scripts run in each tab, one in the background, and two public rate services sit outside. Nothing else is involved.</p>
+      <figure class="diagram reveal">
+        <div class="diagram-scroll" tabindex="0" role="group" aria-label="Architecture diagram, scrolls sideways on small screens"><svg class="dg" viewBox="0 0 1000 500" role="img" aria-labelledby="dgArchT"><title id="dgArchT">Architecture: content scripts in every tab read the page text, find prices and draw an overlay; they ask the background script for rates; the background script keeps a one-hour rate table in local storage and fetches the euro table from Frankfurter, with ExchangeRate-API for missing currencies; the toolbar popup saves settings to sync storage, which every tab listens to, and can clear the rate cache.</title><defs><marker id="dgAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d4aff"/></marker><marker id="dgArS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d4aff"/></marker></defs><rect class="dg-zone" x="20" y="30" width="170" height="340" rx="14"/><text class="dg-z" x="34" y="52">WEB PAGE</text><rect class="dg-zone" x="220" y="30" width="300" height="340" rx="14"/><text class="dg-z" x="234" y="52">CONTENT SCRIPTS, EVERY TAB</text><rect class="dg-zone" x="600" y="30" width="170" height="340" rx="14"/><text class="dg-z" x="614" y="52">BACKGROUND</text><rect class="dg-zone" x="820" y="30" width="160" height="340" rx="14"/><text class="dg-z" x="834" y="52">INTERNET</text><rect class="dg-box dg-muted" x="35" y="160" width="140" height="90" rx="10"/><text class="dg-t" x="105.0" y="193.0" font-size="14">Page text</text><text class="dg-s" x="105.0" y="211.0">read only,</text><text class="dg-s" x="105.0" y="227.0">never edited</text><rect class="dg-box" x="235" y="70" width="270" height="70" rx="10"/><text class="dg-t" x="370.0" y="101.5" font-size="14">detect.js</text><text class="dg-s" x="370.0" y="119.5">Finds prices in the visible text</text><rect class="dg-box" x="235" y="175" width="270" height="70" rx="10"/><text class="dg-t" x="370.0" y="206.5" font-size="14">content.js</text><text class="dg-s" x="370.0" y="224.5">Price registry and pointer hit-test</text><rect class="dg-box" x="235" y="280" width="270" height="70" rx="10"/><text class="dg-t" x="370.0" y="311.5" font-size="14">ui.js</text><text class="dg-s" x="370.0" y="329.5">Overlay above the page, closed Shadow DOM</text><rect class="dg-box" x="612" y="90" width="146" height="122" rx="10"/><text class="dg-t" x="685.0" y="130.5" font-size="14">background.js</text><text class="dg-s" x="685.0" y="148.5">Euro pivot</text><text class="dg-s" x="685.0" y="164.5">Cross rates</text><text class="dg-s" x="685.0" y="180.5">1-hour cache</text><rect class="dg-box" x="612" y="250" width="112" height="70" rx="10"/><text class="dg-t" x="668.0" y="281.5" font-size="13">storage.local</text><text class="dg-s" x="668.0" y="299.5">rate table</text><rect class="dg-box dg-ext" x="834" y="80" width="132" height="90" rx="10"/><text class="dg-t" x="900.0" y="113.0" font-size="14">Frankfurter</text><text class="dg-s" x="900.0" y="131.0">central-bank</text><text class="dg-s" x="900.0" y="147.0">reference rates</text><rect class="dg-box dg-ext" x="834" y="210" width="132" height="90" rx="10"/><text class="dg-t" x="900.0" y="243.0" font-size="13">ExchangeRate-API</text><text class="dg-s" x="900.0" y="261.0">fills missing</text><text class="dg-s" x="900.0" y="277.0">currencies</text><rect class="dg-box dg-store" x="235" y="410" width="270" height="70" rx="10"/><text class="dg-t" x="370.0" y="441.5" font-size="14">storage.sync</text><text class="dg-s" x="370.0" y="459.5">Settings, shared through Firefox Sync</text><rect class="dg-box" x="612" y="410" width="146" height="70" rx="10"/><text class="dg-t" x="685.0" y="441.5" font-size="14">Toolbar popup</text><text class="dg-s" x="685.0" y="459.5">popup.html</text><text class="dg-note" x="900" y="335">Same request</text><text class="dg-note" x="900" y="351">for every user</text><path class="dg-a" d="M175 190 H205 V105 H233" marker-end="url(#dgAr)"/><text class="dg-l" x="205" y="152" text-anchor="middle">reads</text><path class="dg-a" d="M370 140 V173" marker-end="url(#dgAr)"/><text class="dg-l" x="380" y="161" text-anchor="start">price Ranges</text><path class="dg-a" d="M370 245 V278" marker-end="url(#dgAr)"/><text class="dg-l" x="380" y="266" text-anchor="start">show pill or sheet</text><path class="dg-a" d="M505 315 H560 V151 H610" marker-start="url(#dgArS)" marker-end="url(#dgAr)"/><text class="dg-l" x="560" y="226" text-anchor="middle">getRates(base)</text><text class="dg-l" x="560" y="243" text-anchor="middle">rates, date, source</text><path class="dg-a" d="M668 212 V248" marker-start="url(#dgArS)" marker-end="url(#dgAr)"/><path class="dg-a" d="M758 125 H832" marker-end="url(#dgAr)"/><text class="dg-l" x="795" y="116" text-anchor="middle">EUR table</text><path class="dg-a dg-dash" d="M758 185 H795 V255 H832" marker-end="url(#dgAr)"/><text class="dg-l" x="795" y="228" text-anchor="middle">if gaps</text><path class="dg-a" d="M610 445 H507" marker-end="url(#dgAr)"/><text class="dg-l" x="558" y="437" text-anchor="middle">saves</text><path class="dg-a dg-dash" d="M235 445 H205 V215 H233" marker-end="url(#dgAr)"/><text class="dg-l" x="205" y="393" text-anchor="middle">onChanged</text><path class="dg-a" d="M742 408 V214" marker-end="url(#dgAr)"/><text class="dg-l" x="742" y="388" text-anchor="middle">clearCache</text></svg></div>
+        <figcaption><b>Architecture.</b> Solid arrows run on every conversion, dashed ones only when needed. <span class="scroll-hint">Swipe sideways to see all of it.</span></figcaption>
+      </figure>
+
+      <h3 class="case-h3">Finding a Price Without Touching the Page</h3>
+      <ol class="pipeline">
+        <li><b>Walk the visible text.</b> Skips scripts, inputs, code blocks and anything editable. Stops at 60,000 nodes.</li>
+        <li><b>Join split prices.</b> "€", "12" and a raised "99" in three elements are read as one price.</li>
+        <li><b>Match a marker and a number.</b> No currency marker, no price, so "Qty 5" stays alone. "KM" counts as marks only on Bosnian sites.</li>
+        <li><b>Resolve shared markers.</b> "$", "kr" and "¥" from the domain, then the page language, then your setting.</li>
+        <li><b>Parse the amount.</b> A separator followed by exactly three digits is a thousands separator, whatever the character.</li>
+        <li><b>Keep a Range, not a copy.</b> Up to 800 prices per page, re-checked when the page changes.</li>
+      </ol>
+
+      <figure class="diagram reveal">
+        <div class="diagram-scroll" tabindex="0" role="group" aria-label="Sequence diagram, scrolls sideways on small screens"><svg class="dg" viewBox="0 0 1000 600" role="img" aria-labelledby="dgSeqT"><title id="dgSeqT">Sequence for converting one price: the pointer rests on a forint price, content.js hit-tests it and asks the overlay to show the Convert to pill, the user picks euro, the overlay asks the background script for HUF rates, the background reads its cached euro table and, if it is older than an hour, fetches the daily euro table from Frankfurter and saves it, then returns the cross rates with date and source, and the overlay shows the amount.</title><defs><marker id="dgAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d4aff"/></marker><marker id="dgArS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d4aff"/></marker></defs><line class="dg-life" x1="80" y1="62" x2="80" y2="590"/><rect class="dg-box dg-muted" x="18" y="18" width="124" height="44" rx="10"/><text class="dg-t" x="80" y="45" font-size="14">You</text><line class="dg-life" x1="255" y1="62" x2="255" y2="590"/><rect class="dg-box" x="193" y="18" width="124" height="44" rx="10"/><text class="dg-t" x="255" y="45" font-size="14">content.js</text><line class="dg-life" x1="430" y1="62" x2="430" y2="590"/><rect class="dg-box" x="368" y="18" width="124" height="44" rx="10"/><text class="dg-t" x="430" y="45" font-size="14">ui.js</text><line class="dg-life" x1="610" y1="62" x2="610" y2="590"/><rect class="dg-box" x="548" y="18" width="124" height="44" rx="10"/><text class="dg-t" x="610" y="45" font-size="14">background.js</text><line class="dg-life" x1="785" y1="62" x2="785" y2="590"/><rect class="dg-box" x="723" y="18" width="124" height="44" rx="10"/><text class="dg-t" x="785" y="45" font-size="14">storage.local</text><line class="dg-life" x1="925" y1="62" x2="925" y2="590"/><rect class="dg-box dg-ext" x="863" y="18" width="124" height="44" rx="10"/><text class="dg-t" x="925" y="45" font-size="14">Frankfurter</text><rect class="dg-frame" x="560" y="345" width="420" height="122" rx="8"/><rect class="dg-frame-tag" x="560" y="345" width="168" height="22" rx="8"/><text class="dg-ft" x="570" y="360">if older than 1 hour</text><path class="dg-a" d="M84 105 H249" marker-end="url(#dgAr)"/><text class="dg-l" x="167.5" y="97" text-anchor="middle">Pointer rests on “22 990 Ft”</text><path class="dg-a" d="M259 140 H300 V164 H263" marker-end="url(#dgAr)"/><text class="dg-l" x="306" y="150" text-anchor="start">Hit-test the cached price rects</text><path class="dg-a" d="M259 205 H424" marker-end="url(#dgAr)"/><text class="dg-l" x="342.5" y="197" text-anchor="middle">Show the Convert to pill</text><path class="dg-a" d="M84 250 H424" marker-end="url(#dgAr)"/><text class="dg-l" x="255.0" y="242" text-anchor="middle">Pick EUR</text><path class="dg-a" d="M434 295 H604" marker-end="url(#dgAr)"/><text class="dg-l" x="520.0" y="287" text-anchor="middle">getRates(&quot;HUF&quot;)</text><text class="dg-note" x="520.0" y="311">skipped if asked in the last 5 minutes</text><path class="dg-a" d="M614 335 H779" marker-end="url(#dgAr)"/><text class="dg-l" x="697.5" y="327" text-anchor="middle">Read rates:EUR</text><path class="dg-a" d="M614 395 H919" marker-end="url(#dgAr)"/><text class="dg-l" x="767.5" y="387" text-anchor="middle">GET /v2/rates?base=EUR</text><path class="dg-a dg-dash" d="M921 425 H616" marker-end="url(#dgAr)"/><text class="dg-l" x="767.5" y="417" text-anchor="middle">Daily EUR table</text><path class="dg-a" d="M614 455 H779" marker-end="url(#dgAr)"/><text class="dg-l" x="697.5" y="447" text-anchor="middle">Save with a timestamp</text><path class="dg-a dg-dash" d="M606 510 H436" marker-end="url(#dgAr)"/><text class="dg-l" x="520.0" y="502" text-anchor="middle">HUF cross rates, date, source</text><path class="dg-a dg-dash" d="M426 560 H86" marker-end="url(#dgAr)"/><text class="dg-l" x="255.0" y="552" text-anchor="middle">Amount in EUR, rate, date and source</text></svg></div>
+        <figcaption><b>Converting one price.</b> The rate table is reused for an hour, and the request never says which page or price it is for.</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section" id="api">
+      <h2 class="case-h2">API Specification</h2>
+      <p class="intro" style="margin-bottom:22px">The parts talk through WebExtensions messaging. Every handler checks that the sender is the extension itself and ignores anything else.</p>
+      <h3 class="case-h3">Internal Messages</h3>
+      <div class="table-wrap api-table">
+        <table>
+          <thead><tr><th scope="col">Message</th><th scope="col">From → To</th><th scope="col">Request</th><th scope="col">Response</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>getRates</code></th><td>Overlay → background</td><td><code>{ type: "getRates", base: "HUF" }</code><br>base must be a three-letter ISO 4217 code</td><td><code>{ ok: true, base, date, rates, sources, stale }</code><br>or <code>{ ok: false, error }</code></td></tr>
+            <tr><th scope="row"><code>clearCache</code></th><td>Popup → background</td><td><code>{ type: "clearCache" }</code></td><td><code>{ ok: true, cleared: 1 }</code></td></tr>
+            <tr><th scope="row"><code>synk:site</code></th><td>Popup → content script of the active tab</td><td><code>{ type: "synk:site" }</code></td><td><code>{ host: "shop.example.rs", off: false }</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre class="code-block" aria-label="Example getRates response"><code>// getRates("HUF"), success
+{
+  "ok": true,
+  "base": "HUF",
+  "date": "2026-10-09",
+  "rates":   { "EUR": 0.00272, "USD": 0.00297, "RSD": 0.319, ... },
+  "sources": { "EUR": "frankfurter", "USD": "frankfurter", "RSD": "erapi", ... },
+  "stale": false        // true when the last good table is served offline
+}
+
+// errors: "bad currency" | "no rate for XXX" | "no rate source reachable"
+{ "ok": false, "error": "bad currency" }</code></pre>
+      <p class="code-note">Rates in the example are illustrative.</p>
+
+      <h3 class="case-h3">Outbound Requests</h3>
+      <div class="table-wrap api-table">
+        <table>
+          <thead><tr><th scope="col">Endpoint</th><th scope="col">When</th><th scope="col">Payload used</th></tr></thead>
+          <tbody>
+            <tr><td><code>GET https://api.frankfurter.dev/v2/rates?base=EUR</code></td><td>No rate table yet, or it is older than one hour</td><td>Rows of <code>{ date, base, quote, rate }</code>. Only the newest date is kept.</td></tr>
+            <tr><td><code>GET https://open.er-api.com/v6/latest/EUR</code></td><td>Frankfurter is down or lacks a currency</td><td><code>{ base_code, rates, time_last_update_utc }</code>, rebased to EUR if needed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="code-note">Both calls send no cookies, skip the HTTP cache and time out after 8 seconds. If both fail, the last good table is used and marked stale. The base is always EUR, so the request is the same for every user and every page.</p>
+
+      <h3 class="case-h3">Stored Data</h3>
+      <div class="table-wrap api-table">
+        <table>
+          <thead><tr><th scope="col">Key</th><th scope="col">Where</th><th scope="col">Fields</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>settings</code></th><td>sync and local</td><td><code>enabled</code>, <code>favourites</code> (up to 12), <code>favouritesEdited</code>, <code>dollar</code> / <code>krona</code> / <code>yen</code> (how to read "$", "kr", "¥"), <code>theme</code>, <code>layout</code>, <code>lastTarget</code>, <code>offSites</code> (up to 200). Every read is validated against the allowed values.</td></tr>
+            <tr><th scope="row"><code>rates:EUR</code></th><td>local</td><td><code>at</code>, <code>date</code>, <code>rates</code>, <code>sources</code>. Reused for one hour.</td></tr>
+            <tr><th scope="row"><code>fabPos</code></th><td>local</td><td>Where you left the phone tab on the screen edge.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="case-section" id="decisions">
       <h2 class="case-h2">Six Decisions That Shaped It</h2>
       <p class="intro" style="margin-bottom:22px">Each one came from a finding in the decision log I kept from the first build. The log has 62 entries.</p>
@@ -164,7 +270,7 @@
         <h2>How I Ran It</h2>
         <ul class="list">
           <li><strong>Spec first, then build.</strong> Every change started as a written requirement and ended as a numbered finding or decision.</li>
-          <li><strong>AI as the engineering team.</strong> Claude Code wrote most of the code from my specs. I reviewed each build in Firefox and sent back what I saw.</li>
+          <li><strong>Every build reviewed in Firefox</strong> before the next change was specified.</li>
           <li><strong>Automated checks:</strong> 191 tests across price detection, the overlay, the phone flow, settings sync, rates and the off switch. Mozilla's own linter reports zero errors, warnings and notices.</li>
           <li><strong>Store-ready:</strong> listing text, privacy policy, permission justifications and eight screenshots, written alongside the build.</li>
         </ul>
