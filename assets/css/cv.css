@@ -87,3 +87,5 @@
   .reveal{opacity:1 !important;transform:none !important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+.cv-contact a{display:inline-flex;align-items:center;gap:.5em;min-width:0}
+.cv-photo a{display:block;width:100%;height:100%;border-radius:50%}

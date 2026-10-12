@@ -657,3 +657,25 @@ a.iv-synkbase:hover .iv-go{background:#6d4aff;color:#fff;border-color:#6d4aff}
 .code-note{font-size:.88rem;color:var(--ink-soft);margin:0 0 8px}
 @media print{.diagram .dg{min-width:0}}
 .api-table th[scope=row] code{white-space:nowrap;overflow-wrap:normal}
+
+/* ===== v12: every icon and image links somewhere ===== */
+.photo-link{display:block;width:100%;height:100%;border-radius:50%;transition:transform .25s ease}
+.photo-link:hover{transform:scale(1.02)}
+.photo-link:focus-visible,.ico-link:focus-visible,a.step-num:focus-visible,.res-cover:focus-visible,.dg-link:focus-visible,.flow-link:focus-visible,.chips li.tool > a:focus-visible{outline:3px solid rgb(var(--accent-rgb) / .7);outline-offset:3px}
+.ico-link{text-decoration:none;transition:background-color .2s ease,color .2s ease,transform .2s ease}
+.ico-link:hover{background:var(--moss);color:#fff;transform:translateY(-2px)}
+a.step-num{text-decoration:none}
+a.step-num:hover{box-shadow:0 0 0 6px rgb(var(--moss-rgb) / .2)}
+.fl-link{cursor:pointer}
+.fl-link:hover .fl-card,.fl-link:focus .fl-card{stroke:#6d4aff;stroke-width:2.5}
+.fl-link:focus{outline:none}
+.res-cover{display:block;transition:transform .2s ease}
+.res-cover:hover{transform:translateY(-3px)}
+.chips li.tool{padding:0}
+.chips li.tool > a{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;color:inherit;text-decoration:none;border-radius:inherit}
+.tool-chips li.tool{padding:0}
+.tool-chips li.tool > a{padding:6px 12px 6px 10px}
+.toolkit .chips li.tool,.toolkit .chips li.tool > a{cursor:pointer}
+.iv-skills .iv-go{background:#fff;color:#5a38e6;border:1px solid #ddd5fb}
+a.iv-skills:hover .iv-go{background:#6d4aff;color:#fff;border-color:#6d4aff}
+.dg-link,.flow-link{display:block;cursor:zoom-in}
