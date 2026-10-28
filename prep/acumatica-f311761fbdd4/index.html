@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Acumatica Final Round</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: arcade quest log for an ERP interview. Ink scoreboard on top, colour-coded level map left, each level owns one hue. */
+:root{
+  --bg:#F3F3FA; --surface:#FFFFFF; --sunk:#E9E9F5; --ink:#15142C; --muted:#5B5A79; --hair:#DCDCEE;
+  --edge:#15142C; --shadow:#15142C; --onink:#F6F5FF;
+  --sun:#FFC21A; --tang:#FF5B2E; --cobalt:#2B4CFF; --violet:#7B4DFF; --sky:#1FB6EE; --magenta:#E8368F; --mint:#12C79A; --coral:#FF6F61;
+  --good:#0E9B76; --good-soft:#D9F7EE; --bad:#D92D3A; --bad-soft:#FFE3E5; --warn-soft:#FFF1C9;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#100F26; --surface:#1B1A3A; --sunk:#16153A; --ink:#F1F0FF; --muted:#A9A8CF; --hair:#302F5C;
+  --edge:#5F5EA8; --shadow:#05041A; --onink:#15142C;
+  --good:#3EE0B0; --good-soft:#103A33; --bad:#FF7A84; --bad-soft:#3D1626; --warn-soft:#3A3010; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#100F26; --surface:#1B1A3A; --sunk:#16153A; --ink:#F1F0FF; --muted:#A9A8CF; --hair:#302F5C;
+  --edge:#5F5EA8; --shadow:#05041A; --onink:#15142C;
+  --good:#3EE0B0; --good-soft:#103A33; --bad:#FF7A84; --bad-soft:#3D1626; --warn-soft:#3A3010; color-scheme:dark;}
+*{box-sizing:border-box} body{margin:0} [hidden]{display:none!important} img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#15142C}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+a{color:var(--cobalt);font-weight:500}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) a{color:var(--sky)} }
+:root[data-theme="dark"] a{color:var(--sky)}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:#15142C;color:#F6F5FF;
+  padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  border-bottom:4px solid var(--sun)}
+.bar-in{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.brand{font-family:var(--f-display);font-weight:800;font-size:19px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px}
+.brand .dot{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--tang);box-shadow:14px 0 0 var(--cobalt),28px 0 0 var(--mint);margin-right:32px;transform:translateY(-1px)}
+.brand small{font-family:var(--f-mono);font-weight:400;font-size:11px;color:#B9B8DD;letter-spacing:.08em;text-transform:uppercase}
+.rank{display:flex;align-items:center;gap:12px;flex:1 1 280px;min-width:0}
+.rank-name{font-family:var(--f-display);font-weight:800;font-size:14px;white-space:nowrap;background:var(--sun);color:#15142C;padding:3px 10px;border-radius:6px}
+.xpwrap{flex:1;min-width:90px}
+.xptrack{height:12px;background:#2A2950;border-radius:4px;overflow:hidden;border:2px solid #3B3A6E}
+.xpfill{height:100%;width:0;transition:width .5s cubic-bezier(.2,.9,.3,1.2);
+  background:repeating-linear-gradient(-45deg,var(--sun) 0 8px,#FFD65C 8px 16px)}
+.xpnum{font-family:var(--f-mono);font-size:11.5px;color:#B9B8DD;font-variant-numeric:tabular-nums;margin-top:2px}
+.clock{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.clock .t{font-size:21px;font-weight:600;color:#fff}
+.pace{font-size:11.5px;padding:3px 9px;border-radius:99px;font-family:var(--f-body);font-weight:700}
+.pace.ok{background:var(--mint);color:#15142C} .pace.behind{background:var(--tang);color:#15142C} .pace.idle{background:#2A2950;color:#B9B8DD}
+.btn{border:2px solid var(--edge);background:var(--surface);color:var(--ink);padding:6px 13px;border-radius:8px;font-size:13.5px;font-weight:600;
+  box-shadow:3px 3px 0 var(--shadow);transition:transform .08s,box-shadow .08s}
+.btn:hover:not([disabled]){transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--shadow)}
+.btn:active:not([disabled]){transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow)}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.primary{background:var(--lv,var(--tang));color:var(--lvfg,#15142C)}
+.btn.xp{background:var(--sun);color:#15142C}
+.bar .btn{border-color:#F6F5FF;box-shadow:3px 3px 0 var(--tang)}
+.bar .btn.primary{background:var(--tang);color:#15142C;border-color:#15142C;box-shadow:3px 3px 0 var(--sun)}
+
+.shell{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:272px minmax(0,1fr);gap:30px;
+  padding-block:26px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.map{position:sticky;top:calc(env(safe-area-inset-top,0px) + 82px);align-self:start;display:flex;flex-direction:column;gap:5px;max-height:calc(100vh - 100px);overflow-y:auto;padding:2px 6px 8px 2px}
+.map h2{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px 8px;font-weight:600}
+.lvl{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;text-align:left;border:2px solid transparent;background:none;padding:6px 9px;border-radius:10px}
+.lvl:hover{background:var(--surface);border-color:var(--hair)}
+.lvl.cur{background:var(--surface);border-color:var(--edge);box-shadow:3px 3px 0 var(--lv)}
+.lvl .n{font-family:var(--f-display);font-weight:800;font-size:14px;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+  background:var(--sunk);color:var(--muted);border:2px solid var(--lv)}
+.lvl.done .n,.lvl.cur .n{background:var(--lv);color:var(--lvfg);border-color:var(--lv)}
+.lvl .nm{font-size:14px;font-weight:600;line-height:1.25}
+.lvl .mn{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.badges{margin-top:16px;padding:12px;border:2px dashed var(--hair);border-radius:12px}
+.badges h3{margin:0 0 8px;font-size:11px;font-family:var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.bdg{display:inline-block;font-size:11.5px;padding:3px 8px;border-radius:6px;margin:0 4px 6px 0;background:var(--sunk);color:var(--muted);border:1.5px solid var(--hair);font-weight:500}
+.bdg.on{background:var(--lv);color:var(--lvfg);border-color:var(--lv);font-weight:700}
+.reset{margin-top:12px}
+main{min-width:0}
+
+.lvhead{position:relative;overflow:hidden;background:var(--lv);color:var(--lvfg);border:2px solid var(--edge);border-radius:16px;
+  box-shadow:6px 6px 0 var(--shadow);padding:22px 24px 20px;margin-bottom:28px;display:flex;gap:18px;align-items:flex-end}
+.bignum{font-family:var(--f-display);font-weight:800;font-size:clamp(70px,12vw,120px);line-height:.8;letter-spacing:-.04em;
+  color:transparent;-webkit-text-stroke:2.5px var(--lvfg);flex:none;opacity:.9}
+.lvhead .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;opacity:.85}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4.6vw,46px);line-height:1;letter-spacing:-.025em;margin:6px 0 10px;text-wrap:balance}
+.meta{font-family:var(--f-mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.meta span{background:rgba(255,255,255,.22);border:1.5px solid currentColor;padding:2px 9px;border-radius:99px}
+.lvhead::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;
+  background:repeating-radial-gradient(circle,transparent 0 10px,rgba(255,255,255,.18) 10px 12px);pointer-events:none}
+
+.lesson{max-width:72ch}
+.lesson h3{font-family:var(--f-display);font-weight:800;font-size:22px;margin:30px 0 10px;letter-spacing:-.015em;text-wrap:balance;display:flex;align-items:center;gap:10px}
+.lesson h3::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--lv);border:2px solid var(--edge);flex:none}
+.lesson p{margin:0 0 12px}
+.lesson ul,.lesson ol{margin:0 0 14px;padding-left:22px}
+.lesson li{margin-bottom:5px}
+.lesson li::marker{color:var(--lvtext,var(--muted));font-weight:700}
+.lesson b{font-weight:600}
+.lesson code,.mono{font-family:var(--f-mono);font-size:.86em;background:var(--sunk);padding:1px 6px;border-radius:5px;border:1.5px solid var(--hair)}
+.note{border:2px solid var(--edge);background:var(--surface);padding:12px 16px;border-radius:12px;margin:16px 0;box-shadow:4px 4px 0 var(--lv)}
+.flag{border:2px dashed var(--tang);background:var(--warn-soft);padding:12px 16px;border-radius:12px;margin:16px 0}
+.tw{overflow-x:auto;margin:12px 0 18px;border:2px solid var(--edge);border-radius:12px;background:var(--surface);box-shadow:4px 4px 0 var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--hair);vertical-align:top}
+th{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--lvfg);font-weight:600;background:var(--lv)}
+tr:last-child td{border-bottom:0}
+pre{font-family:var(--f-mono);font-size:13px;background:#15142C;color:#E9E8FF;border:2px solid var(--edge);border-radius:12px;padding:14px 16px;overflow-x:auto;line-height:1.55;box-shadow:4px 4px 0 var(--lv)}
+
+.act{margin-top:40px}
+.act > h2{font-family:var(--f-display);font-size:25px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act > p.sub{color:var(--muted);margin:0 0 16px;font-size:14px}
+.tag{font-family:var(--f-mono);font-size:11px;padding:3px 9px;border-radius:99px;background:var(--sun);color:#15142C;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--edge)}
+.qs{display:grid;gap:14px}
+.q{background:var(--surface);border:2px solid var(--edge);border-radius:14px;padding:15px 17px;box-shadow:4px 4px 0 var(--shadow)}
+.q.solved{box-shadow:4px 4px 0 var(--mint)}
+.q .qt{font-weight:600;margin-bottom:10px;font-size:15.5px}
+.opts{display:grid;gap:7px}
+.opt{text-align:left;border:2px solid var(--hair);background:var(--bg);padding:8px 12px;border-radius:9px;font-size:14.5px;transition:border-color .1s,transform .08s}
+.opt:hover:not([disabled]){border-color:var(--lv);transform:translateX(3px)}
+.opt.right{background:var(--good-soft);border-color:var(--good);font-weight:600}
+.opt.right::before{content:"✓ ";color:var(--good);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);text-decoration:line-through;text-decoration-color:var(--bad)}
+.opt[disabled]{cursor:default}
+.why{margin-top:10px;font-size:14px;color:var(--muted);border-top:1.5px dashed var(--hair);padding-top:8px}
+.why b{color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.fc{background:var(--surface);border:2px solid var(--edge);border-radius:14px;padding:0;display:flex;flex-direction:column;min-height:160px;box-shadow:4px 4px 0 var(--shadow);overflow:hidden}
+.fc .front{font-family:var(--f-display);font-weight:800;font-size:17px;line-height:1.2;background:var(--lv);color:var(--lvfg);padding:12px 14px;border-bottom:2px solid var(--edge)}
+.fc .back{font-size:14px;padding:12px 14px 0}
+.fc .row{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px 14px}
+.fc.known{box-shadow:4px 4px 0 var(--mint)}
+.fc.known .front::after{content:" ★";color:var(--sun)}
+.boss{background:var(--surface);border:2px solid var(--edge);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:5px 5px 0 var(--shadow)}
+.boss .bq{font-family:var(--f-display);font-weight:800;font-size:19px;line-height:1.25;margin-bottom:8px;text-wrap:balance;letter-spacing:-.01em}
+.boss .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.boss .tm{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:15px;font-weight:600;min-width:52px;color:var(--lvtext,var(--ink))}
+.boss .reveal{margin-top:14px;border-top:2px dashed var(--hair);padding-top:10px;font-size:14.5px}
+.boss .reveal h4{margin:8px 0 4px;font-size:11.5px;font-family:var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.boss .reveal ul,.boss .reveal ol{margin:0 0 6px;padding-left:20px}
+.grade{font-size:12px;padding:3px 10px;border-radius:99px;font-weight:700;border:1.5px solid var(--edge)}
+.grade.g2{background:var(--mint);color:#15142C} .grade.g1{background:var(--sun);color:#15142C} .grade.g0{background:var(--coral);color:#15142C}
+.checks{display:grid;gap:10px}
+.ck{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:2px solid var(--edge);border-radius:12px;padding:11px 14px;box-shadow:3px 3px 0 var(--shadow)}
+.ck:has(input:checked){box-shadow:3px 3px 0 var(--mint)}
+.ck input{margin-top:4px;width:20px;height:20px;accent-color:var(--mint);flex:none}
+.ck label{cursor:pointer}
+.story{background:var(--surface);border:2px solid var(--edge);border-radius:14px;padding:15px 17px;margin:14px 0;box-shadow:4px 4px 0 var(--lv)}
+.story h4{margin:0 0 4px;font-family:var(--f-display);font-size:18px;font-weight:800;letter-spacing:-.01em}
+.story .use{display:inline-block;font-family:var(--f-mono);font-size:11px;background:var(--sunk);border:1.5px solid var(--hair);padding:2px 8px;border-radius:6px;letter-spacing:.04em;margin-bottom:6px;font-weight:600}
+.story ul{margin:6px 0 0;padding-left:20px}
+.foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:2px solid var(--hair)}
+.toast{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--sun);color:#15142C;border:2px solid #15142C;box-shadow:4px 4px 0 #15142C;
+  padding:9px 15px;border-radius:10px;font-family:var(--f-display);font-weight:800;font-size:15px;opacity:0;transform:translateY(10px) rotate(-1deg);transition:.2s;pointer-events:none;z-index:20}
+.toast.show{opacity:1;transform:none}
+.src{font-size:13.5px} .src li{margin-bottom:4px}
+@media (max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:16px}
+  .map{position:static;flex-direction:row;overflow-x:auto;max-height:none;gap:6px;padding-bottom:8px}
+  .map h2,.badges{display:none}
+  .lvl{grid-template-columns:auto auto;flex:none}
+  .lvl .mn{display:none}
+  .lvl .nm{font-size:13px;white-space:nowrap}
+  .lvhead{padding:16px 16px 14px;gap:12px}
+}
+@media (max-width:480px){ .bignum{display:none} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>Final Round Quest <small>Acumatica · Platform ML</small></div>
+    <div class="rank">
+      <span class="rank-name" id="rankName">Trainee</span>
+      <div class="xpwrap"><div class="xptrack"><div class="xpfill" id="xpFill"></div></div>
+      <div class="xpnum" id="xpNum">0 XP</div></div>
+    </div>
+    <div class="clock">
+      <span class="t" id="clock">4:00:00</span>
+      <span class="pace idle" id="pace">not started</span>
+      <button class="btn primary" id="clockBtn">Start clock</button>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="map" id="map" aria-label="Levels"></nav>
+  <main id="main"></main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- CONTENT ---------- */
+const M = [];
+
+M.push({id:"m0",title:"Mission briefing",min:5,badge:"Briefed",
+lesson:`
+<p>You are interviewing for <b>Senior Business System Analyst, Platform Machine Learning team, Belgrade</b>. The team builds the chat interface that puts AI into everyday Acumatica work. The job ad puts weight on two things: <b>complex API integrations</b> and <b>UI design for B2B/ERP systems</b>.</p>
+<h3>What a final round can contain</h3>
+<p>You do not know the exact format, so this course prepares for all of the usual parts:</p>
+<ul>
+<li>Experience questions, answered with your own artifacts (Level 7).</li>
+<li>A live case: spec a feature on the spot (Level 10, question 1).</li>
+<li>A defense of the Order Risk Hold SDD you wrote for their qualification task (Level 8).</li>
+<li>Technical understanding: ERP platform, APIs, LLM tool calling (Levels 3 to 5).</li>
+<li>Gaps against the ad: 10+ years, developer background, C#, technical degree (Level 9).</li>
+<li>Motivation, salary, notice period, your questions for them (Levels 9 and 11).</li>
+</ul>
+<h3>How the game works</h3>
+<p>The clock runs 4 hours. Each level has a target time in the map. The pace pill turns amber if you fall behind the plan. Quiz answers right on the first try give 10 XP, flashcards you know give 5, boss answers you nail give 30, completing a level gives 50. Progress stays in this browser.</p>
+<div class="note"><b>Rule for the whole course.</b> Facts about Acumatica come from public sources listed in Level 11. Facts about you come from your master profile and your own HLEs. Anything marked <b>[confirm]</b> needs your check before you say it aloud.</div>`,
+checks:[
+ "Open the interview invite. Write down who is on the call, their roles, and the length.",
+ "If the format is unclear, send the recruiter one line: 'Will the session include a case or exercise, and who will join?'",
+ "Open your Order Risk Hold SDD and your AI Voice Control HLE in another window.",
+ "Block 4 hours, phone on silent, water on the desk."
+]});
+
+M.push({id:"m1",title:"Know the company",min:15,badge:"Insider",
+lesson:`
+<h3>The business</h3>
+<ul>
+<li>Cloud ERP for small and midsize companies. Headquarters in Bellevue, Washington.</li>
+<li>Engineering sits in the US, Canada, Serbia and Sri Lanka. A Hyderabad capability center opened in August 2026. The Belgrade office is on Kneza Miloša.</li>
+<li>Sold mainly through partners: VARs who implement it and ISVs who build add-ons on the platform. Customers buy AI Assistant through their VAR or customer success manager.</li>
+<li>Pricing is based on resources used rather than per named user. That is what the ad calls "growth-friendly licensing", and it is a classic sales argument against per-seat competitors.</li>
+<li>Editions by industry: General Business (finance, CRM, payments), Distribution, Manufacturing, Construction, Professional Services, Field Service, Retail Commerce, plus Payroll.</li>
+</ul>
+<h3>Ownership and leadership</h3>
+<ul>
+<li>Vista Equity Partners signed to buy Acumatica on 29 May 2025, from EQT, which had owned it since 2019. The deal closed in late July 2025.</li>
+<li>CEO: John Case (CEO since 2022). He framed the Vista deal as money to speed up, not change, an AI-first roadmap.</li>
+<li>Chief Product Officer: Jon Pollock. His line on 2026 R2 was that growing businesses want practical AI rather than more experiments.</li>
+<li>Omar Ghazi, Director of Product Management for Platform, AI and Technology, writes the public AI Assistant FAQ. Worth knowing the name; do not assume he is on your call.</li>
+<li>Vista runs an internal "Agentic Factory" team that helps portfolio companies decide what AI to build. Acumatica says it works with it.</li>
+</ul>
+<h3>Release rhythm</h3>
+<div class="tw"><table>
+<tr><th>Release</th><th>GA</th><th>What matters for you</th></tr>
+<tr><td>2025 R2</td><td>autumn 2025</td><td>AI Automation (then called AI Studio) appears as an experimental feature</td></tr>
+<tr><td>2026 R1</td><td>March 2026</td><td>AI Studio GA, AI Assistant in early access (managed availability)</td></tr>
+<tr><td>2026 R2</td><td>1 Oct 2026</td><td>AI Assistant GA, AI agents, MCP servers, data warehouse tables, Modern UI is the default</td></tr>
+<tr><td>2027 R1</td><td>planned</td><td>Classic-only forms retired</td></tr>
+</table></div>
+<p>Two major releases a year, R1 in spring and R2 in autumn. The ad's phrase "products with a continuous life cycle" means exactly this: you spec into a release train that never stops, the same as SPQ+.</p>
+<h3>Competitors you should be able to name</h3>
+<p>Oracle NetSuite, Microsoft Dynamics 365 Business Central (with Copilot), Sage Intacct (Sage Copilot), SAP Business One, Epicor, Infor. Every one of them now ships some AI assistant. The ad asks you to analyze competitor solutions, so expect "how would you compare us with X". Level 10 has the method. Do not quote competitor features you have not checked.</p>
+<h3>Culture words from the ad</h3>
+<p>Work/life balance, efficiency, simplicity, "freakishly friendly customer service", making a difference. Use one of them naturally, never all of them.</p>`,
+quiz:[
+ {q:"Who owns Acumatica now, and who sold it?",o:["Vista Equity Partners, bought from EQT","EQT, bought from Accel-KKR","Thoma Bravo, bought from Vista","Microsoft, bought from Sage"],a:0,w:"Agreement signed 29 May 2025, closed late July 2025. EQT had owned it since 2019."},
+ {q:"Which market does Acumatica target?",o:["Global enterprises above 10,000 staff","Small and midsize businesses","Public sector only","Consumers"],a:1},
+ {q:"How many major product releases ship per year?",o:["One","Two (R1 and R2)","Four, quarterly","Continuous, no named releases"],a:1},
+ {q:"When did 2026 R2 become generally available?",o:["March 2026","May 2026","1 October 2026","January 2027"],a:2,w:"ERP Today and the Acumatica community both date it to the end of September / 1 October 2026. One partner blog says May. That one is wrong."},
+ {q:"How do most customers buy Acumatica?",o:["Self-serve credit card","Through partners (VARs)","Only through Vista","Through app stores"],a:1},
+ {q:"What does 'growth-friendly licensing' refer to?",o:["Free tier for startups","Pricing by resources used instead of per user","Discounts for growth-stage companies","No licensing at all"],a:1},
+ {q:"In which release do Classic-only forms disappear?",o:["2026 R1","2026 R2","2027 R1","Never"],a:2}
+],
+flash:[
+ ["CEO","John Case, CEO since 2022"],["CPO","Jon Pollock"],["HQ","Bellevue, Washington"],["Owner","Vista Equity Partners, deal closed July 2025"],
+ ["Channel","VARs implement, ISVs build add-ons, customer success managers support"],["Release names","Year + R1 (spring) / R2 (autumn), e.g. 2026 R2"]
+]});
+
+M.push({id:"m2",title:"Acumatica AI, as shipped",min:25,badge:"AI Cartographer",
+lesson:`
+<p>This is the product area you would join. Know it better than the other candidates.</p>
+<h3>The three-phase AI plan (stated at the 2026 R2 launch)</h3>
+<div class="tw"><table>
+<tr><th>Phase</th><th>When</th><th>Meaning</th></tr>
+<tr><td>1. Assistance</td><td>now</td><td>Ask questions in plain language, extract data from documents, get help in context</td></tr>
+<tr><td>2. Agentic automation</td><td>2026 to 2027</td><td>Agents run multi-step routines, a person approves the result</td></tr>
+<tr><td>3. Strategic autonomy</td><td>2027 onward</td><td>Planning and forecasting that adjust themselves</td></tr>
+</table></div>
+<p>2026 R2 is mostly phase 1, with AI Studio adding the first phase 2 building blocks.</p>
+<h3>AI Assistant (the chat interface)</h3>
+<ul>
+<li>A natural-language chat window reachable from anywhere in the app. Answers come back as text, tables, column charts or pivot tables.</li>
+<li><b>Data comes only from Generic Inquiries (GIs)</b> that an administrator exposes to it.</li>
+<li><b>Security is inherited</b> from each GI's access rights, so users only see what they could already see. No extra security setup.</li>
+<li>Persistent chat threads, so follow-ups build on earlier questions.</li>
+<li>One click turns an answer into a dashboard widget. In 2026 R2 you can drag it onto a dashboard as a live tile and see the source inquiry behind it.</li>
+<li>Only administrators have it by default. Others need the <code>AI Assistant User</code> role.</li>
+<li>Requires 2026 R1 or later. GA for all customers since the 2026 R2 release.</li>
+<li><b>Limits today:</b> it cannot perform actions or update records, and cannot reach data outside the exposed inquiries.</li>
+<li>2026 R2 added: a "self-aware" skill (it says what it can and cannot do), a "context-aware" skill (it knows the screen or record you are on), a Help Agent that answers how-to questions from the documentation portal (Beacon) for your exact version, and widget management. Partners also report it can draft a GI from a description.</li>
+<li>Edition examples: which warehouse can ship 500 units by Friday, in-stock alternatives, historical AR/AP ageing at a past date, shop-floor slowdowns, payment settlement matching.</li>
+</ul>
+<h3>Cost and privacy</h3>
+<ul>
+<li><b>AI Units</b> are the consumption currency. They blend input, output and cache tokens across the several models the assistant uses. Monthly allocation; when it runs out the assistant stops until reset or a top-up. Usage screen: <code>ML900000</code> AI Unit Consumption, plus the License Monitoring Console.</li>
+<li>Prompts and a record that a tool call succeeded are stored briefly so follow-ups work, then purged. The underlying data is not stored. Customer data does not train models; it uses existing foundation models.</li>
+</ul>
+<h3>AI Studio</h3>
+<ul>
+<li>Contains <b>AI Automation</b> and <b>Anomaly Detection</b>. Low-code: an admin writes a standard procedure in plain language and sets triggers.</li>
+<li>2026 R1 added sensitive-field <b>masking</b> (masked before the record goes to the LLM, restored inside Acumatica) and statistics.</li>
+<li>2026 R2 <b>agents</b>: created with plain-language instructions, started by a <b>Business Event</b>, an <b>Import/Export Scenario</b> or an existing <b>workflow</b>. They read context from GIs, act on eligible records, and can hand off to another agent or automated step. Examples given: adjust prices to target margin, qualify leads, assess credit risk. They run under existing access rights. Logs show token counts per run, with warnings near AI Unit limits.</li>
+</ul>
+<h3>MCP servers (new in 2026 R2)</h3>
+<ul>
+<li>An admin enables the feature, creates a server in AI Studio, and adds published GIs. <b>Each GI becomes a tool</b> that Claude, ChatGPT or Gemini can call, with filter, sort, paging and field selection.</li>
+<li>Sign-in through OAuth 2.0. Every request runs as the signed-in user, rights are checked on every call, every call is logged in Access History.</li>
+<li>Read-only in this release. Acumatica recommends 50 tools or fewer per server so the model picks the right one.</li>
+</ul>
+<h3>Analytics underneath</h3>
+<p>An admin can store a GI's results in a data warehouse table, refreshed on a schedule or by hand. The stored copy feeds dashboards, OData, pivots and MCP. Caveat partners call out: field-level access restrictions are not applied to the stored data. Reporting now runs on a separate optimized copy so it does not compete with order entry.</p>
+<div class="note"><b>The pattern to say out loud.</b> In 2026 R2 the Generic Inquiry layer is the AI boundary. The assistant, the agents and MCP all read through GIs, and all of them run as the user. Whoever designs which GIs exist, how they are named and who can see them is designing what the AI knows.</div>
+<div class="flag"><b>Where the work probably goes next (your hypothesis, say it as one).</b> The assistant reads but cannot act. Phase 2 is actions with a person approving. A chat that creates or changes records needs clarification rules, confirmation gates, permission checks, idempotent API calls and clear failure messages. You specified exactly that pattern for SPQ+ voice control. Ask them whether actions from chat are on their roadmap rather than claiming you know.</div>`,
+quiz:[
+ {q:"Where does AI Assistant get its answers?",o:["Directly from the SQL database","From Generic Inquiries an admin exposes to it","From the public internet","From uploaded documents only"],a:1},
+ {q:"Can AI Assistant update a sales order today?",o:["Yes, any field","Yes, with confirmation","No, it cannot perform actions or update records","Only admins can"],a:2},
+ {q:"How does AI Assistant enforce security?",o:["A separate AI permission matrix","It inherits each GI's access rights","It masks all data","It has no security, admin-only"],a:1},
+ {q:"What is an AI Unit?",o:["A licensed seat","A blend of input, output and cache tokens across models","One chat message","One GI call"],a:1},
+ {q:"Who can use AI Assistant right after it is enabled?",o:["Everyone","Administrators only, others need the AI Assistant User role","Partners only","Nobody until training"],a:1},
+ {q:"In a 2026 R2 MCP server, what becomes a tool?",o:["Each screen","Each published Generic Inquiry","Each REST endpoint","Each user role"],a:1},
+ {q:"What can start an AI Studio agent in 2026 R2?",o:["A Business Event, an Import/Export Scenario or a workflow","Only a chat message","A cron job outside Acumatica","An email to support"],a:0},
+ {q:"What does field masking do?",o:["Hides fields on screen","Masks selected fields before the record is sent to the LLM and restores them inside Acumatica","Encrypts the database","Deletes sensitive data"],a:1},
+ {q:"Phase 2 of the AI plan is:",o:["Assistance","Agentic automation with human approval","Strategic autonomy","Model training"],a:1},
+ {q:"Why does Acumatica suggest 50 tools or fewer per MCP server?",o:["License limit","So the model picks the right tool","Memory limit","OAuth limit"],a:1}
+],
+flash:[
+ ["AI Assistant","Chat over exposed GIs. Tables, charts, pivots. Inherits GI rights. Read-only. GA since 2026 R2."],
+ ["AI Studio","AI Automation + Anomaly Detection. Low-code procedures, triggers, masking, agents."],
+ ["Agent triggers (26R2)","Business Event, Import/Export Scenario, workflow"],
+ ["MCP server (26R2)","Published GIs as tools, OAuth 2.0, runs as user, rights checked every call, logged, read-only, 50 tools max advised"],
+ ["AI Units","Monthly consumption currency, blended tokens. Screen ML900000."],
+ ["Help Agent","How-to answers from Beacon docs, tuned to your version"],
+ ["Context-aware skill","Assistant knows the current screen or record"],
+ ["The AI boundary","Generic Inquiries: what is published, and to which roles"]
+]});
+
+M.push({id:"m3",title:"ERP and platform basics",min:25,badge:"Framework Fluent",
+lesson:`
+<h3>ERP processes in one table</h3>
+<div class="tw"><table>
+<tr><th>Process</th><th>Document flow</th></tr>
+<tr><td>Order to cash (O2C)</td><td>Quote / opportunity → sales order → shipment → AR invoice → customer payment</td></tr>
+<tr><td>Procure to pay (P2P)</td><td>Requisition → purchase order → purchase receipt → AP bill → vendor payment</td></tr>
+<tr><td>Record to report (R2R)</td><td>Transactions post to the general ledger → period close → financial statements</td></tr>
+<tr><td>Plan to produce</td><td>Demand → MRP → production order → material issue, labor, output → finished goods</td></tr>
+</table></div>
+<p>Every document has a status, and statuses gate actions. You already used this in the SDD: a held sales order cannot create a shipment.</p>
+<h3>How Acumatica is built</h3>
+<ul>
+<li><b>Acumatica Framework (also called xRP).</b> The application platform, written in C# on .NET. Partners and Acumatica both build on it.</li>
+<li><b>DAC (data access class).</b> A C# class describing one table: its fields, types, defaults, and attributes such as which field is a selector or required.</li>
+<li><b>Graph</b> (business logic controller). The server-side logic behind a screen: data views, events (field changed, row persisting) and actions (Release, Hold, Create Shipment).</li>
+<li><b>Screen IDs.</b> Two letters for the module plus six digits. <code>SO301000</code> is Sales Orders. Learn to read them: SO sales orders, PO purchasing, AR receivables, AP payables, IN inventory, GL ledger, CR CRM, SM system.</li>
+<li><b>Generic Inquiry (GI).</b> A query built in the UI (screen <code>SM208000</code>): tables, joins, conditions, fields, parameters. Feeds dashboards, OData, AI Assistant and MCP tools.</li>
+<li><b>Business Events.</b> Fire when data matches a condition or on a schedule. They can send notifications, run an import scenario and, since 2026 R2, start an agent.</li>
+<li><b>Import/Export Scenarios.</b> Mapped data loads in and out, configured in the UI.</li>
+<li><b>Workflow engine.</b> States, transitions and actions for a document type, adjustable without code.</li>
+<li><b>Customization Projects.</b> A package of code, screen changes and DB changes published to a tenant. This is how partners ship add-ons.</li>
+<li><b>Push notifications</b> send changes from a GI or query to an external URL. <b>Webhooks</b> receive inbound calls and run a handler.</li>
+<li><b>Access rights</b> by role, down to screen, action and field level. <b>Tenants</b> separate companies in one instance.</li>
+<li><b>Modern UI.</b> The new front end, the default since 2026 R2. AI Studio, anomaly detection and the assistant are Modern UI features.</li>
+</ul>
+<div class="note"><b>Why a BSA cares.</b> When you write "the assistant creates a sales order", a developer hears: which graph, which action, which DAC fields, which statuses, which rights. Your spec should name the document, the status rules and the actions, even if you never write the C#.</div>`,
+quiz:[
+ {q:"What is a DAC?",o:["A dashboard","A C# class that defines a table and its fields","A REST endpoint","A user role"],a:1},
+ {q:"What is a graph in Acumatica?",o:["A chart widget","The business logic controller behind a screen: views, events, actions","A report","An OData feed"],a:1},
+ {q:"Which object feeds dashboards, OData, AI Assistant and MCP tools?",o:["Generic Inquiry","Customization project","Workflow","Tenant"],a:0},
+ {q:"Order to cash, in order:",o:["Invoice → order → shipment → payment","Sales order → shipment → invoice → payment","Payment → invoice → order","PO → receipt → bill"],a:1},
+ {q:"How does a partner ship an add-on into a customer's tenant?",o:["Email the DLL","A Customization Project","An MCP server","An AI Unit"],a:1},
+ {q:"SO301000 is:",o:["Sales Orders screen","Stock Items","System settings","Shipments"],a:0},
+ {q:"What changed for Business Events in 2026 R2?",o:["Removed","They can start an AI agent","They became paid","They only run nightly"],a:1}
+],
+flash:[
+ ["xRP / Acumatica Framework","C# / .NET application platform everything is built on"],
+ ["DAC","Table definition class: fields + attributes"],["Graph","Screen logic: views, events, actions"],
+ ["GI (SM208000)","UI-built query; source for dashboards, OData, AI"],["Business Event","Condition or schedule trigger → notification, import scenario, agent"],
+ ["Customization Project","Package of code + screen + DB changes published to a tenant"],
+ ["Push notification vs webhook","Push sends changes out; webhook receives calls in"],["P2P","Requisition → PO → receipt → AP bill → payment"]
+]});
+
+M.push({id:"m4",title:"APIs and integrations",min:35,badge:"Integration Architect",
+lesson:`
+<h3>HTTP in five minutes</h3>
+<div class="tw"><table>
+<tr><th>Verb</th><th>Use</th></tr>
+<tr><td>GET</td><td>Read. Safe, no side effects.</td></tr>
+<tr><td>POST</td><td>Create or trigger an action. Not idempotent by default.</td></tr>
+<tr><td>PUT</td><td>Create or replace. Idempotent: the same call twice leaves the same state. Acumatica uses PUT for create-or-update.</td></tr>
+<tr><td>PATCH</td><td>Partial update</td></tr>
+<tr><td>DELETE</td><td>Remove</td></tr>
+</table></div>
+<p>Status codes you should explain without thinking: <code>200</code> OK, <code>201</code> created, <code>204</code> no content, <code>400</code> bad request, <code>401</code> not authenticated, <code>403</code> authenticated but not allowed, <code>404</code> not found, <code>409</code> conflict with current state (your SDD returns it when shipment is blocked), <code>422</code> validation failed, <code>429</code> too many requests, <code>500</code> server error, <code>503</code> unavailable.</p>
+<h3>Authentication</h3>
+<ul>
+<li><b>OAuth 2.0 authorization code (with PKCE)</b>: a user signs in and the app acts as that user. This is what a chat assistant or MCP client needs, because the AI must see only what the user may see.</li>
+<li><b>Client credentials</b>: machine to machine, no user. Fine for a nightly sync, wrong for a user-facing assistant.</li>
+<li>Access token (short-lived) plus refresh token (needs the <code>offline_access</code> scope). In Acumatica you register the client on the Connected Applications screen.</li>
+<li>Older integrations use cookie-based login. Recommend OAuth for anything new.</li>
+</ul>
+<h3>Acumatica's integration surfaces</h3>
+<div class="tw"><table>
+<tr><th>Surface</th><th>What it is</th><th>When</th></tr>
+<tr><td>Contract-based REST API</td><td>Versioned endpoints exposing business entities (Customer, SalesOrder, StockItem, 200+ objects) as JSON. Extend an endpoint to add fields. Actions such as releasing a document are called on the entity.</td><td>Default for all new integrations</td></tr>
+<tr><td>Contract-based SOAP</td><td>Same contracts over SOAP</td><td>Legacy clients</td></tr>
+<tr><td>Screen-based SOAP</td><td>Drives screens as if a user clicked</td><td>Legacy; breaks when screens change</td></tr>
+<tr><td>OData (GI-based)</td><td>Read a published Generic Inquiry</td><td>Reporting, BI, Power BI</td></tr>
+<tr><td>OData (DAC-based)</td><td>Read tables directly at <code>/api/odata/dac</code></td><td>Analytics needing raw data</td></tr>
+<tr><td>Push notifications / webhooks</td><td>Outbound change events / inbound handlers</td><td>Event-driven sync</td></tr>
+<tr><td>Import/Export Scenarios</td><td>UI-configured batch mapping</td><td>Bulk loads</td></tr>
+<tr><td>MCP server (26R2)</td><td>Published GIs as AI tools</td><td>External AI clients, read-only</td></tr>
+</table></div>
+<p>Details developers will expect you to know:</p>
+<ul>
+<li>Every field in REST JSON is wrapped, for example <code>"CustomerID": {"value": "C000123"}</code>.</li>
+<li>Query options: <code>$filter</code>, <code>$select</code>, <code>$expand</code> (child records like order lines), <code>$top</code>, <code>$skip</code>.</li>
+<li>Some business logic only fires in the order a user would trigger it (get, update, then call the action). Integrators get caught by this.</li>
+<li>License tiers cap concurrent API users and request rates. Bursty integrations hit login-limit and throttling errors. 2026 R2 added an <b>API Monitoring</b> tab in System Monitor showing volume, errors, throttling and license use.</li>
+</ul>
+<pre>GET /entity/Default/&lt;version&gt;/SalesOrder?$filter=Status eq 'Open'
+    &amp;$select=OrderNbr,CustomerID,OrderTotal&amp;$expand=Details&amp;$top=50
+Authorization: Bearer &lt;access token for the signed-in user&gt;</pre>
+<h3>Integration design checklist (use it in any case question)</h3>
+<ol>
+<li><b>Source of truth.</b> Which system owns each field?</li>
+<li><b>Direction and trigger.</b> One-way or two-way. Event (push, webhook, business event) or polling with a <code>LastModified</code> filter.</li>
+<li><b>Sync or async.</b> Does the user wait? If not, queue it.</li>
+<li><b>Idempotency.</b> A retried "create order" must not create two orders. Use an external reference or idempotency key.</li>
+<li><b>Retries and limits.</b> Back off on <code>429</code> and <code>503</code>. Throttle to the license limit.</li>
+<li><b>Mapping.</b> Field to field, units, currencies, code lists, defaults.</li>
+<li><b>Partial failure.</b> Header saved, line rejected: what does the user see, what rolls back?</li>
+<li><b>Errors visible to people.</b> Per-record error, not a silent log.</li>
+<li><b>Security.</b> Which identity, which scopes, which fields masked.</li>
+<li><b>Audit and monitoring.</b> Who did what, through which channel.</li>
+</ol>
+<div class="note"><b>Your bridge.</b> Lead Time Alignment (DMND0032797): SPQ+ calls the shared SAP/SFM lead-time API as single source of truth, every line-creation path covered, async throttled queue instead of a synchronous call, throttling added even after being told there was no rate limit, dummy items without SAP records flagged as a known limitation in the HLE. That story hits items 1, 2, 3, 5 and 8 of the checklist.</div>`,
+quiz:[
+ {q:"Which Acumatica API should a new integration use?",o:["Screen-based SOAP","Contract-based REST","Direct SQL","Excel export"],a:1},
+ {q:"Why prefer contract-based over screen-based APIs?",o:["Faster to type","A screen layout change does not break the integration","Free of license limits","Supports XML only"],a:1},
+ {q:"A BI team wants read-only reporting data. Best surface?",o:["OData from a GI","Screen-based SOAP","Push notifications","Customization project"],a:0},
+ {q:"Shipment is blocked by a risk hold. Best status code?",o:["200","404","409","500"],a:2},
+ {q:"The API answers 429. What should the client do?",o:["Retry immediately in a loop","Back off and retry later, throttle","Give up and delete the record","Switch to SOAP"],a:1},
+ {q:"Network drops after 'create order' is sent. How do you avoid a duplicate on retry?",o:["Hope","Idempotency key or external reference checked before create","Use GET","Turn off retries forever"],a:1},
+ {q:"A chat assistant must see only what the user may see. Which OAuth flow?",o:["Client credentials","Authorization code with PKCE, acting as the user","No auth","Basic auth with an admin account"],a:1},
+ {q:"What does a field look like in Acumatica REST JSON?",o:["\"CustomerID\": \"C1\"","\"CustomerID\": {\"value\": \"C1\"}","<CustomerID>C1</CustomerID>","CustomerID=C1"],a:1},
+ {q:"Polling vs push: what does push give you?",o:["Fewer wasted calls and faster reaction to changes","Simpler retry logic","No security needed","Always cheaper to build"],a:0},
+ {q:"What caps API usage in Acumatica?",o:["Nothing","License limits on concurrent API users and requests","Browser type","Number of GIs"],a:1}
+],
+flash:[
+ ["401 vs 403","401: who are you? 403: I know you, you may not."],["409","Conflict with current state, e.g. blocked by status"],
+ ["422","Valid JSON, invalid business data"],["Idempotent","Same request twice = same result. PUT, GET, DELETE."],
+ ["PKCE","Proof key that protects the authorization code flow for public clients"],["$expand","Pull child records (order lines) in the same call"],
+ ["Extended endpoint","Custom endpoint that adds fields the default contract lacks"],["API Monitoring (26R2)","System Monitor tab: volume, errors, throttling, license use"]
+]});
+
+M.push({id:"m5",title:"LLM and agent mechanics",min:35,badge:"Model Whisperer",
+lesson:`
+<h3>The vocabulary</h3>
+<ul>
+<li><b>Token.</b> A chunk of text, roughly three quarters of an English word. Models bill and limit by tokens.</li>
+<li><b>Context window.</b> Everything the model sees in one request: instructions, chat history, tool definitions, tool results. Long threads and big tool results fill it.</li>
+<li><b>System prompt.</b> The hidden instructions that set role, rules and output format.</li>
+<li><b>Non-determinism.</b> The same question can produce different wording, and sometimes a different tool choice.</li>
+</ul>
+<h3>Tool calling, step by step</h3>
+<pre>1. App sends: user question + system prompt + tool definitions (name, description, JSON schema)
+2. Model replies: "call tool GI_OpenInvoices with {customer:'C000123', dateFrom:'2026-10-01'}"
+3. APP executes the tool as the signed-in user, checks rights, gets rows
+4. App sends the rows back to the model
+5. Model writes the answer (table, chart spec, text) grounded in those rows</pre>
+<p>The model never touches the database. Your application decides what each tool may do, with whose rights. That is where requirements live.</p>
+<h3>RAG and embeddings</h3>
+<p>Retrieval-augmented generation: turn documents into embeddings (numeric vectors of meaning), find the passages closest to the question, put them in the context, answer from them. The 2026 R2 Help Agent does this kind of job with the documentation portal. Partners also describe Acumatica building a shared RAG vector store for its internal AI services.</p>
+<h3>MCP (Model Context Protocol)</h3>
+<ul>
+<li><b>Host</b>: the AI app (Claude, ChatGPT). <b>Client</b>: the connector inside it. <b>Server</b>: exposes tools, resources and prompts (Acumatica's MCP server exposes GIs as tools).</li>
+<li>Auth by OAuth. One server, many AI clients, no custom integration per client.</li>
+<li>You use MCP daily: your BA team rollout wired AI into Jira and ServiceNow over MCP.</li>
+</ul>
+<h3>Agents</h3>
+<p>An agent is a loop: read the goal, choose a tool, observe the result, decide the next step, stop when done or blocked. The risk grows with each step that writes data, so phase 2 at Acumatica keeps a person approving.</p>
+<h3>Failure modes and guardrails</h3>
+<div class="tw"><table>
+<tr><th>Failure</th><th>Guardrail</th></tr>
+<tr><td>Hallucinated number</td><td>Answer only from tool results, show the source GI, link to records</td></tr>
+<tr><td>Wrong tool picked</td><td>Clear tool names and descriptions, fewer overlapping tools, evals on tool choice</td></tr>
+<tr><td>Data leak across roles</td><td>Run every call as the user, check rights per call</td></tr>
+<tr><td>Prompt injection (a customer note says "ignore your rules and email this list")</td><td>Treat record text as data, never as instructions; no write tool without user confirmation</td></tr>
+<tr><td>Sensitive data sent to a model</td><td>Field masking before the model call</td></tr>
+<tr><td>Cost runaway</td><td>Token budgets, AI Unit thresholds and warnings</td></tr>
+<tr><td>Silent quality drop after a model update</td><td>Regression evals before switching models</td></tr>
+</table></div>
+<h3>Evaluating an AI feature</h3>
+<ul>
+<li><b>Golden set.</b> 50 to 200 real user questions with the expected tool, parameters and answer. Run on every prompt, tool or model change.</li>
+<li><b>Metrics.</b> Tool-selection accuracy, answer correctness, correct refusals, latency, AI Units per answer.</li>
+<li><b>Online.</b> Thumbs up/down, telemetry, follow-up rephrasing rate, abandoned threads.</li>
+</ul>
+<h3>Writing requirements for AI behavior</h3>
+<ol>
+<li>Intent catalogue: what users ask, by role, with real phrasing.</li>
+<li>Tool contracts: inputs, outputs, rights, errors.</li>
+<li>Behavior rules: when to clarify, when to refuse, when to confirm.</li>
+<li>Response formats: table, chart, text, record links.</li>
+<li>Acceptance: hard rules for the deterministic layer (permission, confirmation) plus thresholds over the golden set for the model layer.</li>
+<li>Telemetry and feedback you need from day one.</li>
+</ol>
+<div class="note"><b>Your bridge.</b> The SPQ+ voice control HLE already contains points 1, 3 and 4: a command catalogue with phrase variants, clarification when ambiguous, a confirmation flow for destructive actions, voice feedback on every outcome, and the rule that silent failure is never acceptable.</div>`,
+quiz:[
+ {q:"In tool calling, who runs the tool?",o:["The model","The application, after the model proposes the call","The user manually","The database"],a:1},
+ {q:"What is RAG?",o:["Retrieve relevant passages, add them to the context, answer from them","Retrain the model nightly","A UI framework","A rate limit"],a:0},
+ {q:"Which is a prompt injection risk in an ERP?",o:["Slow GI","A customer note containing instructions the model follows","A 404","Dark mode"],a:1},
+ {q:"Why keep the tool list short and distinct?",o:["Licensing","The model picks the wrong tool more often when tools overlap","OAuth","UI space"],a:1},
+ {q:"What is a golden set?",o:["Premium customers","Fixed real questions with expected tools and answers, rerun on every change","Gold-tier license","The best prompts"],a:1},
+ {q:"How do you write acceptance criteria for a non-deterministic feature?",o:["Exact wording match","Hard rules for permissions and confirmation, plus pass thresholds over a test set","Skip AC","Only manual demo"],a:1},
+ {q:"MCP: what does the server expose?",o:["Tools, resources, prompts","Only HTML","Model weights","User passwords"],a:0},
+ {q:"What fills the context window?",o:["Only the last message","Instructions, history, tool definitions and tool results","The whole database","Nothing, it is unlimited"],a:1},
+ {q:"Best defense against a hallucinated revenue number?",o:["Bigger model","Answer only from tool results and show source records","Higher temperature","Longer prompt"],a:1}
+],
+flash:[
+ ["Token","Unit of text the model reads and bills"],["Context window","All text sent in one request"],["Tool / function calling","Model proposes, app executes"],
+ ["Embedding","Vector of meaning used for similarity search"],["Grounding","Answer tied to retrieved or tool data"],["Prompt injection","Instructions hidden in data"],
+ ["Eval","Repeatable test of AI behavior with pass thresholds"],["Human in the loop","Person approves before the system commits"],
+ ["Model routing / blending","Different models for different steps, cost vs quality"],["Agent","Loop: plan, call tool, observe, repeat, stop"]
+]});
+
+M.push({id:"m6",title:"Chat UI for B2B and ERP",min:20,badge:"Interface Smith",
+lesson:`
+<p>The ad names UI design for B2B/ERP. In a chat interface, most of the design work is about states and trust.</p>
+<h3>Patterns that work in ERP chat</h3>
+<ul>
+<li><b>Entry point everywhere</b>, with the current screen and record passed as context (Acumatica's context-aware skill).</li>
+<li><b>Suggested prompts</b> per role and screen, so a new user knows what to ask.</li>
+<li><b>Structured answers</b>: tables with sortable columns, a chart, a pivot, links back to the records, and the source inquiry shown.</li>
+<li><b>Promote to dashboard</b>: an answer worth keeping becomes a widget (already shipped).</li>
+<li><b>Clarifying questions</b> that name what was unclear: "Two customers match 'Nordic'. Nordic Bearings AB or Nordic Tools Oy?"</li>
+<li><b>Action card</b> for any write: every resolved field shown, ambiguous ones highlighted, Confirm and Cancel, result with a link and the document number.</li>
+<li><b>Progress</b> during tool calls: which inquiry is running, a Stop button, streaming text.</li>
+<li><b>Honest limits</b>: "I can read data but cannot change records yet" (the self-aware skill).</li>
+<li><b>Feedback</b> on each answer, feeding the eval set.</li>
+</ul>
+<h3>States to design (a spec without these is not finished)</h3>
+<div class="tw"><table>
+<tr><th>State</th><th>What the user sees</th></tr>
+<tr><td>Empty / first use</td><td>What it can do, 3 to 4 suggested questions for this screen</td></tr>
+<tr><td>Thinking / tool running</td><td>Named step, stop control</td></tr>
+<tr><td>Answer</td><td>Result + source + record links + feedback</td></tr>
+<tr><td>Clarification</td><td>Specific question, short-answer chips</td></tr>
+<tr><td>Confirmation</td><td>Action card, nothing committed yet</td></tr>
+<tr><td>No permission</td><td>Plain statement, no hint of the hidden data</td></tr>
+<tr><td>No data</td><td>"No open invoices for Nordic Bearings in October", not a blank table</td></tr>
+<tr><td>Error / service down</td><td>What failed and what to do next</td></tr>
+<tr><td>Out of AI Units</td><td>Limit reached, when it resets, who can add more</td></tr>
+</table></div>
+<div class="note"><b>Your bridge.</b> SPQ+ voice control: welcome message on activation, a visible listening indicator, a three-step notification for dictation (recording started, stopped, text inserted), settings at app level and user level with user overriding the default, the feature off until the user turns it on, and the dropdown rule that asks which menu you meant when "History" exists in two open menus.</div>`,
+quiz:[
+ {q:"The assistant matches two customers. Best behavior?",o:["Pick the first","Ask which one, naming both","Fail silently","Pick the bigger customer"],a:1},
+ {q:"User asks the chat to create a sales order (future feature). Before committing?",o:["Nothing, just create it","Show an action card with every resolved field and Confirm/Cancel","Ask for a password","Email the manager"],a:1},
+ {q:"A tool call takes 6 seconds. What should the UI show?",o:["Nothing","Which inquiry is running and a Stop control","A random tip","An error"],a:1},
+ {q:"User asks for data they cannot access.",o:["Show a blurred table","Say plainly it is outside their access, reveal nothing","Show totals only","Log them out"],a:1},
+ {q:"AI Units are exhausted.",o:["Generic error","Say the limit is reached, when it resets and who can add units","Hide the chat button","Switch to a free model silently"],a:1}
+]});
+
+M.push({id:"m7",title:"Your evidence",min:25,badge:"Storyteller",
+lesson:`
+<p>Every claim below traces to your master profile or to your own HLE. Read each card aloud once in STAR form: situation, task, action, result. Two minutes each.</p>
+<div class="story"><h4>1. AI Voice Control for SPQ+ (HLE, 9 March 2026)</h4><div class="use">USE FOR: AI feature spec · conversational UI · ERP-style app · edge cases</div>
+<ul>
+<li>SPQ+ is a CPQ web app with modules close to ERP: customers, opportunities, quotations, orders, materials, contracts, price history.</li>
+<li>You specified voice navigation, grid actions, filtering, scrolling, global commands, dictation into quotation comments and automatic spoken error messages.</li>
+<li>Rules you wrote: match natural phrasing to exact module names; read the grid's visible columns at command time instead of a hard-coded list; convert spoken dates to valid formats; ask a specific clarifying question when a command is ambiguous and stop after a second failure; route delete, copy, sign-out and unsaved-changes through a confirmation flow; never fail silently.</li>
+<li>Settings at two levels, user overrides app default, off until enabled, microphone needs browser permission.</li>
+<li>Risks you named: recognition accuracy, adoption, third-party API outage, privacy, scope creep. Show and tell, user guide and demo video planned.</li>
+<li>Out of scope by design: backend logic changes and model training.</li>
+</ul></div>
+<div class="story"><h4>2. SPQ+ first AI agent, multi-provider LLM layer</h4><div class="use">USE FOR: AI integration · vendor risk · fallback design</div>
+<ul><li>LLM abstraction across OpenAI, Gemini and Grok, with provider switching and fallback logic, plus the voice-command module.</li></ul>
+<div class="flag"><b>[confirm]</b> Your HLE v1.0 says the provider API key was stored but not yet active in that scope. Know exactly which release added switching and fallback, and whether it is live, before you describe it.</div></div>
+<div class="story"><h4>3. Lead Time Alignment (DMND0032797)</h4><div class="use">USE FOR: complex integration · unclear requirement · impact analysis</div>
+<ul><li>One-line demand turned into signed scope. SAP/SFM API as single source of truth. Every line-creation path listed (manual, automation, SFM/WCL integrations, Excel import, C4C tickets). Async throttled queue chosen over a synchronous call. Dummy-item limitation flagged in the HLE so nobody found it in UAT. Versions 0.9 to 1.1 in eleven days.</li>
+<li><b>[confirm]</b> Whether it went live and what changed after.</li></ul></div>
+<div class="story"><h4>4. Approval Web Application, 0 to 1</h4><div class="use">USE FOR: new product · traceability · compliance · integrations</div>
+<ul><li>Live across 160+ countries. Multi-tier sign-off with RTM traceability under SOX and ISO 9001. Integrations with SAP, Salesforce, Snowflake and SAP CPI.</li></ul></div>
+<div class="story"><h4>5. AI rollout across the BA team at Soprex</h4><div class="use">USE FOR: adoption · change · AI in daily work</div>
+<ul><li>Automatic ticket creation, MCP connections into ServiceNow and Jira, OpenClaw integrated with the technical team, staff trained, about 50 people using the tools, about 32% less time per specification, AI usage guidelines written. Templates and elicitation standardised across the BA and PM team first.</li></ul></div>
+<div class="story"><h4>6. Delivery quality on SPQ+</h4><div class="use">USE FOR: working with devs and QA · acceptance testing · releases</div>
+<ul><li>300+ specifications (BRD, SRS, HLE). Release planning across 5 teams and 10+ workstreams. Stories cut to roughly 2-hour tasks. Launches at 0 critical defects. You manage 2 development teams (about 15 people) and the BA team.</li></ul></div>
+<div class="story"><h4>7. Booking.dentist</h4><div class="use">USE FOR: scope negotiation · prioritisation · 0 to 1</div>
+<ul><li>Sole BA/PO. Two apps shipped 0 to 1 on a shared data model, 35+ countries, microservices backend. Cut 348 hours of non-MVP scope to protect the launch date. EUR 250,000 seed raised through Katapult on your business case, KPIs and MVP roadmap. Do not claim the scope cut caused the raise.</li></ul></div>
+<div class="story"><h4>8. Order Risk Hold SDD (their own task)</h4><div class="use">USE FOR: "walk us through your assignment"</div>
+<ul><li>Level 8 drills it.</li></ul></div>`,
+quiz:[
+ {q:"'Tell us about an AI feature you specified.' Lead with:",o:["Booking.dentist","AI Voice Control HLE","Approval Web App","Lead Time"],a:1},
+ {q:"'Describe a complex integration.' Lead with:",o:["Lead Time Alignment","Voice Control","348-hour cut","AI rollout"],a:0},
+ {q:"'A developer said your scope was too big.' Lead with:",o:["Booking.dentist 348-hour cut","Approval Web App","Voice Control","Lead Time"],a:0},
+ {q:"'How do you make sure releases are clean?'",o:["Seed funding","300+ specs, 5 teams, 2-hour tasks, 0 critical defects","Help Agent","OpenClaw"],a:1},
+ {q:"'How have you driven adoption of a new tool?'",o:["BA-team AI rollout, ~50 users, ~32% less time per spec","Lead Time","Price Band","Cloudleaf"],a:0},
+ {q:"'Traceability and compliance?'",o:["Approval Web App: RTM under SOX and ISO 9001","Voice dictation","Booking.dentist marketing","Scroll commands"],a:0}
+]});
+
+M.push({id:"m8",title:"Defend your SDD",min:10,badge:"Spec Defender",
+lesson:`
+<p>The Order Risk Hold SDD brings Shopify fraud risk into the Sales Order flow. If they ask about it, they want your reasoning, not a recital.</p>
+<h3>Six positions you took</h3>
+<ol>
+<li><b>Risk level drives the hold, not Shopify's recommendation.</b> The recommendation is Shopify's derived opinion and can change; bind the rule to the least volatile field.</li>
+<li><b>Highest severity wins</b> across several assessments. Holding a good order costs a phone call; shipping a fraudulent one costs the goods. Break ties toward the cheaper mistake.</li>
+<li><b>Five risk levels, not three.</b> PENDING and NONE exist even though the brief did not mention them.</li>
+<li><b>New statuses (Risk Hold, Risk Review), not a boolean flag.</b> Statuses show in lists, filters and reports where the sales manager works. Cost: anything keyed on Status = Open needs regression.</li>
+<li><b>Risk level stays a separate field from status.</b> Releasing the hold changes status but keeps the evidence for a chargeback dispute.</li>
+<li><b>The block lives in the order service, not on the button.</b> The shipment endpoint returns 409. A greyed button blocks nothing; this is a breaking API change and was written up as one.</li>
+</ol>
+<p>Two additions nobody asked for: a go-live cutoff date so the first run does not hold every open order, and a mandatory reason on release.</p>
+<h3>Your five open questions</h3>
+<ol><li>Block invoicing too at high risk?</li><li>Block or allow delivery when risk is pending or unknown?</li><li>Who holds the Risk Override right, and is a second approval needed above a value?</li><li>Should a medium hold expire?</li><li>Hold on medium risk, or warn only at delivery? (the brief contradicts itself)</li></ol>
+<div class="note"><b>Turn it toward the role.</b> "If AI Assistant could release this hold from chat, the same rules apply: run as the user, require the Risk Override right, demand the reason, call the same service so the 409 still fires, and log the channel."</div>`,
+quiz:[
+ {q:"What drives the hold?",o:["Shopify recommendation","Risk level","Order value","Customer age"],a:1},
+ {q:"Two assessments disagree.",o:["Lowest wins","Highest severity wins","Average","Ignore both"],a:1},
+ {q:"Where is shipment blocked?",o:["Disabled button only","In the order service; endpoint returns 409","In the warehouse","In Shopify"],a:1},
+ {q:"Why keep risk level separate from status?",o:["Speed","So the evidence survives the release for chargeback disputes","Licensing","Shopify requires it"],a:1}
+]});
+
+M.push({id:"m9",title:"Gaps, straight",min:15,badge:"Straight Shooter",
+lesson:`
+<p>Name the gap before they do, give one fact, move on. No apology, no padding.</p>
+<div class="tw"><table>
+<tr><th>Ad asks</th><th>Your truth</th><th>Say</th></tr>
+<tr><td>10+ years system analysis and specs</td><td>In the sector since 2019, in analysis since 2020, six years on SPQ+</td><td>"I have six years, not ten. In those six I wrote 300+ specifications on one platform in continuous delivery, including an AI interaction layer on an ERP-like app."</td></tr>
+<tr><td>10+ years business software industry</td><td>Same timeline</td><td>Same answer. Do not stretch dates; background checks see Soprex HR titles.</td></tr>
+<tr><td>Developer or programming analyst background</td><td>None. Technical depth: advanced SQL, REST and Postman, API contract specs, MCP wiring, a Jira Forge app built in 2026</td><td>"I have not worked as a developer. I read API contracts, write my own SQL, and built a Forge app for our Jira, so I can follow a developer into the detail."</td></tr>
+<tr><td>Technical degree</td><td>B.A. Ethnology and Anthropology, Belgrade, 2019</td><td>"My degree is anthropology. It is where I learned to model how people behave, which the ad lists. The technical side came from six years of specs."</td></tr>
+<tr><td>C# / .NET (plus)</td><td>Not claimed</td><td>"No C#. I would learn to read DACs and graphs early, enough to review impact."</td></tr>
+<tr><td>Microservices / cloud integration</td><td>Booking.dentist backend was microservices; SAP CPI, Salesforce, Snowflake integrations</td><td>Use story 4 and 7.</td></tr>
+<tr><td>Russian (plus)</td><td>Serbian native, English C2</td><td>Only if asked.</td></tr>
+</table></div>
+<div class="flag"><b>[confirm] the Forge app line.</b> It comes from your 2026 Jira rollout notes, not from the master profile. Confirm you are happy to say it.</div>
+<h3>Money and logistics</h3>
+<ul>
+<li>This is employment in Serbia. That matches your stated preference for full-time, and no work-permit issue.</li>
+<li>Have your salary expectation ready as a gross figure. Serbian forms and HR usually talk gross.</li>
+<li>Notice period: 3 weeks.</li>
+<li>If they run a background check, the BA titles are the ones Soprex HR will confirm.</li>
+</ul>`,
+checks:[
+ "Say the 10+ years answer aloud in under 30 seconds.",
+ "Say the developer-background answer aloud.",
+ "Say the degree answer aloud without apologizing.",
+ "Decide your gross salary figure and write it down.",
+ "Confirm the Forge app line and the SPQ+ agent status (live or specified)."
+]});
+
+const BOSS = [
+ {q:"Live case: spec how AI Assistant would create a sales order from chat.",t:"Structure under pressure, ERP knowledge, AI guardrails, integration thinking.",
+  a:`<ol><li><b>Clarify first:</b> which roles, which editions, draft only or released, in-app chat or MCP too, what success means (time to enter an order, error rate, adoption).</li>
+<li><b>Slice v1:</b> create a draft order in On Hold status. No release, no price overrides.</li>
+<li><b>Flow:</b> intent detected → resolve customer and items via inquiries → check availability → build the order → show an action card → user confirms → create through the contract-based REST SalesOrder entity (or the graph action) as the signed-in user → return the order number as a link.</li>
+<li><b>Failure modes:</b> two matching customers (clarify), item not found, no rights, customer on credit hold, validation error from the graph shown in plain words, partial line failure, double submit (idempotency key), AI Units exhausted.</li>
+<li><b>Guardrails:</b> nothing commits without confirmation, masked fields, record text treated as data, audit log marks the channel as AI Assistant.</li>
+<li><b>Acceptance:</b> hard rule of zero orders without confirmation; golden set of 50+ phrasings with thresholds for correct customer, items and quantities; latency budget.</li>
+<li><b>Rollout:</b> feature flag, admin opt-in, telemetry, feedback.</li></ol>
+<p>Close with: "Same pattern I specified for SPQ+ voice control: clarify when ambiguous, confirm before destructive actions, never fail silently."</p>`},
+ {q:"How do you write acceptance criteria for an AI feature that answers differently each time?",t:"Whether you understand non-determinism.",
+  a:`<ul><li>Split the feature into a deterministic layer and a model layer.</li><li>Deterministic layer gets classic Given/When/Then: permissions, confirmation, record links, error messages.</li><li>Model layer gets thresholds over a golden set: right tool in at least X%, right numbers, correct refusals, latency under Y.</li><li>Test outcomes, never exact wording. Rerun on every model or prompt change.</li></ul>`},
+ {q:"Tell us about a complex integration you specified.",t:"Integration depth, unclear requirements, risk thinking.",
+  a:`<p>Lead Time Alignment: one-line demand, single source of truth, every creation path, async throttled queue over sync, throttling despite "no rate limit", dummy-item limitation flagged early, versions 0.9 to 1.1. End with the outcome if confirmed, or how you would measure it.</p>`},
+ {q:"A customer says the assistant gave a wrong total. Walk us through troubleshooting.",t:"Methodical debugging, support mindset (the ad lists troubleshooting customer issues).",
+  a:`<ol><li>Get the thread: question, answer, timestamp, user.</li><li>Check which inquiry was called and with which parameters.</li><li>Run that inquiry directly as the same user.</li><li>Locate the fault: data, inquiry definition, a stale stored result (data warehouse refresh schedule), the user's rights limiting rows, or the model misreading a filter, date range or currency.</li><li>Fix in the right place, add the case to the golden set, tell the customer what happened.</li></ol>`},
+ {q:"How would you decide which inquiries to expose to the assistant or an MCP server?",t:"Product judgment on the AI boundary.",
+  a:`<ul><li>Start from real questions: support tickets, partner feedback, user interviews by role.</li><li>Pick inquiries with clear names, described fields and good performance; store heavy ones.</li><li>Check access rights per role; remember stored results skip field-level restrictions.</li><li>Avoid overlapping tools; stay under about 50 per server.</li><li>Measure tool choice in evals and prune.</li></ul>`},
+ {q:"How would you compare our assistant with Copilot in Business Central or NetSuite's AI?",t:"The ad: analyze competitor solutions.",
+  a:`<ul><li>Define 15 to 20 real tasks per role first.</li><li>Run them against each product (trials, demos, docs) and record results.</li><li>Dimensions: read vs act, grounding and source links, permission model, openness (MCP), pricing model, entry points, languages.</li><li>Output: a matrix, parity gaps, differentiators, backlog proposals.</li><li>Say clearly you would not quote competitor features you have not tested.</li></ul>`},
+ {q:"Demo a new feature to a mixed audience. How do you run it and handle feedback?",t:"Communication (the ad lists demos to technical and less technical people).",
+  a:`<ul><li>Open with the user problem, then one scenario end to end on realistic data.</li><li>Prepared fallback if the model misbehaves live.</li><li>Capture feedback in a fixed form: who, what, severity, request vs bug.</li><li>Close the loop in writing within a day. SPQ+ voice control planned a show-and-tell, guide and demo video for this reason.</li></ul>`},
+ {q:"A developer says your spec cannot fit the sprint.",t:"Collaboration and scope control.",
+  a:`<ul><li>Ask which part drives the size.</li><li>Separate must from nice with MoSCoW, propose a thinner first slice, time-box a spike for the unknown.</li><li>Example: 348 hours cut at Booking.dentist, each cut listed with hours and the manual workaround.</li></ul>`},
+ {q:"We need to change a Generic Inquiry that dashboards, the assistant and MCP all use. Impact analysis?",t:"System thinking (the ad: impact analysis of changes).",
+  a:`<ul><li>List consumers: dashboards, OData feeds, AI Assistant, MCP tools, stored warehouse table, agents, external clients.</li><li>Renamed or removed fields break tool contracts and outside clients.</li><li>Check rights and refresh schedule.</li><li>Version it: new inquiry, migrate consumers, retire the old one.</li><li>Test plan per consumer and a note to partners.</li></ul>`},
+ {q:"How do you acceptance-test an AI feature before release?",t:"QA collaboration, acceptance testing, bug reporting.",
+  a:`<ul><li>Deterministic tests: rights, confirmation, links, errors.</li><li>Golden set run with thresholds.</li><li>Adversarial set: injection text in records, out-of-scope asks, ambiguous names.</li><li>UAT with real roles on realistic data.</li><li>Bug report includes thread, tool calls, parameters, expected vs actual, model version.</li><li>Release behind a flag, watch telemetry.</li></ul>`},
+ {q:"The ad asks for 10+ years. You have six. Why you?",t:"Composure and self-assessment.",
+  a:`<p>"Six years, not ten. In those six: 300+ specifications on a global platform in continuous delivery, an AI voice interaction layer specified for an ERP-like app, integrations with SAP, Salesforce and Snowflake, launches at zero critical defects, and an AI rollout that cut spec time by about a third for my own team. The work in this ad is what I have been doing, on a smaller platform."</p>`},
+ {q:"Why Acumatica, and why this team?",t:"Motivation grounded in facts.",
+  a:`<ul><li>The assistant reached GA on 1 October and the stated next phase is agents with a person approving. That is the work I want: getting AI to act safely inside business software.</li><li>An ERP with a continuous release train, the same rhythm I have worked in for six years.</li><li>The team is in Belgrade; I want to build product here rather than serve one client.</li></ul>`}
+];
+M.push({id:"m10",title:"Boss fight: mock round",min:25,badge:"Boss Slayer",
+lesson:`<p>Twelve questions. For each: start the 2-minute timer, answer aloud, then reveal the skeleton and grade yourself honestly. Partial and missed answers go back on your list for the last minutes.</p>`,boss:BOSS});
+
+M.push({id:"m11",title:"Your questions, final checks",min:5,badge:"Ready",
+lesson:`
+<h3>Questions to ask them (pick three)</h3>
+<ol>
+<li>Which parts does the team own: the assistant UI, the tool layer, the MCP server, AI Studio?</li>
+<li>Are actions from chat on the roadmap, and what is the first write action you plan?</li>
+<li>How do you evaluate the assistant today, and who owns the eval set?</li>
+<li>How do analysts and product managers split the work here? Who owns the backlog?</li>
+<li>What does a functional spec look like at Acumatica: format, tools, review?</li>
+<li>How do you regression-test when an underlying model changes?</li>
+<li>How does feedback from partners and support reach the team?</li>
+<li>What would a strong first 90 days look like in this role?</li>
+</ol>
+<h3>Sources</h3>
+<ul class="src">
+<li><a href="https://community.acumatica.com/acumatica-news-updates-2/acumatica-ai-assistant-faq-34846" target="_blank" rel="noopener">Acumatica AI Assistant FAQ (Acumatica Community)</a></li>
+<li><a href="https://erp.today/acumatica-2026-r2-puts-ai-agents-and-outside-ai-tools-inside-erp-controls/" target="_blank" rel="noopener">ERP Today: 2026 R2 AI agents and outside AI tools</a></li>
+<li><a href="https://acupowererp.com/posts/acumatica-2026-r2-key-features-and-takeaways-for-every-edition" target="_blank" rel="noopener">AcuPower: 2026 R2 key features</a></li>
+<li><a href="https://www.acumatica.com/corporate-newsroom/press-releases/2026-r1-advanced-ai-capabilities/" target="_blank" rel="noopener">Acumatica press release: 2026 R1</a></li>
+<li><a href="https://www.businesswire.com/news/home/20250529481310/en" target="_blank" rel="noopener">Business Wire: Acumatica to be acquired by Vista</a></li>
+<li><a href="https://diginomica.com/acumaticas-latest-ownership-change-what-happens-next" target="_blank" rel="noopener">Diginomica: ownership history and CEO</a></li>
+<li><a href="https://www.acumatica.com/blog/acumatica-erp-podcast-vista-equity-partners-perspectives/" target="_blank" rel="noopener">Acumatica podcast recap: Vista perspectives</a></li>
+<li><a href="https://www.acumatica.com/corporate-newsroom/press-releases/capability-center-hyderabad-india/" target="_blank" rel="noopener">Acumatica: Hyderabad capability center</a></li>
+<li><a href="https://www.stacksync.com/blog/acumatica-api-integration-guide" target="_blank" rel="noopener">Stacksync: Acumatica API guide</a></li>
+<li><a href="https://www.dckap.com/blog/acumatica-api-integration/" target="_blank" rel="noopener">DCKAP: Acumatica API integration</a></li>
+<li><a href="https://www.acumatica.com/blog/acumatica-web-services-rest-api-odata-and-integration-best-practices/" target="_blank" rel="noopener">Acumatica blog: REST, OData and integration practices</a></li>
+<li><a href="https://supergood.ai/api-report-card/acumatica" target="_blank" rel="noopener">Supergood: Acumatica API report card</a></li>
+<li><a href="https://www.sprinterra.com/acumatica-ai-capabilities/" target="_blank" rel="noopener">Sprinterra: Acumatica AI capabilities</a></li>
+</ul>`,
+checks:[
+ "Camera, mic and connection tested.",
+ "SDD, Voice Control HLE and Lead Time HLE open in tabs.",
+ "Salary figure (gross) and notice period written on a sticky note.",
+ "Three questions for them chosen.",
+ "Re-did every boss question you graded Partial or Missed."
+]});
+
+/* ---------- HUES ---------- */
+const HUE={m0:["--sun","#15142C"],m1:["--tang","#15142C"],m2:["--violet","#FFFFFF"],m3:["--cobalt","#FFFFFF"],m4:["--sky","#15142C"],m5:["--magenta","#FFFFFF"],m6:["--mint","#15142C"],m7:["--tang","#15142C"],m8:["--cobalt","#FFFFFF"],m9:["--coral","#15142C"],m10:["--magenta","#FFFFFF"],m11:["--mint","#15142C"]};
+function hv(id){const h=HUE[id];return `--lv:var(${h[0]});--lvfg:${h[1]};`;}
+/* ---------- STATE ---------- */
+const KEY="acu-final-quest-v1";
+const RANKS=[[0,"Trainee"],[250,"Analyst"],[600,"Senior Analyst"],[1000,"Lead Analyst"],[1300,"Platform Analyst"],[1600,"Final-round ready"]];
+let S={xp:0,cur:"m0",done:{},quiz:{},flash:{},boss:{},check:{},clock:{elapsed:0,running:false,at:0}};
+try{const raw=localStorage.getItem(KEY); if(raw){S=Object.assign(S,JSON.parse(raw));}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const TOTAL=240*60;
+const $=s=>document.querySelector(s);
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove("show"),1600);}
+function addXP(n,why){S.xp+=n;save();renderBar();toast("+"+n+" XP"+(why?" · "+why:""));}
+function maxXP(){let t=0;M.forEach(m=>{t+=50;(m.quiz||[]).forEach(()=>t+=10);(m.flash||[]).forEach(()=>t+=5);(m.boss||[]).forEach(()=>t+=30);(m.checks||[]).forEach(()=>t+=10);});return t;}
+const MAX=maxXP();
+
+function rank(){let r=RANKS[0],nx=null;for(let i=0;i<RANKS.length;i++){if(S.xp>=RANKS[i][0]){r=RANKS[i];nx=RANKS[i+1]||null;}}return {r,nx};}
+function fmt(s){s=Math.max(0,Math.round(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h+":"+String(m).padStart(2,"0")+":"+String(x).padStart(2,"0");}
+function elapsed(){return S.clock.elapsed+(S.clock.running?(Date.now()-S.clock.at)/1000:0);}
+
+function renderBar(){
+  const {r,nx}=rank();
+  $("#rankName").textContent=r[1];
+  const lo=r[0],hi=nx?nx[0]:MAX;
+  $("#xpFill").style.width=Math.min(100,((S.xp-lo)/Math.max(1,hi-lo))*100)+"%";
+  $("#xpNum").textContent=S.xp+" XP"+(nx?" · "+(nx[0]-S.xp)+" to "+nx[1]:" · max rank")+" · "+MAX+" possible";
+}
+function tick(){
+  const e=elapsed();
+  $("#clock").textContent=fmt(TOTAL-e);
+  const pace=$("#pace");
+  if(!S.clock.running&&e===0){pace.className="pace idle";pace.textContent="not started";return;}
+  let planned=0;for(const m of M){planned+=m.min*60;if(m.id===S.cur)break;}
+  if(e>planned){pace.className="pace behind";pace.textContent="behind plan";}
+  else{pace.className="pace ok";pace.textContent="on pace";}
+}
+$("#clockBtn").addEventListener("click",()=>{
+  if(S.clock.running){S.clock.elapsed=elapsed();S.clock.running=false;}
+  else{S.clock.running=true;S.clock.at=Date.now();}
+  $("#clockBtn").textContent=S.clock.running?"Pause":"Resume";save();tick();
+});
+setInterval(tick,1000);
+
+function renderMap(){
+  const el=$("#map");let h='<h2>Levels · 4h plan</h2>';
+  M.forEach((m,i)=>{h+=`<button class="lvl ${S.done[m.id]?"done":""} ${S.cur===m.id?"cur":""}" style="${hv(m.id)}" data-go="${m.id}" aria-current="${S.cur===m.id}"><span class="n">${S.done[m.id]?"✓":i}</span><span class="nm">${m.title}</span><span class="mn">${m.min}m</span></button>`;});
+  h+='<div class="badges"><h3>Badges</h3>'+M.map(m=>`<span class="bdg ${S.done[m.id]?"on":""}" style="${hv(m.id)}">${m.badge}</span>`).join("")+
+     '<div class="reset"><button class="btn" id="resetBtn">Reset progress</button></div></div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+  const rb=$("#resetBtn");
+  rb.addEventListener("click",()=>{
+    if(rb.dataset.arm){S={xp:0,cur:"m0",done:{},quiz:{},flash:{},boss:{},check:{},clock:{elapsed:0,running:false,at:0}};save();$("#clockBtn").textContent="Start clock";renderAll();toast("Progress reset");}
+    else{rb.dataset.arm="1";rb.textContent="Click again to reset";setTimeout(()=>{rb.textContent="Reset progress";delete rb.dataset.arm;},3000);}
+  });
+}
+function go(id){S.cur=id;save();renderAll();window.scrollTo({top:0,behavior:"smooth"});try{history.replaceState(null,"","#"+id);}catch(e){}}
+
+function renderMain(){
+  const i=M.findIndex(m=>m.id===S.cur);const m=M[i];
+  let h=`<div class="lvhead"><div class="bignum" aria-hidden="true">${String(i).padStart(2,"0")}</div><div><div class="eyebrow">Level ${i} of ${M.length-1}</div><h1>${m.title}</h1>
+  <div class="meta"><span>Target ${m.min} min</span><span>Badge: ${m.badge}</span></div></div></div>
+  <article class="lesson">${m.lesson}</article>`;
+  if(m.quiz){h+=`<section class="act"><h2>Checkpoint quiz <span class="tag">10 XP first try</span></h2><p class="sub">Pick an answer. Wrong first picks score nothing, but you can still find the right one.</p><div class="qs">`+
+    m.quiz.map((q,qi)=>{const k=m.id+"-"+qi,st=S.quiz[k];
+      return `<div class="q ${st&&st.solved?"solved":""}" data-k="${k}"><div class="qt">${qi+1}. ${q.q}</div><div class="opts">`+
+      q.o.map((o,oi)=>{let c="";if(st){if(oi===q.a&&st.solved)c="right";else if(st.tried&&st.tried.includes(oi)&&oi!==q.a)c="wrong";}
+        return `<button class="opt ${c}" data-q="${qi}" data-o="${oi}" ${st&&st.solved?"disabled":""}>${o.replace(/</g,"&lt;")}</button>`;}).join("")+
+      `</div>${st&&st.solved&&q.w?`<div class="why"><b>Why.</b> ${q.w}</div>`:""}</div>`;}).join("")+`</div></section>`;}
+  if(m.flash){h+=`<section class="act"><h2>Flashcards <span class="tag">5 XP each</span></h2><p class="sub">Say the answer before you flip.</p><div class="cards">`+
+    m.flash.map((f,fi)=>{const k=m.id+"-f"+fi,st=S.flash[k];
+      return `<div class="fc ${st===2?"known":""}" data-k="${k}"><div class="front">${f[0]}</div><div class="back" ${st?"":"hidden"}>${f[1]}</div>
+      <div class="row">${st?`<button class="btn xp" data-fk="${k}" data-v="2" ${st===2?"disabled":""}>${st===2?"Known":"I knew it"}</button><button class="btn" data-fk="${k}" data-v="1">Review again</button>`:`<button class="btn" data-flip="${k}">Flip</button>`}</div></div>`;}).join("")+`</div></section>`;}
+  if(m.boss){h+=`<section class="act"><h2>Mock questions <span class="tag">30 XP nailed · 15 partial</span></h2><p class="sub">Timer, answer aloud, reveal, grade.</p>`+
+    m.boss.map((b,bi)=>{const k=m.id+"-b"+bi,g=S.boss[k];
+      return `<div class="boss" data-k="${k}"><div class="bq">${bi+1}. ${b.q}</div>
+      <div class="row"><button class="btn" data-timer="${k}">Start 2:00</button><span class="tm" id="tm-${k}"></span>
+      <button class="btn" data-rev="${k}">Reveal skeleton</button>${g!==undefined?`<span class="grade g${g}">${["Missed","Partial","Nailed"][g]}</span>`:""}</div>
+      <div class="reveal" id="rv-${k}" hidden><h4>What they test</h4><p>${b.t}</p><h4>Answer skeleton</h4>${b.a}
+      <div class="row"><button class="btn xp" data-gk="${k}" data-g="2">Nailed it</button><button class="btn" data-gk="${k}" data-g="1">Partial</button><button class="btn" data-gk="${k}" data-g="0">Missed</button></div></div></div>`;}).join("")+`</section>`;}
+  if(m.checks){h+=`<section class="act"><h2>Do it now <span class="tag">10 XP each</span></h2><div class="checks">`+
+    m.checks.map((c,ci)=>{const k=m.id+"-c"+ci;return `<div class="ck"><input type="checkbox" id="ck-${k}" data-ck="${k}" ${S.check[k]?"checked":""}><label for="ck-${k}">${c}</label></div>`;}).join("")+`</div></section>`;}
+  const next=M[i+1];
+  h+=`<div class="foot"><button class="btn ${S.done[m.id]?"":"primary"}" id="doneBtn" ${S.done[m.id]?"disabled":""}>${S.done[m.id]?"Level complete":"Complete level · +50 XP"}</button>
+  ${next?`<button class="btn" data-go="${next.id}">Next: ${next.title} →</button>`:""}</div>`;
+  const main=$("#main");main.setAttribute("style",hv(m.id));main.innerHTML=h;wire(main,m);
+}
+const timers={};
+function wire(root,m){
+  root.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+    const qi=+b.dataset.q,oi=+b.dataset.o,q=m.quiz[qi],k=m.id+"-"+qi;
+    const st=S.quiz[k]||(S.quiz[k]={tried:[],solved:false});
+    if(st.solved)return;
+    const first=st.tried.length===0;st.tried.push(oi);
+    if(oi===q.a){st.solved=true;save();if(first)addXP(10,"correct");else toast("Found it");}
+    else{save();toast("Not this one");}
+    renderMain();
+  }));
+  root.querySelectorAll("[data-flip]").forEach(b=>b.addEventListener("click",()=>{S.flash[b.dataset.flip]=1;save();renderMain();}));
+  root.querySelectorAll("[data-fk]").forEach(b=>b.addEventListener("click",()=>{
+    const k=b.dataset.fk,v=+b.dataset.v,was=S.flash[k];S.flash[k]=v;save();
+    if(v===2&&was!==2&&!S.flash[k+"-x"]){S.flash[k+"-x"]=1;save();addXP(5,"card");}
+    renderMain();}));
+  root.querySelectorAll("[data-rev]").forEach(b=>b.addEventListener("click",()=>{const r=document.getElementById("rv-"+b.dataset.rev);r.hidden=!r.hidden;}));
+  root.querySelectorAll("[data-timer]").forEach(b=>b.addEventListener("click",()=>{
+    const k=b.dataset.timer;clearInterval(timers[k]);let s=120;const out=document.getElementById("tm-"+k);out.textContent="2:00";
+    timers[k]=setInterval(()=>{s--;out.textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");if(s<=0){clearInterval(timers[k]);out.textContent="time";toast("Time. Wrap up in one sentence.");}},1000);
+  }));
+  root.querySelectorAll("[data-gk]").forEach(b=>b.addEventListener("click",()=>{
+    const k=b.dataset.gk,g=+b.dataset.g,prev=S.boss[k];S.boss[k]=g;save();
+    const pts=[0,15,30],gain=pts[g]-(prev===undefined?0:pts[prev]);
+    if(gain>0)addXP(gain,["","partial","nailed"][g]);else{S.xp+=gain;save();renderBar();toast("Graded: "+["Missed","Partial","Nailed"][g]);}
+    renderMain();}));
+  root.querySelectorAll("[data-ck]").forEach(c=>c.addEventListener("change",()=>{
+    const k=c.dataset.ck;S.check[k]=c.checked;save();if(c.checked)addXP(10,"done");else{S.xp-=10;save();renderBar();}}));
+  const d=root.querySelector("#doneBtn");
+  if(d)d.addEventListener("click",()=>{if(S.done[m.id])return;S.done[m.id]=true;save();addXP(50,m.badge+" badge");renderAll();});
+  root.querySelectorAll(".foot [data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+}
+function renderAll(){renderBar();renderMap();renderMain();tick();}
+(function init(){
+  const h=(location.hash||"").replace("#","");if(M.some(m=>m.id===h))S.cur=h;
+  $("#clockBtn").textContent=S.clock.running?"Pause":(S.clock.elapsed>0?"Resume":"Start clock");
+  renderAll();
+  window.addEventListener("hashchange",()=>{const h=location.hash.replace("#","");if(M.some(m=>m.id===h)&&h!==S.cur){S.cur=h;save();renderAll();}});
+})();
+</script>
+
+</body>
+</html>
